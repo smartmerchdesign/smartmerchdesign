@@ -24,220 +24,132 @@
 }
 .contact-form-card p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
 
-.sidebar-card {
-  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
-  border-radius: 16px; padding: 30px 26px; margin-bottom: 16px;
-  transition: border-color .3s;
+.form-group { margin-bottom: 24px; }
+.form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); margin-bottom: 8px; }
+.form-group input, .form-group textarea {
+  width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px; padding: 14px 18px; color: var(--white); font-family: var(--body); font-size: 15px;
+  transition: all .2s;
 }
-.sidebar-card:hover { border-color: rgba(245,137,26,.3); }
-.sidebar-card-label { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); margin-bottom: 10px; }
-.sidebar-card-icon { font-size: 28px; margin-bottom: 12px; }
-.sidebar-card-val { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--white); }
-.sidebar-card-sub { font-size: 13px; color: var(--muted); margin-top: 4px; }
-.sidebar-card a { color: var(--white); text-decoration: none; }
-.sidebar-card a:hover { color: var(--orange); }
+.form-group input:focus, .form-group textarea:focus { outline: none; border-color: var(--orange); background: rgba(255,255,255,.08); }
 
-.hours-table { width: 100%; border-collapse: collapse; margin-top: 8px; }
-.hours-table td { padding: 6px 0; font-size: 13.5px; color: var(--muted); border-bottom: 1px solid rgba(255,255,255,.05); }
-.hours-table td:first-child { font-weight: 600; color: var(--white); }
-.hours-table td:last-child { text-align: right; color: var(--orange); font-weight: 600; }
-
-.success-msg {
-  display: none; background: rgba(245,137,26,.1); border: 1px solid rgba(245,137,26,.3);
-  border-radius: 10px; padding: 16px 20px; text-align: center;
-  font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--orange);
-  margin-top: 20px;
+.form-submit {
+  width: 100%; background: var(--orange); color: var(--white); border: none;
+  font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 1px;
+  padding: 16px; border-radius: 10px; cursor: pointer; transition: all .2s;
+  box-shadow: 0 8px 24px rgba(245,137,26,.3);
 }
+.form-submit:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(245,137,26,.45); }
+.form-submit:disabled { background: #555; cursor: not-allowed; box-shadow: none; transform: none; }
+
+#formStatus { margin-top: 20px; padding: 16px; border-radius: 10px; font-weight: 600; display: none; text-align: center; }
+
 @media (max-width: 900px) {
-  .contact-layout { grid-template-columns: 1fr; padding: 40px 20px; }
+  .contact-layout { grid-template-columns: 1fr; padding: 40px 24px; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <a class="logo" href="index.html"><span class="logo-bulb">💡</span>SMART <em>MERCH</em> DESIGN</a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
-      <div class="dropdown-menu">
-        <a href="services.html">All Services</a>
-        <a href="how-it-works.html">How It Works</a>
-        <a href="bulk-orders.html">Bulk Orders</a>
-      </div>
-    </li>
+    <li><a href="services.html">Services</a></li>
     <li><a href="products.html">Products</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="pricing.html">Pricing</a></li>
     <li><a href="faq.html">FAQ</a></li>
-    <li><a href="contact.html" class="active">Contact</a></li>
+    <li><a href="contact.html">Contact</a></li>
   </ul>
-  <div style="display:flex;gap:12px;align-items:center;">
-    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
-    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
-      <span></span><span></span><span></span>
-    </div>
-  </div>
+  <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
 </nav>
 
-<div class="page-hero">
-  <div class="page-hero-inner">
-    <div class="page-tag">💡 Get In Touch</div>
-    <h1>LET'S BUILD SOMETHING <em>SMART</em></h1>
-    <p>Have a project in mind? A question? A deadline breathing down your neck? We're here — real people, fast responses, zero runaround.</p>
-  </div>
-</div>
-
 <div class="contact-layout">
-
-  <!-- FORM -->
   <div class="contact-form-card">
-    <h2>Send Us a Message</h2>
-    <p>We typically respond within a few hours during business days.</p>
-
-    <!-- Netlify Form: add netlify attribute so Netlify detects & emails you on submission -->
-    <form name="contact" method="POST" netlify netlify-honeypot="bot-field" id="contactForm">
-      <input type="hidden" name="form-name" value="contact">
-      <p class="hidden"><label>Don't fill this out: <input name="bot-field"></label></p>
-
-      <div class="form-row">
-        <div class="form-group">
-          <label class="form-label">First Name *</label>
-          <input class="form-input" type="text" name="first-name" placeholder="Jane" required>
-        </div>
-        <div class="form-group">
-          <label class="form-label">Last Name *</label>
-          <input class="form-input" type="text" name="last-name" placeholder="Smith" required>
-        </div>
-      </div>
-
+    <h2>Send a Message</h2>
+    <p>Have a question about a product or a custom order? Drop us a line and we'll get back to you smartly.</p>
+    
+    <form action="https://formspree.io/f/xykolgjb" method="POST" id="contactForm">
       <div class="form-group">
-        <label class="form-label">Email Address *</label>
-        <input class="form-input" type="email" name="email" placeholder="jane@yourcompany.com" required>
+        <label>Full Name</label>
+        <input type="text" name="name" placeholder="Your name" required>
       </div>
-
       <div class="form-group">
-        <label class="form-label">Phone Number</label>
-        <input class="form-input" type="tel" name="phone" placeholder="(555) 000-0000">
+        <label>Email Address</label>
+        <input type="email" name="email" placeholder="your@email.com" required>
       </div>
-
       <div class="form-group">
-        <label class="form-label">What can we help you with? *</label>
-        <select class="form-select" name="inquiry-type" required>
-          <option value="" disabled selected>Select a topic...</option>
-          <option>Custom Merch Order</option>
-          <option>Bulk / Corporate Order</option>
-          <option>Design Services</option>
-          <option>Rush Order</option>
-          <option>Pricing & Quotes</option>
-          <option>Order Status</option>
-          <option>General Question</option>
-        </select>
+        <label>Message</label>
+        <textarea name="message" rows="5" placeholder="How can we help?" required></textarea>
       </div>
-
-      <div class="form-group">
-        <label class="form-label">Tell us about your project *</label>
-        <textarea class="form-textarea" name="message" placeholder="What are you looking to create? Tell us about your brand, the products you're interested in, approximate quantities, timeline, and budget — the more detail, the better!" required></textarea>
-      </div>
-
-      <div class="form-group">
-        <label class="form-label">How did you hear about us?</label>
-        <select class="form-select" name="referral">
-          <option value="" disabled selected>Select one...</option>
-          <option>Etsy</option>
-          <option>Google Search</option>
-          <option>Instagram</option>
-          <option>Word of Mouth / Referral</option>
-          <option>LinkedIn</option>
-          <option>Other</option>
-        </select>
-      </div>
-
-      <button class="form-submit" type="submit">💡 Send Message →</button>
+      
+      <button type="submit" class="form-submit" id="submitBtn">Send Message →</button>
+      <div id="formStatus"></div>
     </form>
-    <div class="success-msg" id="successMsg">✅ Message sent! We'll be in touch shortly.</div>
   </div>
 
-  <!-- SIDEBAR INFO -->
-  <div>
-    <div class="sidebar-card">
-      <div class="sidebar-card-icon">📧</div>
-      <div class="sidebar-card-label">Email Us</div>
-      <div class="sidebar-card-val"><a href="mailto:smartmerchdesign@gmail.com">smartmerchdesign@gmail.com</a></div>
-      <div class="sidebar-card-sub">Best for detailed project inquiries</div>
+  <div class="sidebar">
+    <!-- Existing Sidebar Content -->
+    <div style="background:rgba(255,255,255,.03); padding:32px; border-radius:20px; border:1px solid rgba(255,255,255,.05);">
+       <h3 style="font-family:var(--display); margin-bottom:16px;">Contact Info</h3>
+       <p style="color:var(--muted); font-size:14px; margin-bottom:8px;">📧 smartmerchdesign@gmail.com</p>
+       <p style="color:var(--muted); font-size:14px; margin-bottom:8px;">📞 (347) 608-5682</p>
+       <p style="color:var(--muted); font-size:14px;">📍 Oakhurst, NJ 07755</p>
     </div>
-
-    <div class="sidebar-card">
-      <div class="sidebar-card-icon">📞</div>
-      <div class="sidebar-card-label">Call Us</div>
-      <div class="sidebar-card-val"><a href="tel:+13476085682">(347) 608-5682</a></div>
-      <div class="sidebar-card-sub">Mon–Fri, 9am–6pm ET</div>
-    </div>
-
-    <div class="sidebar-card">
-      <div class="sidebar-card-icon">📍</div>
-      <div class="sidebar-card-label">Visit Us</div>
-      <div class="sidebar-card-val"><a href="https://maps.google.com/?q=1700+Fanwood+St+Oakhurst+NJ+07755" target="_blank">1700 Fanwood St<br>Oakhurst, NJ 07755</a></div>
-      <div class="sidebar-card-sub">By appointment preferred</div>
-    </div>
-
-    <div class="sidebar-card">
-      <div class="sidebar-card-icon">🛍️</div>
-      <div class="sidebar-card-label">Shop Directly</div>
-      <div class="sidebar-card-val"><a href="https://smartmerchdesignco.etsy.com" target="_blank">Etsy Store →</a></div>
-      <div class="sidebar-card-sub">Secure checkout · Real reviews</div>
-    </div>
-
-    <div class="sidebar-card">
-      <div class="sidebar-card-icon">🕐</div>
-      <div class="sidebar-card-label">Business Hours</div>
-      <table class="hours-table">
-        <tr><td>Monday – Friday</td><td>9am – 6pm</td></tr>
-        <tr><td>Saturday</td><td>10am – 3pm</td></tr>
-        <tr><td>Sunday</td><td>Closed</td></tr>
-      </table>
-    </div>
-  </div>
-
-</div>
-
-<!-- TICKER -->
-<div class="strip" aria-hidden="true">
-  <div class="strip-track">
-    <span class="strip-item">Fast Responses</span>
-    <span class="strip-item">Real People</span>
-    <span class="strip-item">No Runaround</span>
-    <span class="strip-item">Free Quotes</span>
-    <span class="strip-item">Rush Orders Welcome</span>
-    <span class="strip-item">Fast Responses</span>
-    <span class="strip-item">Real People</span>
-    <span class="strip-item">No Runaround</span>
-    <span class="strip-item">Free Quotes</span>
-    <span class="strip-item">Rush Orders Welcome</span>
   </div>
 </div>
 
 <footer>
   <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
   <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
-  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
   <div class="footer-links">
     <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
     <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
-    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
-    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
   </div>
 </footer>
 
 <script>
-// Show inline success after submit (Netlify handles the actual email)
-document.getElementById('contactForm').addEventListener('submit', function(e) {
-  // Let Netlify handle the POST; show success UI if JS-redirect isn't used
-  setTimeout(() => {
-    document.getElementById('successMsg').style.display = 'block';
-    this.reset();
-  }, 400);
-});
+  const form = document.getElementById('contactForm');
+  const status = document.getElementById('formStatus');
+  const btn = document.getElementById('submitBtn');
+
+  form.addEventListener("submit", async function(event) {
+    event.preventDefault();
+    btn.innerText = "Sending...";
+    btn.disabled = true;
+    
+    const data = new FormData(event.target);
+    fetch(event.target.action, {
+      method: form.method,
+      body: data,
+      headers: { 'Accept': 'application/json' }
+    }).then(response => {
+      status.style.display = "block";
+      if (response.ok) {
+        status.style.background = "rgba(245,137,26,.1)";
+        status.style.color = "var(--orange)";
+        status.innerHTML = "Thanks! Your message has been sent successfully.";
+        form.reset();
+        btn.style.display = "none";
+      } else {
+        status.style.background = "rgba(255,0,0,.1)";
+        status.style.color = "#ff6b6b";
+        status.innerHTML = "Oops! There was a problem submitting your form.";
+        btn.disabled = false;
+        btn.innerText = "Send Message →";
+      }
+    }).catch(error => {
+        status.style.display = "block";
+        status.style.background = "rgba(255,0,0,.1)";
+        status.style.color = "#ff6b6b";
+        status.innerHTML = "Oops! There was a connectivity issue.";
+        btn.disabled = false;
+        btn.innerText = "Send Message →";
+    });
+  });
 </script>
+
 </body>
 </html>
