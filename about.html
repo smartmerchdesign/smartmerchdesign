@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>About Us — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.about-story {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 72px;
+  padding: 80px 56px; align-items: center;
+}
+.story-text .sec-title { color: var(--navy); }
+.story-text p { font-size: 15px; line-height: 1.9; color: #6b7a99; margin-top: 20px; }
+.story-text p strong { color: var(--navy); }
+.story-visual {
+  background: linear-gradient(145deg, var(--navy), #0a1e4a);
+  border-radius: 24px; padding: 48px 40px;
+  border: 1px solid rgba(245,137,26,.2);
+  position: relative; overflow: hidden;
+}
+.story-visual::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--orlo));
+}
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+.stat-box { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 22px 18px; text-align: center; }
+.stat-box .n { font-family: var(--display); font-size: 42px; font-weight: 900; color: var(--orange); line-height: 1; }
+.stat-box .l { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 500; letter-spacing: 0.5px; }
+.story-visual h3 { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 24px; letter-spacing: 1px; }
+
+.values { padding: 80px 56px; background: var(--dark); }
+.values-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+.value-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 16px; padding: 36px 28px; transition: all .3s;
+}
+.value-card:hover { border-color: rgba(245,137,26,.35); transform: translateY(-4px); }
+.value-icon { font-size: 38px; margin-bottom: 18px; display: block; }
+.value-title { font-family: var(--display); font-size: 24px; font-weight: 700; color: var(--white); margin-bottom: 12px; }
+.value-title em { color: var(--orange); font-style: normal; }
+.value-card p { font-size: 14px; line-height: 1.8; color: var(--muted); }
+
+.team { padding: 80px 56px; background: var(--offwhite); }
+.team .sec-title { color: var(--navy); }
+.team-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 52px; }
+.team-card {
+  background: var(--white); border-radius: 16px; overflow: hidden;
+  box-shadow: 0 8px 32px rgba(13,42,94,.08); transition: transform .3s;
+}
+.team-card:hover { transform: translateY(-6px); }
+.team-avatar {
+  height: 200px; display: flex; align-items: center; justify-content: center;
+  font-size: 80px;
+}
+.team-avatar.a1 { background: linear-gradient(135deg, #152348, #0d2a5e); }
+.team-avatar.a2 { background: linear-gradient(135deg, #2a1000, #5c2500); }
+.team-avatar.a3 { background: linear-gradient(135deg, #0d2a5e, #152348); }
+.team-info { padding: 24px 22px; }
+.team-name { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--navy); }
+.team-role { font-size: 12px; color: var(--orange); font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase; margin: 4px 0 12px; }
+.team-bio { font-size: 13.5px; line-height: 1.75; color: #6b7a99; }
+
+.mission-strip {
+  background: linear-gradient(135deg, var(--navy), #0a1832);
+  padding: 72px 56px; text-align: center;
+  border-top: 1px solid rgba(245,137,26,.15);
+}
+.mission-strip blockquote {
+  font-family: var(--display); font-size: clamp(28px, 4vw, 52px);
+  font-weight: 900; line-height: 1.05; color: var(--white); max-width: 800px; margin: 0 auto 32px;
+}
+.mission-strip blockquote em { color: var(--orange); font-style: normal; }
+.mission-strip p { color: var(--muted); font-size: 15px; }
+
+@media (max-width: 900px) {
+  .about-story, .values-grid, .team-grid { grid-template-columns: 1fr; }
+  .about-story, .values, .team { padding: 48px 20px; }
+  .mission-strip { padding: 48px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html" class="active">About</a></li>
+    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">💡 Our Story</div>
+    <h1>MERCH MADE <em>PERSONAL</em></h1>
+    <p>We started Smart Merch Design because we were tired of seeing great brands stuck with forgettable swag. Every order we take is personal — because your brand deserves better than a logo slapped on a shirt.</p>
+  </div>
+</div>
+
+<!-- STORY -->
+<section class="about-story" style="background:var(--offwhite);">
+  <div class="story-text">
+    <div class="sec-tag" style="color:var(--navy)">Where It Started</div>
+    <h2 class="sec-title" style="color:var(--navy)">Built on <em>Smarter</em> Thinking</h2>
+    <p>Smart Merch Design was founded right here in <strong>Oakhurst, New Jersey</strong> with one simple belief: great merch should be designed with the same care and strategy as everything else in your brand.</p>
+    <p>We've worked with startups, Fortune 500 companies, sports teams, nonprofits, and local businesses — and the goal is always the same: <strong>make something your people will actually want to wear.</strong></p>
+    <p>Our team brings together design talent, production know-how, and an obsessive commitment to quality so you never have to stress about your merch again. We handle it all — from the first concept sketch to the final box on your doorstep.</p>
+    <a class="form-submit" href="quote.html" style="margin-top:28px;display:inline-flex;">Get a Free Quote →</a>
+  </div>
+  <div class="story-visual">
+    <h3>💡 BY THE NUMBERS</h3>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="n">500+</div><div class="l">Brands Served</div></div>
+      <div class="stat-box"><div class="n">10K+</div><div class="l">Orders Shipped</div></div>
+      <div class="stat-box"><div class="n">5.0 ★</div><div class="l">Etsy Rating</div></div>
+      <div class="stat-box"><div class="n">48h</div><div class="l">Rush Turnaround</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- VALUES -->
+<section class="values">
+  <div class="sec-tag">What We Stand For</div>
+  <h2 class="sec-title">The <em>Smart</em> Way We Work</h2>
+  <div class="values-grid">
+    <div class="value-card">
+      <span class="value-icon">🧠</span>
+      <div class="value-title"><em>Strategy</em> First</div>
+      <p>Every product we make starts with a question: what do you want people to feel when they see this? Merch is marketing — and we treat it that way.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🏆</span>
+      <div class="value-title">Zero <em>Compromise</em></div>
+      <p>We don't cut corners. We source the best blanks, use the right printing method for each product, and won't ship anything we wouldn't be proud to wear ourselves.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🤝</span>
+      <div class="value-title"><em>Real</em> Relationships</div>
+      <p>We're not a faceless print shop. When you email us, a real person responds. We learn your brand, your timeline, your goals — and we actually care about your success.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">⚡</span>
+      <div class="value-title"><em>Speed</em> Without Sacrifice</div>
+      <p>Rush orders are our specialty. We've built a production workflow that delivers fast without ever sacrificing the quality you're paying for.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">💡</span>
+      <div class="value-title"><em>Smart</em> Pricing</div>
+      <p>Transparent, competitive, and fair. No surprise fees. No bait-and-switch. Just honest pricing for exceptional work.</p>
+    </div>
+    <div class="value-card">
+      <span class="value-icon">🌍</span>
+      <div class="value-title"><em>Community</em> Rooted</div>
+      <p>Proud to be a New Jersey business. We love working with local teams, schools, and organizations — and we give back where we can.</p>
+    </div>
+  </div>
+</section>
+
+<!-- TEAM -->
+<section class="team">
+  <div class="sec-tag" style="color:var(--navy)">The Team</div>
+  <h2 class="sec-title">The <em>Minds</em> Behind the Merch</h2>
+  <div class="team-grid">
+    <div class="team-card">
+      <div class="team-avatar a1">🧠</div>
+      <div class="team-info">
+        <div class="team-name">The Design Team</div>
+        <div class="team-role">Creative Direction</div>
+        <p class="team-bio">Our designers live and breathe brand identity. They'll take your vision — or build one from scratch — and turn it into something your audience will love at first glance.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar a2">🏭</div>
+      <div class="team-info">
+        <div class="team-name">Production Crew</div>
+        <div class="team-role">Print & Fulfillment</div>
+        <p class="team-bio">From screen printing to embroidery to DTG, our production specialists know exactly which method makes each product shine — and they execute it with precision every time.</p>
+      </div>
+    </div>
+    <div class="team-card">
+      <div class="team-avatar a3">📦</div>
+      <div class="team-info">
+        <div class="team-name">Client Success</div>
+        <div class="team-role">Order Management</div>
+        <p class="team-bio">Your order is tracked, communicated, and delivered with care. Our client success team makes sure you always know where things stand — no chasing required.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MISSION QUOTE -->
+<div class="mission-strip">
+  <blockquote>"We don't just print shirts. We build <em>brands people wear.</em>"</blockquote>
+  <p>— The Smart Merch Design Team, Oakhurst, NJ</p>
+  <a class="form-submit" href="contact.html" style="margin-top:32px;display:inline-flex;">Start Your Project →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+  </div>
+</footer>
+
+<script>
+document.querySelector('.hamburger').addEventListener('click', function() {
+  document.querySelector('.nav-links').classList.toggle('open');
+});
+</script>
+</body>
+</html>

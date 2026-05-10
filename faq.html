@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FAQ — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.faq-layout { display:grid; grid-template-columns:200px 1fr; gap:60px; padding:72px 56px; align-items:start; }
+.faq-nav { position:sticky; top:96px; }
+.faq-nav a { display:block; font-size:13px; font-weight:600; color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:8px; margin-bottom:2px; border-left:2px solid transparent; transition:all .2s; letter-spacing:0.5px; }
+.faq-nav a:hover, .faq-nav a.active { color:var(--orange); border-left-color:var(--orange); background:rgba(245,137,26,.06); }
+.faq-nav-title { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,.25); margin:20px 0 8px 12px; }
+.faq-content {}
+.faq-section { margin-bottom:64px; }
+.faq-section-title { font-family:var(--display); font-size:28px; font-weight:900; color:var(--white); margin-bottom:24px; padding-bottom:14px; border-bottom:1px solid rgba(255,255,255,.08); }
+.faq-section-title em { color:var(--orange); font-style:normal; }
+.faq-item { border-bottom:1px solid rgba(255,255,255,.06); }
+.faq-q {
+  width:100%; text-align:left; background:none; border:none; cursor:pointer;
+  font-family:var(--body); font-size:16px; font-weight:600; color:var(--white);
+  padding:18px 0; display:flex; align-items:center; justify-content:space-between; gap:16px;
+  transition:color .2s;
+}
+.faq-q:hover { color:var(--orange); }
+.faq-q .arrow { font-size:18px; transition:transform .3s; flex-shrink:0; color:var(--orange); }
+.faq-item.open .faq-q { color:var(--orange); }
+.faq-item.open .arrow { transform:rotate(45deg); }
+.faq-a { font-size:14.5px; line-height:1.85; color:var(--muted); max-height:0; overflow:hidden; transition:max-height .4s ease, padding .3s; }
+.faq-item.open .faq-a { max-height:400px; padding-bottom:18px; }
+.faq-a a { color:var(--orange); }
+.faq-a strong { color:var(--white); }
+
+.still-stuck {
+  background:linear-gradient(145deg,#152348,#0d1e3e);
+  border:1px solid rgba(245,137,26,.2); border-radius:20px; padding:48px 40px; margin:0 56px 72px; text-align:center;
+}
+.still-stuck h3 { font-family:var(--display); font-size:36px; font-weight:900; color:var(--white); margin-bottom:12px; }
+.still-stuck h3 em { color:var(--orange); font-style:normal; }
+.still-stuck p { font-size:15px; color:var(--muted); margin-bottom:28px; }
+.contact-options { display:flex; justify-content:center; gap:14px; flex-wrap:wrap; }
+.co { display:inline-flex; align-items:center; gap:10px; background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:12px 24px; color:var(--white); text-decoration:none; font-size:15px; transition:all .25s; }
+.co:hover { border-color:rgba(245,137,26,.4); background:rgba(245,137,26,.08); color:var(--orange); }
+
+@media (max-width:900px) {
+  .faq-layout { grid-template-columns:1fr; padding:40px 20px; }
+  .faq-nav { display:none; }
+  .still-stuck { margin:0 20px 48px; padding:32px 24px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html" class="active">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">💡 Quick Answers</div>
+    <h1>GOT <em>QUESTIONS?</em> WE'VE GOT SMART ANSWERS.</h1>
+    <p>Everything you need to know about ordering, designing, pricing, and shipping — answered straight.</p>
+  </div>
+</div>
+
+<div class="faq-layout">
+
+  <nav class="faq-nav">
+    <a href="#ordering">Ordering</a>
+    <a href="#design">Design</a>
+    <a href="#printing">Printing</a>
+    <a href="#pricing">Pricing</a>
+    <a href="#shipping">Shipping</a>
+    <a href="#returns">Returns</a>
+    <a href="#bulk">Bulk Orders</a>
+  </nav>
+
+  <div class="faq-content">
+
+    <div class="faq-section" id="ordering">
+      <div class="faq-section-title">💡 <em>Ordering</em> Basics</div>
+
+      <div class="faq-item">
+        <button class="faq-q">How do I place an order? <span class="arrow">+</span></button>
+        <div class="faq-a">You can start by filling out our <a href="quote.html">free quote form</a>, sending us an email at <a href="mailto:smartmerchdesign@gmail.com">smartmerchdesign@gmail.com</a>, or ordering directly through our <a href="https://smartmerchdesignco.etsy.com" target="_blank">Etsy store</a>. For custom bulk orders, the quote form is the fastest route.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What's the minimum order quantity? <span class="arrow">+</span></button>
+        <div class="faq-a">For screen-printed apparel, the minimum is typically <strong>12 units</strong>. For DTG (direct-to-garment) printing, there's no minimum — you can order just 1. Promotional products vary by item. Check our <a href="pricing.html">pricing page</a> for details by tier.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I mix sizes and colors in one order? <span class="arrow">+</span></button>
+        <div class="faq-a">Yes! For screen printing, the minimums apply to the total run, not each size or color. So you can order a mix of S/M/L/XL and hit the minimum across all sizes combined. Color of the garment may affect pricing.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do you have samples I can see first? <span class="arrow">+</span></button>
+        <div class="faq-a">We provide <strong>digital mockups</strong> before every order so you can see exactly how the print will look. Physical samples can be requested for large orders (200+ units) at an additional cost. Contact us to discuss.</div>
+      </div>
+    </div>
+
+    <div class="faq-section" id="design">
+      <div class="faq-section-title">✏️ <em>Design</em> & Artwork</div>
+
+      <div class="faq-item">
+        <button class="faq-q">What file format do I need to submit? <span class="arrow">+</span></button>
+        <div class="faq-a">For best results, submit your artwork as a <strong>vector file (AI, EPS, or PDF)</strong> with fonts outlined. We also accept high-resolution PNG or TIF files (300 DPI or higher). If you only have a low-res file, we offer <a href="pricing.html">vectorization services</a> starting at $50.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What if I don't have a design? <span class="arrow">+</span></button>
+        <div class="faq-a">No problem — we've got you. Our design team can create custom artwork from scratch starting at $150. Just share your ideas, brand guidelines, colors, and anything you love for inspiration. <a href="quote.html">Start a project →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">How many design revisions do I get? <span class="arrow">+</span></button>
+        <div class="faq-a">We offer <strong>unlimited revisions</strong> on mockups before you approve. We'd rather tweak it until it's perfect than send you something you're not happy with. Once you approve the final proof, production begins.</div>
+      </div>
+    </div>
+
+    <div class="faq-section" id="printing">
+      <div class="faq-section-title">🖨️ <em>Printing</em> Methods</div>
+
+      <div class="faq-item">
+        <button class="faq-q">What's the difference between screen printing and DTG? <span class="arrow">+</span></button>
+        <div class="faq-a"><strong>Screen printing</strong> uses ink pressed through a mesh screen — it's more durable, more vibrant, and cost-effective for large runs (12+ units). <strong>DTG (Direct-to-Garment)</strong> prints full-color designs digitally onto the fabric — great for small runs, complex artwork, or 1-of-1 pieces. We'll recommend the best method for your project.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do you do embroidery? <span class="arrow">+</span></button>
+        <div class="faq-a">Yes! Embroidery is available for hats, polos, bags, jackets, and more. It gives a premium, textured look and is incredibly durable. Minimum is typically 12 units. We'll digitize your artwork for embroidery at no extra charge for most designs.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Will the colors look exactly like my design file? <span class="arrow">+</span></button>
+        <div class="faq-a">We do our best to match your colors as closely as possible using PMS (Pantone Matching System) for screen printing. Monitor colors can vary, so for exact color matching, please provide a PMS color code. DTG printing is full-color but may vary slightly from screen to print.</div>
+      </div>
+    </div>
+
+    <div class="faq-section" id="pricing">
+      <div class="faq-section-title">💰 <em>Pricing</em> & Payment</div>
+
+      <div class="faq-item">
+        <button class="faq-q">How much does custom merch cost? <span class="arrow">+</span></button>
+        <div class="faq-a">It depends on the product, quantity, print method, and number of colors. As a general guide, custom apparel starts around <strong>$8–$18 per unit</strong> depending on order size. Get an exact quote using our <a href="quote.html">quote form</a> — it's free and fast.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Are there setup fees? <span class="arrow">+</span></button>
+        <div class="faq-a">Screen printing has a one-time setup fee per color per location (typically $25–$40 per screen). This covers creating the screens for your design. For DTG and embroidery, digitization may have a one-time fee. These are always disclosed upfront in your quote.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">What payment methods do you accept? <span class="arrow">+</span></button>
+        <div class="faq-a">We accept all major credit cards, PayPal, Venmo, and bank transfer for large orders. Etsy orders can be paid through Etsy's secure checkout. A 50% deposit is required to begin production on custom orders.</div>
+      </div>
+    </div>
+
+    <div class="faq-section" id="shipping">
+      <div class="faq-section-title">📦 <em>Shipping</em> & Delivery</div>
+
+      <div class="faq-item">
+        <button class="faq-q">How long does production take? <span class="arrow">+</span></button>
+        <div class="faq-a">Standard turnaround is <strong>7–10 business days</strong> after proof approval. Rush orders can be completed in <strong>48–72 hours</strong> for an additional fee. Production time does not include shipping. We always confirm timelines before production begins.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do you ship nationwide? <span class="arrow">+</span></button>
+        <div class="faq-a">Yes — we ship anywhere in the continental United States via UPS, FedEx, and USPS. Expedited and overnight shipping options are available. International shipping is available for select orders — contact us for details.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can you ship to multiple locations? <span class="arrow">+</span></button>
+        <div class="faq-a">Yes! Our fulfillment service can drop-ship individual orders to multiple addresses. This is popular for remote teams, event attendees, or retail distribution. <a href="bulk-orders.html">Learn more about bulk fulfillment →</a></div>
+      </div>
+    </div>
+
+    <div class="faq-section" id="returns">
+      <div class="faq-section-title">↩️ <em>Returns</em> & Issues</div>
+
+      <div class="faq-item">
+        <button class="faq-q">What if there's a problem with my order? <span class="arrow">+</span></button>
+        <div class="faq-a">We stand behind everything we produce. If your order has a defect, printing error, or doesn't match the approved proof, we'll <strong>reprint or refund</strong> — no questions asked. Contact us within 14 days of receiving your order.</div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can I return or exchange custom orders? <span class="arrow">+</span></button>
+        <div class="faq-a">Because custom orders are made specifically for you, we can't accept returns due to a change of mind or incorrect sizing if the right sizes were submitted. However, if the order doesn't match your approved proof, we make it right every time.</div>
+      </div>
+    </div>
+
+    <div class="faq-section" id="bulk">
+      <div class="faq-section-title">📊 <em>Bulk</em> & Corporate Orders</div>
+
+      <div class="faq-item">
+        <button class="faq-q">Do you offer discounts for large orders? <span class="arrow">+</span></button>
+        <div class="faq-a">Absolutely. Our pricing scales with quantity — the more you order, the lower your per-unit cost. Orders over 200 units receive our best pricing, plus access to additional services like custom packaging and fulfillment. <a href="bulk-orders.html">See bulk order details →</a></div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-q">Can you handle ongoing or reorder needs? <span class="arrow">+</span></button>
+        <div class="faq-a">Yes — once your artwork is approved and screens are made, reorders are fast and affordable. We keep your files on file so you never have to start from scratch. Many clients set up recurring seasonal orders with us.</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<!-- STILL STUCK -->
+<div class="still-stuck">
+  <h3>Still Have a <em>Question?</em></h3>
+  <p>Can't find what you're looking for? Our team is real people, ready to help — just reach out.</p>
+  <div class="contact-options">
+    <a class="co" href="mailto:smartmerchdesign@gmail.com">📧 Email Us</a>
+    <a class="co" href="tel:+13476085682">📞 (347) 608-5682</a>
+    <a class="co" href="contact.html">💬 Contact Form</a>
+    <a class="co" href="quote.html">💡 Get a Quote</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+  </div>
+</footer>
+
+<script>
+document.querySelectorAll('.faq-q').forEach(btn => {
+  btn.addEventListener('click', () => {
+    const item = btn.parentElement;
+    const wasOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
+    if (!wasOpen) item.classList.add('open');
+  });
+});
+// Highlight nav on scroll
+const sections = document.querySelectorAll('.faq-section');
+const navLinks = document.querySelectorAll('.faq-nav a');
+window.addEventListener('scroll', () => {
+  let current = '';
+  sections.forEach(s => { if (window.scrollY >= s.offsetTop - 120) current = s.id; });
+  navLinks.forEach(a => { a.classList.toggle('active', a.getAttribute('href') === '#' + current); });
+});
+</script>
+</body>
+</html>

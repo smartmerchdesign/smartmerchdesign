@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Services — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.services-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px;
+  padding: 72px 56px;
+}
+.svc-card {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08);
+  border-radius: 18px; padding: 40px 32px;
+  position: relative; overflow: hidden; transition: all .3s;
+}
+.svc-card::after {
+  content:''; position:absolute; left:0; bottom:0; right:0; height:3px;
+  background: var(--orange); transform:scaleX(0); transform-origin:left; transition:transform .35s;
+}
+.svc-card:hover { transform:translateY(-6px); border-color:rgba(245,137,26,.35); }
+.svc-card:hover::after { transform:scaleX(1); }
+.svc-card.featured {
+  background: linear-gradient(145deg, #152348, #0d1e3e);
+  border-color: rgba(245,137,26,.3); grid-column: span 1;
+}
+.svc-card.featured::before {
+  content: 'MOST POPULAR'; position:absolute; top:18px; right:18px;
+  font-size:10px; font-weight:700; letter-spacing:2px; color:var(--orange);
+  background:rgba(245,137,26,.12); border:1px solid rgba(245,137,26,.3);
+  padding:4px 10px; border-radius:100px;
+}
+.svc-icon-wrap {
+  width:60px; height:60px; border-radius:14px;
+  background:rgba(245,137,26,.12); border:1px solid rgba(245,137,26,.2);
+  display:flex; align-items:center; justify-content:center; font-size:28px; margin-bottom:22px;
+}
+.svc-name { font-family:var(--display); font-size:28px; font-weight:900; color:var(--white); margin-bottom:12px; }
+.svc-name em { color:var(--orange); font-style:normal; }
+.svc-desc { font-size:14px; line-height:1.8; color:var(--muted); margin-bottom:24px; }
+.svc-features { list-style:none; }
+.svc-features li { font-size:13.5px; color:rgba(255,255,255,.7); padding:7px 0; border-bottom:1px solid rgba(255,255,255,.06); display:flex; align-items:center; gap:10px; }
+.svc-features li::before { content:'✓'; color:var(--orange); font-weight:700; }
+.svc-link { display:inline-flex; align-items:center; gap:8px; margin-top:24px; color:var(--orange); font-family:var(--display); font-size:16px; font-weight:700; text-decoration:none; letter-spacing:0.5px; transition:gap .2s; }
+.svc-link:hover { gap:14px; }
+
+.print-methods { padding:72px 56px; background:var(--offwhite); }
+.print-methods .sec-title { color:var(--navy); }
+.methods-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:20px; margin-top:48px; }
+.method-card { background:var(--white); border-radius:14px; padding:28px 22px; text-align:center; transition:transform .3s; box-shadow:0 4px 20px rgba(13,42,94,.06); }
+.method-card:hover { transform:translateY(-4px); }
+.method-icon { font-size:40px; margin-bottom:14px; }
+.method-name { font-family:var(--display); font-size:20px; font-weight:700; color:var(--navy); margin-bottom:8px; }
+.method-tag { display:inline-block; font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; color:var(--orange); background:rgba(245,137,26,.08); border:1px solid rgba(245,137,26,.2); padding:3px 10px; border-radius:100px; margin-bottom:12px; }
+.method-desc { font-size:13px; line-height:1.7; color:#6b7a99; }
+
+.cta-band { background:linear-gradient(135deg,var(--navy),#0a1832); padding:72px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px; }
+.cta-band h2 { font-family:var(--display); font-size:clamp(28px,4vw,52px); font-weight:900; color:var(--white); line-height:1; }
+.cta-band h2 em { color:var(--orange); font-style:normal; }
+.cta-band p { font-size:15px; color:var(--muted); margin-top:12px; max-width:500px; }
+.cta-actions { display:flex; gap:14px; flex-shrink:0; flex-wrap:wrap; }
+.btn-outline { display:inline-flex; align-items:center; gap:8px; border:2px solid rgba(245,137,26,.5); color:var(--orange); font-family:var(--display); font-weight:700; font-size:17px; letter-spacing:1px; padding:14px 32px; border-radius:10px; text-decoration:none; transition:all .25s; }
+.btn-outline:hover { border-color:var(--orange); background:rgba(245,137,26,.1); }
+
+@media (max-width:900px) {
+  .services-grid, .methods-grid { grid-template-columns:1fr; padding:40px 20px; }
+  .print-methods, .cta-band { padding:48px 20px; }
+  .cta-band { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html" class="active">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">💡 What We Do</div>
+    <h1>EVERY SERVICE YOUR <em>BRAND</em> NEEDS</h1>
+    <p>Design, print, fulfill, ship. We do it all — under one roof, with one team who actually cares about the outcome.</p>
+  </div>
+</div>
+
+<div class="services-grid">
+  <div class="svc-card">
+    <div class="svc-icon-wrap">🧠</div>
+    <div class="svc-name"><em>Smart</em> Design</div>
+    <p class="svc-desc">Not just making things look good — making them work. Our designers build your merch around your brand strategy, not just a template.</p>
+    <ul class="svc-features">
+      <li>Custom artwork from scratch</li>
+      <li>Unlimited revisions</li>
+      <li>Brand guideline alignment</li>
+      <li>Mockup previews before production</li>
+      <li>Print-ready file delivery</li>
+    </ul>
+    <a href="quote.html" class="svc-link">Get a Design Quote →</a>
+  </div>
+
+  <div class="svc-card featured">
+    <div class="svc-icon-wrap">👕</div>
+    <div class="svc-name"><em>Smart</em> Printing</div>
+    <p class="svc-desc">Screen print, DTG, embroidery, sublimation — we pick the right method for your product and your budget, so the result is always top tier.</p>
+    <ul class="svc-features">
+      <li>Screen printing (bulk orders)</li>
+      <li>DTG — Direct to Garment</li>
+      <li>Embroidery (hats, polos, bags)</li>
+      <li>Sublimation printing</li>
+      <li>Heat transfer vinyl</li>
+    </ul>
+    <a href="quote.html" class="svc-link">Get a Print Quote →</a>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon-wrap">🎁</div>
+    <div class="svc-name"><em>Smart</em> Promos</div>
+    <p class="svc-desc">Branded merchandise beyond apparel — mugs, totes, stickers, drinkware, and hundreds more products that get real use and real exposure.</p>
+    <ul class="svc-features">
+      <li>Huge product catalog</li>
+      <li>Event & trade show kits</li>
+      <li>Branded gift sets</li>
+      <li>Custom packaging available</li>
+      <li>Low minimum quantities</li>
+    </ul>
+    <a href="products.html" class="svc-link">View Product Catalog →</a>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon-wrap">📦</div>
+    <div class="svc-name"><em>Smart</em> Fulfillment</div>
+    <p class="svc-desc">12 units or 12,000 — we handle warehousing, kitting, and drop-shipping so you never worry about logistics.</p>
+    <ul class="svc-features">
+      <li>Bulk order fulfillment</li>
+      <li>Individual drop-shipping</li>
+      <li>Custom kitting & bundling</li>
+      <li>Inventory management</li>
+      <li>Nationwide shipping</li>
+    </ul>
+    <a href="bulk-orders.html" class="svc-link">Bulk Orders Info →</a>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon-wrap">⚡</div>
+    <div class="svc-name"><em>Smart</em> Rush</div>
+    <p class="svc-desc">Event tomorrow? Don't panic. Our rush production pipeline gets you from approval to shipped in as little as 48 hours.</p>
+    <ul class="svc-features">
+      <li>48-hour rush turnaround</li>
+      <li>Priority production queue</li>
+      <li>Expedited shipping options</li>
+      <li>Same-day proofing</li>
+      <li>No quality compromise</li>
+    </ul>
+    <a href="contact.html" class="svc-link">Request Rush Order →</a>
+  </div>
+
+  <div class="svc-card">
+    <div class="svc-icon-wrap">💡</div>
+    <div class="svc-name"><em>Smart</em> Strategy</div>
+    <p class="svc-desc">Not sure what to order or where to start? We consult on product selection, budget allocation, and merch strategy — free of charge.</p>
+    <ul class="svc-features">
+      <li>Free merch consultation</li>
+      <li>Product recommendation</li>
+      <li>Budget planning help</li>
+      <li>Distribution strategy</li>
+      <li>Brand consistency review</li>
+    </ul>
+    <a href="contact.html" class="svc-link">Book a Consultation →</a>
+  </div>
+</div>
+
+<!-- PRINT METHODS -->
+<section class="print-methods">
+  <div class="sec-tag" style="color:var(--navy)">The Tech</div>
+  <h2 class="sec-title">We Use the <em>Right Method</em> Every Time</h2>
+  <div class="methods-grid">
+    <div class="method-card">
+      <div class="method-icon">🖨️</div>
+      <div class="method-tag">High Volume</div>
+      <div class="method-name">Screen Print</div>
+      <p class="method-desc">Vivid, durable ink pressed through a mesh screen. The gold standard for bulk apparel orders over 24 units.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">🖥️</div>
+      <div class="method-tag">Full Color</div>
+      <div class="method-name">DTG</div>
+      <p class="method-desc">Direct-to-garment digital printing for photographic detail and unlimited colors with no minimum order.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">🧵</div>
+      <div class="method-tag">Premium Feel</div>
+      <div class="method-name">Embroidery</div>
+      <p class="method-desc">Threaded designs for a textured, high-end finish. Perfect for hats, polos, bags, and corporate apparel.</p>
+    </div>
+    <div class="method-card">
+      <div class="method-icon">🌈</div>
+      <div class="method-tag">All-Over Print</div>
+      <div class="method-name">Sublimation</div>
+      <p class="method-desc">Dye infused directly into the fabric for edge-to-edge prints that never crack, peel, or fade.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div>
+    <h2>Ready for <em>Smarter</em> Merch?</h2>
+    <p>Start with a free quote — no commitment required. Tell us what you need and we'll come back with options, pricing, and a plan.</p>
+  </div>
+  <div class="cta-actions">
+    <a class="form-submit" href="quote.html">💡 Get a Free Quote</a>
+    <a class="btn-outline" href="contact.html">Chat With Us</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+  </div>
+</footer>
+</body>
+</html>

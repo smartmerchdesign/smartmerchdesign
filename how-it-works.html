@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>How It Works — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.process-section { padding:72px 56px; }
+.step-full {
+  display:grid; grid-template-columns:80px 1fr; gap:32px;
+  padding:48px 0; border-bottom:1px solid rgba(255,255,255,.07); align-items:start;
+}
+.step-full:last-child { border-bottom:none; }
+.step-num-big {
+  width:80px; height:80px; border-radius:50%; border:2px solid rgba(245,137,26,.4);
+  display:flex; align-items:center; justify-content:center;
+  font-family:var(--display); font-size:32px; font-weight:900; color:var(--orange);
+  background:rgba(245,137,26,.08); flex-shrink:0;
+  box-shadow:0 0 0 8px rgba(245,137,26,.06);
+}
+.step-body {}
+.step-meta { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+.step-label { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--orange); }
+.step-time { font-size:12px; color:rgba(255,255,255,.3); }
+.step-title { font-family:var(--display); font-size:38px; font-weight:900; color:var(--white); margin-bottom:14px; line-height:1; }
+.step-title em { color:var(--orange); font-style:normal; }
+.step-desc { font-size:15px; line-height:1.85; color:var(--muted); max-width:600px; margin-bottom:20px; }
+.step-details { display:flex; flex-wrap:wrap; gap:10px; }
+.step-detail { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.09); border-radius:8px; padding:8px 14px; font-size:13px; color:rgba(255,255,255,.7); display:flex; align-items:center; gap:8px; }
+.step-detail::before { content:'✓'; color:var(--orange); font-weight:700; }
+
+.timeline-vis {
+  background:rgba(245,137,26,.05); border:1px solid rgba(245,137,26,.15);
+  border-radius:20px; padding:48px 40px; margin:0 56px 72px;
+}
+.timeline-vis h3 { font-family:var(--display); font-size:28px; font-weight:900; color:var(--white); margin-bottom:32px; text-align:center; }
+.timeline-vis h3 em { color:var(--orange); font-style:normal; }
+.timeline-bar { display:grid; grid-template-columns:repeat(7,1fr); gap:0; position:relative; }
+.tl-day {
+  text-align:center; padding:0 4px;
+}
+.tl-dot {
+  width:40px; height:40px; border-radius:50%; margin:0 auto 10px;
+  display:flex; align-items:center; justify-content:center; font-size:16px;
+  border:2px solid rgba(255,255,255,.1); background:rgba(255,255,255,.04);
+  position:relative; z-index:1;
+}
+.tl-dot.active { background:var(--orange); border-color:var(--orange); box-shadow:0 0 20px rgba(245,137,26,.4); }
+.tl-dot.done { background:rgba(245,137,26,.2); border-color:rgba(245,137,26,.4); }
+.tl-label { font-size:11px; font-weight:700; color:var(--white); margin-bottom:4px; }
+.tl-sub { font-size:10px; color:var(--muted); line-height:1.4; }
+.tl-line { position:absolute; top:19px; left:10%; right:10%; height:2px; background:linear-gradient(90deg, var(--orange) 0%, rgba(245,137,26,.2) 60%); z-index:0; }
+
+.start-cta { display:flex; align-items:center; justify-content:space-between; gap:40px; padding:72px 56px; background:linear-gradient(135deg,var(--navy),#0a1832); }
+.start-cta h2 { font-family:var(--display); font-size:clamp(28px,4vw,56px); font-weight:900; color:var(--white); line-height:1; }
+.start-cta h2 em { color:var(--orange); font-style:normal; }
+.start-cta p { font-size:15px; color:var(--muted); margin-top:12px; max-width:500px; }
+.cta-group { display:flex; gap:14px; flex-wrap:wrap; flex-shrink:0; }
+
+@media (max-width:900px) {
+  .process-section { padding:40px 20px; }
+  .step-full { grid-template-columns:60px 1fr; gap:20px; }
+  .step-num-big { width:60px; height:60px; font-size:24px; }
+  .timeline-vis { margin:0 20px 48px; padding:32px 20px; }
+  .timeline-bar { grid-template-columns:repeat(4,1fr); }
+  .tl-line { display:none; }
+  .start-cta { flex-direction:column; padding:48px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html" class="active">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html" class="active">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">💡 The Process</div>
+    <h1>FROM <em>IDEA</em> TO DOORSTEP IN 5 SMART STEPS</h1>
+    <p>No confusion. No chasing. Just a clear, streamlined process that turns your vision into reality — fast and stress-free.</p>
+  </div>
+</div>
+
+<section class="process-section">
+
+  <div class="step-full">
+    <div class="step-num-big">01</div>
+    <div class="step-body">
+      <div class="step-meta">
+        <span class="step-label">Step One</span>
+        <span class="step-time">Takes about 5 minutes</span>
+      </div>
+      <div class="step-title">💡 Share Your <em>Vision</em></div>
+      <p class="step-desc">Start by telling us what you need — products, quantities, timeline, and any brand assets you have. The more info you share, the faster we can build something great. Use our quote form, shoot us an email, or give us a call. Zero commitment required.</p>
+      <div class="step-details">
+        <span class="step-detail">Free, no-obligation quote</span>
+        <span class="step-detail">Share your logo, colors, ideas</span>
+        <span class="step-detail">Tell us your timeline & budget</span>
+        <span class="step-detail">We respond same business day</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-full">
+    <div class="step-num-big">02</div>
+    <div class="step-body">
+      <div class="step-meta">
+        <span class="step-label">Step Two</span>
+        <span class="step-time">24–48 hours after inquiry</span>
+      </div>
+      <div class="step-title">✏️ We Build Your <em>Mockup</em></div>
+      <p class="step-desc">Our designers get to work creating a digital mockup of your product — exactly how it'll look in real life. We'll share it for your review and make as many revisions as you need. You don't pay a dime until you love it.</p>
+      <div class="step-details">
+        <span class="step-detail">Digital mockup provided</span>
+        <span class="step-detail">Unlimited free revisions</span>
+        <span class="step-detail">Color, size, placement options</span>
+        <span class="step-detail">Final proof approval required</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-full">
+    <div class="step-num-big">03</div>
+    <div class="step-body">
+      <div class="step-meta">
+        <span class="step-label">Step Three</span>
+        <span class="step-time">Once you love the proof</span>
+      </div>
+      <div class="step-title">💳 Approve &amp; <em>Pay</em></div>
+      <p class="step-desc">When you're happy with the proof, we send a final order summary and invoice. A 50% deposit kicks off production. It's that simple — no mystery fees, no fine print. Just the number we quoted you.</p>
+      <div class="step-details">
+        <span class="step-detail">Clear, itemized invoice</span>
+        <span class="step-detail">50% deposit to start</span>
+        <span class="step-detail">Credit card, PayPal, or bank transfer</span>
+        <span class="step-detail">Balance due on completion</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-full">
+    <div class="step-num-big">04</div>
+    <div class="step-body">
+      <div class="step-meta">
+        <span class="step-label">Step Four</span>
+        <span class="step-time">7–10 days standard · 48hr rush</span>
+      </div>
+      <div class="step-title">🏭 We <em>Produce</em> Your Order</div>
+      <p class="step-desc">Your order goes into production using the right printing method for the job — screen print, DTG, embroidery, or sublimation. Every piece is quality-checked before it goes anywhere near a shipping box.</p>
+      <div class="step-details">
+        <span class="step-detail">Right print method selected</span>
+        <span class="step-detail">Premium blanks sourced</span>
+        <span class="step-detail">QC inspection on every item</span>
+        <span class="step-detail">Rush option available</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="step-full">
+    <div class="step-num-big">05</div>
+    <div class="step-body">
+      <div class="step-meta">
+        <span class="step-label">Step Five</span>
+        <span class="step-time">Fast, tracked, insured</span>
+      </div>
+      <div class="step-title">📦 Ship <em>Smart</em></div>
+      <p class="step-desc">Your finished order is packed carefully and shipped with full tracking. We send you the tracking info the moment it ships. Delivery to one address or a thousand — we handle it all with care.</p>
+      <div class="step-details">
+        <span class="step-detail">Tracked shipping</span>
+        <span class="step-detail">Expedited options available</span>
+        <span class="step-detail">Multi-location drop-ship</span>
+        <span class="step-detail">Balance collected on ship</span>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<!-- TIMELINE VIS -->
+<div class="timeline-vis">
+  <h3>Your Order, On a <em>Smart Timeline</em></h3>
+  <div style="position:relative;">
+    <div class="tl-line"></div>
+    <div class="timeline-bar">
+      <div class="tl-day"><div class="tl-dot done">📝</div><div class="tl-label">Day 1</div><div class="tl-sub">Quote & inquiry</div></div>
+      <div class="tl-day"><div class="tl-dot done">✏️</div><div class="tl-label">Day 2</div><div class="tl-sub">Mockup sent</div></div>
+      <div class="tl-day"><div class="tl-dot done">✅</div><div class="tl-label">Day 3</div><div class="tl-sub">Proof approved</div></div>
+      <div class="tl-day"><div class="tl-dot active">🏭</div><div class="tl-label">Days 4–9</div><div class="tl-sub">In production</div></div>
+      <div class="tl-day"><div class="tl-dot">📦</div><div class="tl-label">Day 10</div><div class="tl-sub">Ships out</div></div>
+      <div class="tl-day"><div class="tl-dot">🚚</div><div class="tl-label">Day 12</div><div class="tl-sub">In transit</div></div>
+      <div class="tl-day"><div class="tl-dot">🎉</div><div class="tl-label">Day 14</div><div class="tl-sub">Delivered!</div></div>
+    </div>
+  </div>
+  <p style="text-align:center;font-size:13px;color:var(--muted);margin-top:24px;">Need it faster? Rush turnaround available — <a href="contact.html" style="color:var(--orange);">ask us how →</a></p>
+</div>
+
+<!-- START CTA -->
+<div class="start-cta">
+  <div>
+    <h2>Ready to Start Your <em>Smart</em> Order?</h2>
+    <p>Fill out our quote form in 3 minutes. We'll come back with a mockup, pricing, and a timeline that works for you.</p>
+  </div>
+  <div class="cta-group">
+    <a class="form-submit" href="quote.html">💡 Get a Free Quote</a>
+    <a class="form-submit" href="contact.html" style="background:transparent;border:2px solid rgba(245,137,26,.5);color:var(--orange);box-shadow:none;">Ask a Question</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+  </div>
+</footer>
+</body>
+</html>

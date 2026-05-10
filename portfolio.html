@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Portfolio — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.portfolio-intro { padding:56px 56px 0; max-width:700px; }
+.portfolio-grid {
+  display:grid; grid-template-columns:repeat(3,1fr); gap:16px;
+  padding:40px 56px 72px;
+}
+.port-card {
+  border-radius:16px; overflow:hidden; position:relative;
+  aspect-ratio:1; cursor:pointer; transition:transform .3s;
+}
+.port-card:hover { transform:scale(1.02); z-index:2; }
+.port-card:hover .port-overlay { opacity:1; }
+.port-card.tall { grid-row:span 2; aspect-ratio:auto; min-height:480px; }
+.port-card.wide { grid-column:span 2; aspect-ratio:16/9; }
+.port-bg {
+  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+  font-size:72px; position:absolute; inset:0;
+  background:linear-gradient(135deg, var(--from), var(--to));
+}
+.port-overlay {
+  position:absolute; inset:0; background:rgba(8,15,36,.85);
+  display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
+  padding:24px 22px; opacity:0; transition:opacity .3s;
+  backdrop-filter:blur(4px);
+}
+.port-tag { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--orange); margin-bottom:6px; }
+.port-title { font-family:var(--display); font-size:22px; font-weight:900; color:var(--white); margin-bottom:6px; line-height:1.1; }
+.port-sub { font-size:12px; color:var(--muted); }
+
+.testimonials { padding:72px 56px; background:var(--offwhite); }
+.testimonials .sec-title { color:var(--navy); }
+.testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; margin-top:48px; }
+.tc {
+  background:var(--white); border-radius:16px; padding:28px 26px;
+  box-shadow:0 4px 24px rgba(13,42,94,.07); transition:transform .3s;
+}
+.tc:hover { transform:translateY(-4px); }
+.tc-stars { color:var(--orange); font-size:18px; margin-bottom:14px; letter-spacing:2px; }
+.tc-text { font-size:14px; line-height:1.8; color:#6b7a99; margin-bottom:18px; }
+.tc-author { display:flex; align-items:center; gap:12px; }
+.tc-av { width:38px; height:38px; border-radius:50%; background:var(--navy); display:flex; align-items:center; justify-content:center; font-family:var(--display); font-size:14px; font-weight:700; color:var(--white); flex-shrink:0; }
+.tc-name { font-weight:600; font-size:14px; color:var(--navy); }
+.tc-role { font-size:12px; color:#9ba8be; }
+
+.brands-strip { padding:64px 56px; text-align:center; }
+.brands-label { font-size:12px; font-weight:700; letter-spacing:3px; text-transform:uppercase; color:var(--muted); margin-bottom:32px; }
+.brands-row { display:flex; justify-content:center; flex-wrap:wrap; gap:12px; }
+.brand-pill {
+  background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
+  border-radius:100px; padding:10px 22px;
+  font-family:var(--display); font-size:15px; font-weight:700; color:rgba(255,255,255,.5);
+  letter-spacing:1px; transition:all .2s;
+}
+.brand-pill:hover { color:var(--white); border-color:rgba(245,137,26,.3); background:rgba(245,137,26,.06); }
+
+.cta-band { background:linear-gradient(135deg,var(--navy),#0a1832); padding:72px 56px; display:flex; align-items:center; justify-content:space-between; gap:40px; }
+.cta-band h2 { font-family:var(--display); font-size:clamp(28px,4vw,52px); font-weight:900; color:var(--white); line-height:1; }
+.cta-band h2 em { color:var(--orange); font-style:normal; }
+.cta-band p { font-size:15px; color:var(--muted); margin-top:12px; max-width:480px; }
+
+@media (max-width:900px) {
+  .portfolio-grid, .portfolio-intro { padding:24px 20px; }
+  .portfolio-grid { grid-template-columns:1fr; }
+  .port-card.tall, .port-card.wide { grid-row:span 1; grid-column:span 1; aspect-ratio:1; }
+  .testi-grid { grid-template-columns:1fr; }
+  .testimonials, .brands-strip, .cta-band { padding:48px 20px; }
+  .cta-band { flex-direction:column; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html" class="active">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">💡 Our Work</div>
+    <h1>MERCH THAT <em>MOVES</em> PEOPLE</h1>
+    <p>500+ brands. 10,000+ orders. Every single one made with strategy, craft, and care. Here's a taste of what smart merch looks like in the wild.</p>
+  </div>
+</div>
+
+<div class="portfolio-intro">
+  <p style="font-size:15px;color:var(--muted);line-height:1.8;">Hover over any project to learn more. From startup launch kits to corporate event merch to sports team uniforms — we've done it all.</p>
+</div>
+
+<div class="portfolio-grid">
+
+  <div class="port-card tall" style="--from:#0d2a5e;--to:#152348;">
+    <div class="port-bg">👕</div>
+    <div class="port-overlay">
+      <div class="port-tag">Corporate Apparel</div>
+      <div class="port-title">TechCorp Annual Retreat</div>
+      <div class="port-sub">300 custom hoodies · Screen print · 2-color</div>
+    </div>
+  </div>
+
+  <div class="port-card" style="--from:#2a1000;--to:#5c2500;">
+    <div class="port-bg">🧢</div>
+    <div class="port-overlay">
+      <div class="port-tag">Headwear</div>
+      <div class="port-title">Elevate Athletics Dad Hats</div>
+      <div class="port-sub">144 units · Embroidery · 3 colorways</div>
+    </div>
+  </div>
+
+  <div class="port-card" style="--from:#1a2a0a;--to:#2a4a10;">
+    <div class="port-bg">🛍️</div>
+    <div class="port-overlay">
+      <div class="port-tag">Promotional</div>
+      <div class="port-title">Spark Agency Event Kit</div>
+      <div class="port-sub">500 tote bags · Screen print · 1-color</div>
+    </div>
+  </div>
+
+  <div class="port-card wide" style="--from:#1a0a2a;--to:#2a104a;">
+    <div class="port-bg">☕</div>
+    <div class="port-overlay">
+      <div class="port-tag">Drinkware</div>
+      <div class="port-title">Morning Ritual Coffee Co. — Full Drinkware Line</div>
+      <div class="port-sub">Mugs, tumblers, water bottles · Custom branding · 6 SKUs</div>
+    </div>
+  </div>
+
+  <div class="port-card" style="--from:#0a1a2a;--to:#102a3a;">
+    <div class="port-bg">🎽</div>
+    <div class="port-overlay">
+      <div class="port-tag">Sports Team</div>
+      <div class="port-title">Jersey Shore FC Uniforms</div>
+      <div class="port-sub">Sublimation · Full roster · Custom numbers & names</div>
+    </div>
+  </div>
+
+  <div class="port-card" style="--from:#2a0a0a;--to:#4a1010;">
+    <div class="port-bg">🎒</div>
+    <div class="port-overlay">
+      <div class="port-tag">Accessories</div>
+      <div class="port-title">Red Brick Realty Welcome Kits</div>
+      <div class="port-sub">Backpack + notebook + pen + mug · Kitted sets · 80 units</div>
+    </div>
+  </div>
+
+  <div class="port-card" style="--from:#0a2a1a;--to:#104a2a;">
+    <div class="port-bg">🧥</div>
+    <div class="port-overlay">
+      <div class="port-tag">Nonprofit</div>
+      <div class="port-title">Green Future NJ Awareness Run</div>
+      <div class="port-sub">200 zip-ups · Embroidery + screen print combo</div>
+    </div>
+  </div>
+
+  <div class="port-card" style="--from:#2a2a0a;--to:#4a4a10;">
+    <div class="port-bg">📱</div>
+    <div class="port-overlay">
+      <div class="port-tag">Tech Accessories</div>
+      <div class="port-title">DevCon Hackathon Swag</div>
+      <div class="port-sub">Phone cases, mouse pads, stickers · 250 attendees</div>
+    </div>
+  </div>
+
+  <div class="port-card" style="--from:#2a0a2a;--to:#4a104a;">
+    <div class="port-bg">🖼️</div>
+    <div class="port-overlay">
+      <div class="port-tag">Art Prints</div>
+      <div class="port-title">Boardwalk Gallery Pop-Up</div>
+      <div class="port-sub">Canvas prints, framed posters, metal prints · 12 artworks</div>
+    </div>
+  </div>
+
+</div>
+
+<!-- TESTIMONIALS -->
+<section class="testimonials">
+  <div class="sec-tag" style="color:var(--navy)">What They Said</div>
+  <h2 class="sec-title">Real <em>Results.</em> Real Reviews.</h2>
+  <div class="testi-grid">
+    <div class="tc">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">Honestly the smartest decision we made for our company retreat was ordering through Smart Merch. Quality was incredible and everything came ahead of schedule.</p>
+      <div class="tc-author"><div class="tc-av">JR</div><div><div class="tc-name">Jessica R.</div><div class="tc-role">Marketing Director, TechCorp</div></div></div>
+    </div>
+    <div class="tc">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">These guys actually get it. They didn't just print a logo — they thought about the design and made it look like it belonged there. Smart merch indeed.</p>
+      <div class="tc-author"><div class="tc-av">MK</div><div><div class="tc-name">Marcus K.</div><div class="tc-role">Founder, Elevate Athletics</div></div></div>
+    </div>
+    <div class="tc">
+      <div class="tc-stars">★★★★★</div>
+      <p class="tc-text">500 tote bags, 3 days early, zero issues. If you want merch done the smart way — with care, quality, and zero stress — this is your team.</p>
+      <div class="tc-author"><div class="tc-av">SL</div><div><div class="tc-name">Sarah L.</div><div class="tc-role">Events Manager, Spark Agency</div></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- BRANDS -->
+<section class="brands-strip">
+  <div class="brands-label">Trusted by brands across New Jersey & beyond</div>
+  <div class="brands-row">
+    <div class="brand-pill">TechCorp</div>
+    <div class="brand-pill">Elevate Athletics</div>
+    <div class="brand-pill">Spark Agency</div>
+    <div class="brand-pill">Jersey Shore FC</div>
+    <div class="brand-pill">Green Future NJ</div>
+    <div class="brand-pill">Red Brick Realty</div>
+    <div class="brand-pill">Morning Ritual Coffee</div>
+    <div class="brand-pill">DevCon</div>
+    <div class="brand-pill">Boardwalk Gallery</div>
+    <div class="brand-pill">+ 490 more</div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div>
+    <h2>Ready to Add Your Brand to <em>This List?</em></h2>
+    <p>Start with a free quote. We'll come back with product ideas, pricing, and a timeline that works for you.</p>
+  </div>
+  <div style="display:flex;gap:14px;flex-shrink:0;flex-wrap:wrap;">
+    <a class="form-submit" href="quote.html">💡 Get a Free Quote</a>
+    <a class="form-submit" href="contact.html" style="background:transparent;border:2px solid rgba(245,137,26,.5);color:var(--orange);box-shadow:none;">Chat With Us</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+  </div>
+</footer>
+</body>
+</html>

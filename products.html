@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Products — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.filter-bar {
+  display:flex; gap:10px; flex-wrap:wrap; padding:32px 56px 0;
+}
+.filter-btn {
+  font-family:var(--display); font-size:14px; font-weight:700; letter-spacing:1px;
+  padding:9px 20px; border-radius:100px; border:1px solid rgba(255,255,255,.15);
+  background:transparent; color:var(--muted); cursor:pointer; transition:all .2s;
+}
+.filter-btn:hover, .filter-btn.active { background:var(--orange); border-color:var(--orange); color:var(--white); }
+
+.cat-section { padding:48px 56px; }
+.cat-section:not(:first-of-type) { padding-top:0; }
+.cat-header-row {
+  display:flex; align-items:center; gap:16px; margin-bottom:24px;
+  padding-bottom:16px; border-bottom:1px solid rgba(255,255,255,.08);
+}
+.cat-emoji { font-size:28px; }
+.cat-title { font-family:var(--display); font-size:28px; font-weight:900; color:var(--white); flex:1; }
+.cat-count-badge { font-size:11px; font-weight:700; color:var(--orange); background:rgba(245,137,26,.12); border:1px solid rgba(245,137,26,.25); padding:4px 12px; border-radius:100px; }
+.products-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; }
+.prod-chip {
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09);
+  border-radius:10px; padding:14px 14px; display:flex; align-items:center; gap:10px;
+  transition:all .2s; cursor:default;
+}
+.prod-chip:hover { background:rgba(245,137,26,.1); border-color:rgba(245,137,26,.4); }
+.prod-chip-i { font-size:18px; }
+.prod-chip-name { font-size:13px; color:rgba(255,255,255,.8); font-weight:500; }
+
+.etsy-cta {
+  margin:0 56px 64px; background:linear-gradient(135deg, #2a1000, #5c2500);
+  border-radius:20px; padding:52px 48px; display:flex; align-items:center; justify-content:space-between; gap:32px;
+  border:1px solid rgba(241,101,33,.3);
+}
+.etsy-cta h2 { font-family:var(--display); font-size:clamp(28px,3.5vw,48px); font-weight:900; color:var(--white); line-height:1.05; }
+.etsy-cta h2 em { color:var(--etsy); font-style:normal; }
+.etsy-cta p { font-size:14px; color:rgba(255,255,255,.6); margin-top:10px; max-width:400px; line-height:1.7; }
+.etsy-cta-btn { display:inline-flex; align-items:center; gap:10px; background:var(--etsy); color:var(--white); font-family:var(--display); font-weight:700; font-size:18px; letter-spacing:1px; padding:16px 40px; border-radius:10px; text-decoration:none; flex-shrink:0; transition:all .25s; box-shadow:0 8px 32px rgba(241,101,33,.4); }
+.etsy-cta-btn:hover { background:#ff7535; transform:translateY(-2px); }
+
+@media (max-width:900px) {
+  .filter-bar, .cat-section { padding:24px 20px; }
+  .etsy-cta { margin:0 20px 48px; flex-direction:column; padding:32px 24px; }
+  .products-grid { grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html" class="active">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">💡 The Full Catalog</div>
+    <h1>EVERY PRODUCT. <em>EVERY</em> BRAND.</h1>
+    <p>From classic tees to all-over printed hoodies, from mugs to mouse pads — if you can put a logo on it, we can make it look smart. 100+ products and counting.</p>
+  </div>
+</div>
+
+<div class="filter-bar">
+  <button class="filter-btn active" onclick="filterAll(this)">All Products</button>
+  <button class="filter-btn" onclick="filterCat(this,'apparel')">👕 Apparel</button>
+  <button class="filter-btn" onclick="filterCat(this,'headwear')">🧢 Headwear</button>
+  <button class="filter-btn" onclick="filterCat(this,'bags')">👜 Bags</button>
+  <button class="filter-btn" onclick="filterCat(this,'drinkware')">☕ Drinkware</button>
+  <button class="filter-btn" onclick="filterCat(this,'home')">🏠 Home & Living</button>
+  <button class="filter-btn" onclick="filterCat(this,'tech')">📱 Tech</button>
+  <button class="filter-btn" onclick="filterCat(this,'art')">🖼️ Art & Print</button>
+  <button class="filter-btn" onclick="filterCat(this,'kids')">👶 Kids</button>
+</div>
+
+<div id="catalog">
+
+<div class="cat-section" data-cat="apparel">
+  <div class="cat-header-row">
+    <span class="cat-emoji">👕</span>
+    <span class="cat-title">Apparel</span>
+    <span class="cat-count-badge">20 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">👕</span><span class="prod-chip-name">Unisex T-Shirt</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">👚</span><span class="prod-chip-name">Women's T-Shirt</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">👔</span><span class="prod-chip-name">Long Sleeve Shirt</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧥</span><span class="prod-chip-name">Pullover Hoodie</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🤐</span><span class="prod-chip-name">Zip-Up Hoodie</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🌀</span><span class="prod-chip-name">Crewneck Sweatshirt</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">✂️</span><span class="prod-chip-name">Crop Hoodie</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🎽</span><span class="prod-chip-name">Tank Top</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">💪</span><span class="prod-chip-name">Muscle Tank</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🌸</span><span class="prod-chip-name">Crop Top</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🏇</span><span class="prod-chip-name">Polo Shirt</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧨</span><span class="prod-chip-name">Bomber Jacket</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🌬️</span><span class="prod-chip-name">Windbreaker</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🦵</span><span class="prod-chip-name">Leggings</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🏃</span><span class="prod-chip-name">Joggers</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🩳</span><span class="prod-chip-name">Shorts</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🏋️</span><span class="prod-chip-name">Sports Bra</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧦</span><span class="prod-chip-name">Socks</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🩲</span><span class="prod-chip-name">Boxer Briefs</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🦺</span><span class="prod-chip-name">Puffer Vest</span></div>
+  </div>
+</div>
+
+<div class="cat-section" data-cat="headwear">
+  <div class="cat-header-row">
+    <span class="cat-emoji">🧢</span>
+    <span class="cat-title">Headwear</span>
+    <span class="cat-count-badge">7 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">🧢</span><span class="prod-chip-name">Dad Hat</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🎩</span><span class="prod-chip-name">Snapback Cap</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🎓</span><span class="prod-chip-name">Flexfit Cap</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🚚</span><span class="prod-chip-name">Trucker Hat</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🪣</span><span class="prod-chip-name">Bucket Hat</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧶</span><span class="prod-chip-name">Beanie</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">☀️</span><span class="prod-chip-name">Visor</span></div>
+  </div>
+</div>
+
+<div class="cat-section" data-cat="bags">
+  <div class="cat-header-row">
+    <span class="cat-emoji">👜</span>
+    <span class="cat-title">Bags</span>
+    <span class="cat-count-badge">7 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">🛍️</span><span class="prod-chip-name">Tote Bag</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🎒</span><span class="prod-chip-name">Backpack</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🎽</span><span class="prod-chip-name">Drawstring Bag</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">💼</span><span class="prod-chip-name">Duffle Bag</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">👝</span><span class="prod-chip-name">Fanny Pack</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">💻</span><span class="prod-chip-name">Laptop Sleeve</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🛒</span><span class="prod-chip-name">Mini Tote</span></div>
+  </div>
+</div>
+
+<div class="cat-section" data-cat="drinkware">
+  <div class="cat-header-row">
+    <span class="cat-emoji">☕</span>
+    <span class="cat-title">Drinkware</span>
+    <span class="cat-count-badge">9 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">☕</span><span class="prod-chip-name">Coffee Mug 11oz</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">☕</span><span class="prod-chip-name">Coffee Mug 15oz</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🍵</span><span class="prod-chip-name">Enamel Mug</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧋</span><span class="prod-chip-name">Latte Mug</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🚗</span><span class="prod-chip-name">Travel Mug</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🍺</span><span class="prod-chip-name">Pint Glass</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🍷</span><span class="prod-chip-name">Wine Glass</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🥃</span><span class="prod-chip-name">Shot Glass</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">💧</span><span class="prod-chip-name">Water Bottle</span></div>
+  </div>
+</div>
+
+<div class="cat-section" data-cat="home">
+  <div class="cat-header-row">
+    <span class="cat-emoji">🏠</span>
+    <span class="cat-title">Home & Living</span>
+    <span class="cat-count-badge">5 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">🛋️</span><span class="prod-chip-name">Throw Pillow</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🛏️</span><span class="prod-chip-name">Pillow Case</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🛁</span><span class="prod-chip-name">Throw Blanket</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🏖️</span><span class="prod-chip-name">Beach Towel</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">👨‍🍳</span><span class="prod-chip-name">Apron</span></div>
+  </div>
+</div>
+
+<div class="cat-section" data-cat="tech">
+  <div class="cat-header-row">
+    <span class="cat-emoji">📱</span>
+    <span class="cat-title">Tech Accessories</span>
+    <span class="cat-count-badge">6 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">🍎</span><span class="prod-chip-name">iPhone Case</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">📲</span><span class="prod-chip-name">Samsung Case</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🎧</span><span class="prod-chip-name">AirPods Case</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">⌚</span><span class="prod-chip-name">Apple Watch Band</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🖱️</span><span class="prod-chip-name">Mouse Pad</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">💻</span><span class="prod-chip-name">Laptop Skin</span></div>
+  </div>
+</div>
+
+<div class="cat-section" data-cat="art">
+  <div class="cat-header-row">
+    <span class="cat-emoji">🖼️</span>
+    <span class="cat-title">Art & Stationery</span>
+    <span class="cat-count-badge">10 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">🖼️</span><span class="prod-chip-name">Canvas Print</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🪟</span><span class="prod-chip-name">Framed Poster</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">📜</span><span class="prod-chip-name">Poster</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🔲</span><span class="prod-chip-name">Metal Print</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">📓</span><span class="prod-chip-name">Spiral Notebook</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">📔</span><span class="prod-chip-name">Hardcover Journal</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🪧</span><span class="prod-chip-name">Stickers</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🎄</span><span class="prod-chip-name">Ornament</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🕯️</span><span class="prod-chip-name">Candle</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧩</span><span class="prod-chip-name">Puzzle</span></div>
+  </div>
+</div>
+
+<div class="cat-section" data-cat="kids">
+  <div class="cat-header-row">
+    <span class="cat-emoji">👶</span>
+    <span class="cat-title">Kids & Baby</span>
+    <span class="cat-count-badge">6 items</span>
+  </div>
+  <div class="products-grid">
+    <div class="prod-chip"><span class="prod-chip-i">👕</span><span class="prod-chip-name">Kids T-Shirt</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧥</span><span class="prod-chip-name">Youth Hoodie</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">👔</span><span class="prod-chip-name">Youth Long Sleeve</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">👶</span><span class="prod-chip-name">Baby Onesie</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🍼</span><span class="prod-chip-name">Baby Bib</span></div>
+    <div class="prod-chip"><span class="prod-chip-i">🧶</span><span class="prod-chip-name">Baby Beanie</span></div>
+  </div>
+</div>
+
+</div><!-- /catalog -->
+
+<div class="etsy-cta">
+  <div>
+    <h2>See Everything in Our <em>Etsy Store</em></h2>
+    <p>Browse real listings with photos, reviews, pricing, and secure checkout. The easiest way to order smart merch.</p>
+  </div>
+  <a class="etsy-cta-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Visit Our Etsy Store →</a>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+  </div>
+</footer>
+
+<script>
+function filterAll(btn) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-section').forEach(s => s.style.display = '');
+}
+function filterCat(btn, cat) {
+  document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.cat-section').forEach(s => {
+    s.style.display = s.dataset.cat === cat ? '' : 'none';
+  });
+}
+</script>
+</body>
+</html>

@@ -1,0 +1,254 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.pricing-section { padding:72px 56px; }
+.pricing-intro { max-width:680px; margin-bottom:56px; }
+.pricing-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+.price-card {
+  background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.1);
+  border-radius:20px; padding:40px 32px; position:relative; overflow:hidden; transition:all .3s;
+}
+.price-card:hover { transform:translateY(-6px); border-color:rgba(245,137,26,.3); }
+.price-card.popular {
+  background:linear-gradient(145deg,#152348,#0d1e3e);
+  border-color:rgba(245,137,26,.4);
+  transform:scale(1.02);
+}
+.price-card.popular:hover { transform:scale(1.02) translateY(-6px); }
+.popular-badge {
+  position:absolute; top:20px; right:20px;
+  font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase;
+  color:var(--dark); background:var(--orange); padding:4px 12px; border-radius:100px;
+}
+.price-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--orange),var(--orlo)); opacity:0; transition:opacity .3s; }
+.price-card:hover::before, .price-card.popular::before { opacity:1; }
+.price-tier { font-size:12px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:var(--orange); margin-bottom:12px; }
+.price-name { font-family:var(--display); font-size:30px; font-weight:900; color:var(--white); margin-bottom:8px; }
+.price-sub { font-size:13px; color:var(--muted); margin-bottom:28px; }
+.price-from { font-size:12px; color:var(--muted); font-weight:500; }
+.price-num { font-family:var(--display); font-size:56px; font-weight:900; color:var(--white); line-height:1; margin-bottom:4px; }
+.price-num em { color:var(--orange); font-style:normal; font-size:28px; vertical-align:super; }
+.price-per { font-size:12px; color:var(--muted); margin-bottom:28px; }
+.price-divider { height:1px; background:rgba(255,255,255,.07); margin:24px 0; }
+.price-features { list-style:none; }
+.price-features li { font-size:13.5px; color:rgba(255,255,255,.7); padding:8px 0; display:flex; align-items:flex-start; gap:10px; border-bottom:1px solid rgba(255,255,255,.05); }
+.price-features li:last-child { border-bottom:none; }
+.price-features li::before { content:'✓'; color:var(--orange); font-weight:700; flex-shrink:0; margin-top:1px; }
+.price-features li.no::before { content:'—'; color:rgba(255,255,255,.2); }
+.price-features li.no { color:rgba(255,255,255,.3); }
+.price-cta { display:block; text-align:center; margin-top:28px; padding:14px; background:rgba(245,137,26,.12); border:1px solid rgba(245,137,26,.3); border-radius:10px; color:var(--orange); font-family:var(--display); font-size:17px; font-weight:700; letter-spacing:1px; text-decoration:none; transition:all .25s; }
+.price-cta:hover { background:var(--orange); color:var(--white); }
+.price-card.popular .price-cta { background:var(--orange); color:var(--white); }
+.price-card.popular .price-cta:hover { background:var(--orlo); }
+
+.add-ons { padding:0 56px 72px; }
+.add-ons h3 { font-family:var(--display); font-size:32px; font-weight:900; color:var(--white); margin-bottom:8px; }
+.add-ons h3 em { color:var(--orange); font-style:normal; }
+.add-ons p { font-size:14px; color:var(--muted); margin-bottom:32px; }
+.addons-grid { display:grid; grid-template-columns:repeat(4,1fr); gap:14px; }
+.addon-card { background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.08); border-radius:12px; padding:20px 18px; transition:all .25s; }
+.addon-card:hover { border-color:rgba(245,137,26,.3); }
+.addon-name { font-family:var(--display); font-size:18px; font-weight:700; color:var(--white); margin-bottom:4px; }
+.addon-price { font-size:14px; color:var(--orange); font-weight:600; margin-bottom:8px; }
+.addon-desc { font-size:12.5px; color:var(--muted); line-height:1.6; }
+
+.guarantee { background:linear-gradient(135deg,#152348,#0d1e3e); margin:0 56px 72px; border-radius:20px; padding:48px 40px; border:1px solid rgba(245,137,26,.2); display:flex; align-items:center; gap:40px; }
+.guarantee-icon { font-size:64px; flex-shrink:0; filter:drop-shadow(0 0 20px rgba(245,137,26,.4)); }
+.guarantee h3 { font-family:var(--display); font-size:32px; font-weight:900; color:var(--white); margin-bottom:10px; }
+.guarantee h3 em { color:var(--orange); font-style:normal; }
+.guarantee p { font-size:14px; color:var(--muted); line-height:1.8; }
+
+@media (max-width:900px) {
+  .pricing-section, .add-ons { padding:40px 20px; }
+  .pricing-grid { grid-template-columns:1fr; }
+  .addons-grid { grid-template-columns:1fr 1fr; }
+  .guarantee { margin:0 20px 48px; flex-direction:column; padding:32px 24px; }
+  .price-card.popular { transform:none; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">💡 Transparent Pricing</div>
+    <h1>SMART PRICES. <em>ZERO</em> SURPRISES.</h1>
+    <p>No hidden fees. No bait-and-switch. Just clear, competitive pricing that scales with your order — and custom quotes for anything more complex.</p>
+  </div>
+</div>
+
+<section class="pricing-section">
+  <div class="pricing-intro">
+    <div class="sec-tag">Apparel Tiers</div>
+    <h2 class="sec-title">Pick Your <em>Smart</em> Plan</h2>
+    <p class="sec-sub">These are starting prices for custom apparel. Actual pricing depends on product, print method, number of colors, and quantity. <a href="quote.html" style="color:var(--orange);">Get a personalized quote →</a></p>
+  </div>
+
+  <div class="pricing-grid">
+    <!-- STARTER -->
+    <div class="price-card">
+      <div class="price-tier">Starter</div>
+      <div class="price-name">Smart Starter</div>
+      <div class="price-sub">Perfect for small runs, personal projects, and testing the waters.</div>
+      <div class="price-from">Starting from</div>
+      <div class="price-num"><em>$</em>18</div>
+      <div class="price-per">per unit · min 12 units</div>
+      <ul class="price-features">
+        <li>1–2 color screen print or DTG</li>
+        <li>12–47 unit minimum</li>
+        <li>Standard 7–10 day turnaround</li>
+        <li>1 free digital mockup</li>
+        <li>Email support</li>
+        <li class="no">Rush production</li>
+        <li class="no">Dedicated account manager</li>
+        <li class="no">Bulk pricing breaks</li>
+      </ul>
+      <a class="price-cta" href="quote.html">Get a Quote →</a>
+    </div>
+
+    <!-- SMART (POPULAR) -->
+    <div class="price-card popular">
+      <div class="popular-badge">Most Popular</div>
+      <div class="price-tier">Best Value</div>
+      <div class="price-name">Smart Pro</div>
+      <div class="price-sub">For growing brands, events, and teams who need quality at scale.</div>
+      <div class="price-from">Starting from</div>
+      <div class="price-num"><em>$</em>12</div>
+      <div class="price-per">per unit · min 48 units</div>
+      <ul class="price-features">
+        <li>Up to 4-color screen print</li>
+        <li>48–199 unit runs</li>
+        <li>5–7 day standard turnaround</li>
+        <li>3 free digital mockups</li>
+        <li>Priority email + phone support</li>
+        <li>Rush available (48hr add-on)</li>
+        <li>Dedicated account manager</li>
+        <li class="no">Warehouse & kitting</li>
+      </ul>
+      <a class="price-cta" href="quote.html">Get a Quote →</a>
+    </div>
+
+    <!-- ENTERPRISE -->
+    <div class="price-card">
+      <div class="price-tier">Enterprise</div>
+      <div class="price-name">Smart Scale</div>
+      <div class="price-sub">For corporate orders, large events, and brands that need it all handled.</div>
+      <div class="price-from">Starting from</div>
+      <div class="price-num"><em>$</em>8</div>
+      <div class="price-per">per unit · min 200 units</div>
+      <ul class="price-features">
+        <li>Unlimited colors / methods</li>
+        <li>200+ unit runs</li>
+        <li>3–5 day turnaround</li>
+        <li>Unlimited mockups & revisions</li>
+        <li>Dedicated account manager</li>
+        <li>Rush always available</li>
+        <li>Warehousing & kitting included</li>
+        <li>Drop-ship to multiple locations</li>
+      </ul>
+      <a class="price-cta" href="quote.html">Get a Quote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ADD-ONS -->
+<section class="add-ons">
+  <h3><em>Smart</em> Add-Ons</h3>
+  <p>Enhance any order with these options. Pricing varies by product and quantity.</p>
+  <div class="addons-grid">
+    <div class="addon-card">
+      <div class="addon-name">Rush Production</div>
+      <div class="addon-price">From +$2/unit</div>
+      <div class="addon-desc">48-hour turnaround from approved proof to shipped.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Custom Tags</div>
+      <div class="addon-price">From +$1.50/unit</div>
+      <div class="addon-desc">Custom woven or printed neck tags replacing standard garment tags.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Poly Bag Packaging</div>
+      <div class="addon-price">From +$0.50/unit</div>
+      <div class="addon-desc">Individual poly bags for retail-ready presentation or gifting.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Custom Packaging</div>
+      <div class="addon-price">Custom quote</div>
+      <div class="addon-desc">Branded boxes, tissue paper, and custom inserts for premium gifting.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Kitting & Assembly</div>
+      <div class="addon-price">Custom quote</div>
+      <div class="addon-desc">Bundle multiple products into branded kits, assembled and ready to ship.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Fulfillment Storage</div>
+      <div class="addon-price">Custom quote</div>
+      <div class="addon-desc">We warehouse your inventory and ship individual orders as needed.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Design from Scratch</div>
+      <div class="addon-price">From $150</div>
+      <div class="addon-desc">Full custom artwork creation if you don't have a design ready.</div>
+    </div>
+    <div class="addon-card">
+      <div class="addon-name">Artwork Vectorization</div>
+      <div class="addon-price">From $50</div>
+      <div class="addon-desc">Convert your logo or art to print-ready vector format.</div>
+    </div>
+  </div>
+</section>
+
+<!-- GUARANTEE -->
+<div class="guarantee">
+  <div class="guarantee-icon">💡</div>
+  <div>
+    <h3>The Smart <em>Guarantee</em></h3>
+    <p>Not happy with your order? We'll make it right — period. We stand behind every product we produce with a 100% satisfaction commitment. If something isn't right, we reprint or refund. No runaround, no exceptions.</p>
+    <a class="form-submit" href="contact.html" style="margin-top:20px;display:inline-flex;">Talk to Our Team →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
+  </div>
+</footer>
+</body>
+</html>
