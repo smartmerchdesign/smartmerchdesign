@@ -4,39 +4,775 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Smart Merch Design — Think Smart. Look Great.</title>
-<link rel="stylesheet" href="shared.css">
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@700;900&family=DM+Sans:ital,wght@0,400;0,500;0,600;1,400&display=swap');
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --navy:    #0d2a5e;
+  --dark:    #080f24;
+  --mid:     #152348;
+  --orange:  #f5891a;
+  --orlo:    #ffa840;
+  --etsy:    #f16521;
+  --white:   #ffffff;
+  --offwhite:#f4f6fb;
+  --muted:   rgba(255,255,255,0.52);
+  --display: 'Barlow Condensed', sans-serif;
+  --body:    'DM Sans', sans-serif;
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--body); background: var(--dark); color: var(--white); overflow-x: hidden; }
+
+/* ─── NAV ─── */
+nav {
+  position: sticky; top: 0; z-index: 50;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 56px; height: 68px;
+  background: rgba(8,15,36,0.95);
+  backdrop-filter: blur(16px);
+  border-bottom: 1px solid rgba(245,137,26,0.18);
+}
+.logo {
+  font-family: var(--display); font-weight: 900; font-size: 20px;
+  letter-spacing: 2px; color: var(--white); text-decoration: none;
+  display: flex; align-items: center; gap: 10px;
+}
+.logo-bulb { font-size: 20px; }
+.logo em { color: var(--orange); font-style: normal; }
+.nav-links { display: flex; gap: 32px; list-style: none; }
+.nav-links a {
+  font-size: 13px; font-weight: 500; letter-spacing: 0.8px;
+  color: var(--muted); text-decoration: none; transition: color .2s;
+}
+.nav-links a:hover { color: var(--orange); }
+.etsy-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--etsy); color: var(--white);
+  font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 1px;
+  padding: 9px 20px; border-radius: 6px; text-decoration: none;
+  transition: background .2s, transform .2s;
+  box-shadow: 0 4px 18px rgba(241,101,33,.35);
+}
+.etsy-btn:hover { background: #ff7535; transform: translateY(-1px); }
+
+/* ─── HERO ─── */
+.hero {
+  min-height: calc(100vh - 68px);
+  display: grid; grid-template-columns: 1fr 440px;
+  align-items: center; gap: 60px;
+  padding: 80px 56px;
+  position: relative; overflow: hidden;
+  background: var(--dark);
+}
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background: linear-gradient(118deg, transparent 55%, rgba(245,137,26,0.05) 55%);
+  pointer-events: none;
+}
+.hero::after {
+  content: ''; position: absolute; inset: 0;
+  background-image: radial-gradient(rgba(255,255,255,0.06) 1px, transparent 1px);
+  background-size: 28px 28px; pointer-events: none;
+}
+/* floating bulb glow in background */
+.hero-glow {
+  position: absolute; right: 120px; top: 50%; transform: translateY(-50%);
+  width: 500px; height: 500px;
+  background: radial-gradient(circle, rgba(245,137,26,0.07) 0%, transparent 70%);
+  border-radius: 50%; pointer-events: none; z-index: 0;
+}
+.hero-left { position: relative; z-index: 1; }
+.hero-tag {
+  display: inline-flex; align-items: center; gap: 8px;
+  font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--orange); border: 1px solid rgba(245,137,26,0.35);
+  padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+  animation: up .7s ease both;
+}
+h1 {
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(60px, 7.5vw, 108px);
+  line-height: .88; letter-spacing: -1px; margin-bottom: 28px;
+  animation: up .7s .08s ease both;
+}
+h1 .org { color: var(--orange); }
+h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
+.hero-sub {
+  font-size: 17px; line-height: 1.8; color: var(--muted);
+  max-width: 500px; margin-bottom: 40px;
+  animation: up .7s .16s ease both;
+}
+.hero-sub strong { color: var(--white); font-weight: 600; }
+.hero-etsy {
+  display: inline-flex; align-items: center; gap: 12px;
+  background: var(--etsy); color: var(--white);
+  font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: 1px;
+  padding: 16px 38px; border-radius: 10px; text-decoration: none;
+  box-shadow: 0 10px 36px rgba(241,101,33,.4);
+  transition: all .25s; animation: up .7s .24s ease both;
+}
+.hero-etsy:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 44px rgba(241,101,33,.55); }
+
+/* hero card */
+.hero-right { position: relative; z-index: 1; animation: up .7s .32s ease both; }
+.card {
+  background: linear-gradient(145deg, #152348, #0d1e3e);
+  border: 1px solid rgba(245,137,26,.22); border-radius: 20px; padding: 36px 32px;
+  box-shadow: 0 32px 72px rgba(0,0,0,.5); position: relative; overflow: hidden;
+}
+.card::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--orlo));
+}
+.card-headline {
+  font-family: var(--display); font-size: 13px; font-weight: 700;
+  letter-spacing: 3px; text-transform: uppercase;
+  color: var(--orange); margin-bottom: 18px; text-align: center;
+}
+.bulb-big { font-size: 80px; text-align: center; margin-bottom: 20px; display: block;
+  filter: drop-shadow(0 0 24px rgba(245,137,26,.5));
+  animation: pulse 3s ease-in-out infinite;
+}
+.card-stats { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 12px; }
+.cs {
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.07);
+  border-radius: 10px; padding: 14px 10px; text-align: center;
+}
+.cs-n { font-family: var(--display); font-size: 26px; font-weight: 700; color: var(--orange); }
+.cs-l { font-size: 11px; color: var(--muted); margin-top: 3px; font-weight: 500; }
+.card-stars {
+  margin-top: 14px; padding: 14px 16px;
+  background: rgba(245,137,26,.1); border: 1px solid rgba(245,137,26,.2);
+  border-radius: 10px; text-align: center;
+}
+.big-stars { font-size: 26px; letter-spacing: 4px; color: var(--orange); }
+.star-label { font-size: 12px; color: var(--muted); margin-top: 4px; letter-spacing: 1px; }
+
+/* ─── TICKER ─── */
+.strip {
+  background: var(--orange); height: 60px;
+  display: flex; align-items: center; overflow: hidden;
+}
+.strip-track {
+  display: flex; gap: 56px; white-space: nowrap;
+  animation: ticker 24s linear infinite;
+}
+.strip-item {
+  font-family: var(--display); font-size: 16px; font-weight: 700;
+  letter-spacing: 2px; text-transform: uppercase;
+  display: flex; align-items: center; gap: 20px; color: rgba(255,255,255,.92);
+}
+.strip-item::after { content: '💡'; font-size: 13px; }
+
+/* ─── WHY SMART ─── */
+.why {
+  padding: 96px 56px; background: var(--offwhite);
+}
+.why-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 2px; margin-top: 52px;
+}
+.why-card {
+  background: var(--white); padding: 48px 36px;
+  position: relative; overflow: hidden;
+  transition: transform .3s;
+}
+.why-card:first-child { border-radius: 16px 0 0 16px; }
+.why-card:last-child  { border-radius: 0 16px 16px 0; }
+.why-card:hover { transform: translateY(-4px); z-index: 1; box-shadow: 0 20px 50px rgba(13,42,94,.12); }
+.why-num {
+  font-family: var(--display); font-size: 80px; font-weight: 900;
+  color: rgba(245,137,26,.08); position: absolute; top: 16px; right: 20px;
+  line-height: 1; pointer-events: none;
+}
+.why-icon { font-size: 40px; margin-bottom: 20px; display: block; }
+.why-title {
+  font-family: var(--display); font-size: 28px; font-weight: 700;
+  color: var(--navy); margin-bottom: 12px;
+}
+.why-title em { color: var(--orange); font-style: normal; }
+.why-desc { font-size: 15px; line-height: 1.8; color: #6b7a99; }
+
+/* ─── SERVICES ─── */
+.services { padding: 96px 56px; background: var(--dark); }
+.svc-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 52px; }
+.svc {
+  background: rgba(255,255,255,.04); border-radius: 14px; padding: 34px 28px;
+  border: 1px solid rgba(255,255,255,.08); position: relative; overflow: hidden;
+  transition: transform .3s, border-color .3s;
+}
+.svc::after {
+  content: ''; position: absolute; left: 0; bottom: 0; right: 0; height: 3px;
+  background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .3s;
+}
+.svc:hover { transform: translateY(-5px); border-color: rgba(245,137,26,.3); }
+.svc:hover::after { transform: scaleX(1); }
+.svc-icon {
+  width: 54px; height: 54px; border-radius: 12px;
+  background: rgba(245,137,26,.12); display: flex; align-items: center;
+  justify-content: center; font-size: 24px; margin-bottom: 18px;
+}
+.svc-title { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--white); margin-bottom: 10px; }
+.svc p { font-size: 14px; line-height: 1.75; color: var(--muted); }
+
+/* ─── PROCESS ─── */
+.process { padding: 96px 56px; background: var(--offwhite); }
+.process .sec-title { color: var(--navy); }
+.steps {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 2px; margin-top: 60px; position: relative;
+}
+.steps::before {
+  content: ''; position: absolute;
+  top: 44px; left: 12%; right: 12%; height: 1px;
+  background: repeating-linear-gradient(90deg, rgba(245,137,26,.5) 0, rgba(245,137,26,.5) 16px, transparent 16px, transparent 28px);
+}
+.step { padding: 0 20px; text-align: center; }
+.step-n {
+  width: 88px; height: 88px; border-radius: 50%; margin: 0 auto 24px;
+  background: var(--white); border: 2px solid rgba(245,137,26,.3);
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 30px; font-weight: 700; color: var(--orange);
+  position: relative; z-index: 1; transition: all .3s;
+  box-shadow: 0 4px 20px rgba(13,42,94,.1);
+}
+.step:hover .step-n { background: var(--orange); color: var(--white); box-shadow: 0 0 32px rgba(245,137,26,.4); }
+.step-title { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.step p { font-size: 13px; line-height: 1.75; color: #6b7a99; }
+
+/* ─── PRODUCTS ─── */
+.products { padding: 96px 56px; background: var(--mid); }
+.products .sec-title { color: var(--white); }
+.prod-head { margin-bottom: 52px; }
+.cat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.cat {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+  border-radius: 16px; padding: 26px 22px;
+  transition: border-color .3s, background .3s;
+}
+.cat:hover { border-color: rgba(245,137,26,.35); background: rgba(255,255,255,.06); }
+.cat-header {
+  display: flex; align-items: center; gap: 12px;
+  margin-bottom: 18px; padding-bottom: 14px;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+}
+.cat-icon { font-size: 22px; }
+.cat-name {
+  font-family: var(--display); font-size: 20px; font-weight: 700;
+  color: var(--white); letter-spacing: 0.5px; flex: 1;
+}
+.cat-count {
+  font-size: 11px; font-weight: 700; color: var(--orange);
+  background: rgba(245,137,26,.12); border: 1px solid rgba(245,137,26,.25);
+  padding: 3px 9px; border-radius: 100px; letter-spacing: 0.5px;
+}
+.chips { display: flex; flex-wrap: wrap; gap: 7px; }
+.chip {
+  display: inline-flex; align-items: center; gap: 5px;
+  background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.09);
+  border-radius: 6px; padding: 5px 10px;
+  font-size: 12.5px; color: rgba(255,255,255,.75); font-weight: 500;
+  transition: all .2s; white-space: nowrap;
+}
+.chip:hover { background: rgba(245,137,26,.15); border-color: rgba(245,137,26,.45); color: var(--white); }
+.chip-i { font-size: 13px; }
+
+/* ─── ETSY BANNER ─── */
+.etsy-banner {
+  background: linear-gradient(135deg, #2a1000, #5c2500);
+  border-top: 1px solid rgba(241,101,33,.3);
+  border-bottom: 1px solid rgba(241,101,33,.3);
+  padding: 64px 56px;
+  display: flex; align-items: center; justify-content: space-between; gap: 40px;
+}
+.etsy-banner-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--etsy); margin-bottom: 12px;
+  display: flex; align-items: center; gap: 8px;
+}
+.etsy-banner-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--etsy); }
+.etsy-banner-title {
+  font-family: var(--display); font-size: clamp(32px, 4vw, 52px);
+  font-weight: 900; line-height: 1; color: var(--white); margin-bottom: 12px;
+}
+.etsy-banner-title em { color: var(--etsy); font-style: normal; }
+.etsy-banner-sub { font-size: 15px; color: rgba(255,255,255,.6); max-width: 480px; line-height: 1.7; }
+.etsy-banner-btn {
+  display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0;
+  background: var(--etsy); color: var(--white);
+  font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: 1px;
+  padding: 18px 44px; border-radius: 10px; text-decoration: none;
+  box-shadow: 0 10px 40px rgba(241,101,33,.45); transition: all .25s;
+}
+.etsy-banner-btn:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 50px rgba(241,101,33,.6); }
+
+/* ─── RATINGS ─── */
+.ratings { padding: 96px 56px; background: var(--navy); }
+.ratings .sec-title { color: var(--white); margin-bottom: 52px; }
+.rating-big {
+  display: flex; align-items: center; justify-content: center; gap: 60px;
+  margin-bottom: 56px; flex-wrap: wrap;
+}
+.rating-score { text-align: center; }
+.score-num {
+  font-family: var(--display); font-size: 96px; font-weight: 900;
+  color: var(--orange); line-height: 1;
+}
+.score-stars { font-size: 36px; letter-spacing: 6px; color: var(--orange); margin: 6px 0; }
+.score-label { font-size: 14px; color: var(--muted); letter-spacing: 1px; }
+.rating-divider { width: 1px; height: 120px; background: rgba(255,255,255,.12); }
+.rating-counts { display: flex; flex-direction: column; gap: 10px; min-width: 280px; }
+.rbar { display: flex; align-items: center; gap: 12px; }
+.rbar-label { font-size: 13px; color: var(--muted); width: 40px; text-align: right; }
+.rbar-track { flex: 1; height: 8px; background: rgba(255,255,255,.1); border-radius: 4px; overflow: hidden; }
+.rbar-fill { height: 100%; background: var(--orange); border-radius: 4px; }
+.rbar-pct { font-size: 12px; color: var(--muted); width: 34px; }
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.tc {
+  background: rgba(255,255,255,.05); border-radius: 14px; padding: 30px;
+  border: 1px solid rgba(255,255,255,.08); transition: border-color .3s;
+}
+.tc:hover { border-color: rgba(245,137,26,.35); }
+.tc-stars { color: var(--orange); font-size: 15px; letter-spacing: 3px; margin-bottom: 14px; }
+.tc-text { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,.7); font-style: italic; margin-bottom: 22px; }
+.tc-author { display: flex; align-items: center; gap: 12px; }
+.tc-av {
+  width: 40px; height: 40px; border-radius: 50%;
+  background: linear-gradient(135deg, var(--navy), var(--orange));
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 15px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+.tc-name { font-weight: 600; font-size: 14px; }
+.tc-role { font-size: 12px; color: var(--muted); margin-top: 2px; }
+
+/* ─── CONTACT ─── */
+.contact { padding: 96px 56px; background: var(--dark); }
+.contact .sec-title { color: var(--white); margin-bottom: 14px; }
+.contact-sub { font-size: 16px; color: var(--muted); margin-bottom: 48px; max-width: 520px; line-height: 1.7; }
+.contact-cards { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.ccard {
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09);
+  border-radius: 16px; padding: 32px 28px;
+  display: flex; align-items: flex-start; gap: 18px;
+  text-decoration: none; transition: all .25s;
+}
+.ccard:hover { background: rgba(245,137,26,.08); border-color: rgba(245,137,26,.35); transform: translateY(-3px); }
+.ccard-icon {
+  width: 52px; height: 52px; border-radius: 12px; flex-shrink: 0;
+  background: rgba(245,137,26,.15);
+  display: flex; align-items: center; justify-content: center; font-size: 22px;
+}
+.ccard-label { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--muted); margin-bottom: 6px; }
+.ccard-val { font-weight: 600; font-size: 16px; color: var(--white); line-height: 1.4; }
+
+/* ─── SHARED SECTION STYLES ─── */
+.sec-tag {
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--orange); display: flex; align-items: center; gap: 10px; margin-bottom: 14px;
+}
+.sec-tag::before { content: ''; display: block; width: 28px; height: 2px; background: currentColor; }
+.sec-title {
+  font-family: var(--display); font-weight: 900;
+  font-size: clamp(34px, 4.5vw, 56px); line-height: 1; letter-spacing: -.5px;
+}
+.sec-title em { color: var(--orange); font-style: normal; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: #030810; padding: 36px 56px;
+  display: flex; justify-content: space-between; align-items: center;
+  border-top: 1px solid rgba(255,255,255,.06); flex-wrap: wrap; gap: 16px;
+}
+.footer-logo { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 2px; display: flex; align-items: center; gap: 8px; }
+.footer-logo em { color: var(--orange); font-style: normal; }
+.footer-copy { font-size: 12px; color: var(--muted); }
+.footer-etsy {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: rgba(241,101,33,.15); border: 1px solid rgba(241,101,33,.3);
+  color: var(--etsy); font-size: 13px; font-weight: 600;
+  padding: 8px 16px; border-radius: 6px; text-decoration: none; transition: all .2s;
+}
+.footer-etsy:hover { background: var(--etsy); color: var(--white); }
+.footer-links {
+  display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 24px;
+  margin-top: 10px; width: 100%;
+}
+.footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color .2s; }
+.footer-links a:hover { color: var(--orange); }
+
+/* ─── ANIMATIONS ─── */
+@keyframes up {
+  from { opacity: 0; transform: translateY(22px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes ticker {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+@keyframes pulse {
+  0%, 100% { filter: drop-shadow(0 0 16px rgba(245,137,26,.4)); }
+  50%       { filter: drop-shadow(0 0 36px rgba(245,137,26,.8)); }
+}
+
+/* ─── RESPONSIVE ─── */
+@media (max-width: 1100px) { .cat-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (max-width: 980px) {
+  nav { padding: 0 24px; }
+  .nav-links { display: none; }
+  .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; min-height: auto; }
+  .hero-right { display: none; }
+  .why, .services, .process, .products, .ratings, .contact { padding: 72px 24px; }
+  .why-grid { grid-template-columns: 1fr; gap: 16px; }
+  .why-card:first-child, .why-card:last-child { border-radius: 14px; }
+  .why-card { border-radius: 14px; }
+  .svc-grid, .testi-grid { grid-template-columns: 1fr; }
+  .steps { grid-template-columns: 1fr 1fr; }
+  .steps::before { display: none; }
+  .cat-grid { grid-template-columns: 1fr; }
+  .contact-cards { grid-template-columns: 1fr; }
+  .etsy-banner { flex-direction: column; padding: 56px 24px; text-align: center; }
+  .etsy-banner-sub { margin: 0 auto; }
+  .etsy-banner-tag { justify-content: center; }
+  footer { flex-direction: column; text-align: center; padding: 28px 24px; }
+  .rating-big { gap: 32px; }
+  .rating-divider { width: 200px; height: 1px; }
+  .rating-counts { min-width: 240px; }
+}
+</style>
 </head>
 <body>
 
+<!-- NAV -->
 <nav>
   <a class="logo" href="index.html"><span class="logo-bulb">💡</span>SMART <em>MERCH</em> DESIGN</a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="services.html">Services</a></li>
+    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
     <li><a href="products.html">Products</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="pricing.html">Pricing</a></li>
     <li><a href="faq.html">FAQ</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
-  <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
 
-<section class="hero">
+<!-- HERO -->
+<section class="hero" id="top">
+  <div class="hero-glow"></div>
   <div class="hero-left">
-    <h1>MERCH AS <span style="color:var(--orange)">SMART</span> AS YOUR BRAND</h1>
-    <p>Custom branded products designed with strategy. Not just shirts—tools for your brand.</p>
-    <a href="contact.html" class="hero-etsy">Get a Free Quote</a>
+    <div class="hero-tag">💡 Think Smart. Look Great.</div>
+    <h1>MERCH AS<br><span class="org">SMART</span> AS<br><span class="out">YOUR BRAND</span></h1>
+    <p class="hero-sub">Not just merch — <strong>smart merch.</strong> We design custom branded products that make people stop, stare, and remember your name. Your brand deserves more than a logo slapped on a shirt.</p>
+    <a class="hero-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop Our Etsy Store</a>
+  </div>
+  <div class="hero-right">
+    <div class="card">
+      <div class="card-headline">💡 The Smart Choice for Merch</div>
+      <span class="bulb-big">💡</span>
+      <div class="card-stats">
+        <div class="cs"><div class="cs-n">500+</div><div class="cs-l">Smart Brands</div></div>
+        <div class="cs"><div class="cs-n">48h</div><div class="cs-l">Turnaround</div></div>
+        <div class="cs"><div class="cs-n">10K+</div><div class="cs-l">Orders Shipped</div></div>
+      </div>
+      <div class="card-stars">
+        <div class="big-stars">★★★★★</div>
+        <div class="star-label">5-Star Rated on Etsy</div>
+      </div>
+    </div>
   </div>
 </section>
 
+<!-- TICKER -->
+<div class="strip" aria-hidden="true">
+  <div class="strip-track">
+    <span class="strip-item">Smart T-Shirts</span>
+    <span class="strip-item">Smart Hoodies</span>
+    <span class="strip-item">Smart Tank Tops</span>
+    <span class="strip-item">Smart Caps</span>
+    <span class="strip-item">Smart Mugs</span>
+    <span class="strip-item">Smart Totes</span>
+    <span class="strip-item">Smart Stickers</span>
+    <span class="strip-item">Smart Water Bottles</span>
+    <span class="strip-item">Smart Sweatshirts</span>
+    <span class="strip-item">Smart Phone Cases</span>
+    <span class="strip-item">Smart T-Shirts</span>
+    <span class="strip-item">Smart Hoodies</span>
+    <span class="strip-item">Smart Tank Tops</span>
+    <span class="strip-item">Smart Caps</span>
+    <span class="strip-item">Smart Mugs</span>
+    <span class="strip-item">Smart Totes</span>
+    <span class="strip-item">Smart Stickers</span>
+    <span class="strip-item">Smart Water Bottles</span>
+    <span class="strip-item">Smart Sweatshirts</span>
+    <span class="strip-item">Smart Phone Cases</span>
+  </div>
+</div>
+
+<!-- WHY SMART -->
+<section class="why" id="why">
+  <div class="sec-tag" style="color:var(--navy)">The Smart Difference</div>
+  <h2 class="sec-title" style="color:var(--navy)">Why <em>Smart</em> Merch?</h2>
+  <div class="why-grid">
+    <div class="why-card">
+      <div class="why-num">01</div>
+      <span class="why-icon">🧠</span>
+      <div class="why-title"><em>Smart</em> Design</div>
+      <p class="why-desc">Every piece starts with strategy, not just style. We design merch that communicates your brand's personality, values, and story — so it works as hard as you do.</p>
+    </div>
+    <div class="why-card" style="background:var(--navy);">
+      <div class="why-num" style="color:rgba(245,137,26,.12)">02</div>
+      <span class="why-icon">💰</span>
+      <div class="why-title" style="color:var(--white)"><em>Smart</em> Pricing</div>
+      <p class="why-desc" style="color:rgba(255,255,255,.6)">Premium quality doesn't have to mean premium prices. Our smart sourcing and production workflow keeps costs low and quality high — no compromise.</p>
+    </div>
+    <div class="why-card">
+      <div class="why-num">03</div>
+      <span class="why-icon">🚀</span>
+      <div class="why-title"><em>Smart</em> Delivery</div>
+      <p class="why-desc">From proof to production to your door — our streamlined workflow means you get your merch fast, on time, every time. Rush orders welcome.</p>
+    </div>
+  </div>
+</section>
+
+<!-- SMART SERVICES -->
+<section class="services" id="services">
+  <div class="sec-tag">Smart Services</div>
+  <h2 class="sec-title">Everything a <em>Smart Brand</em> Needs</h2>
+  <div class="svc-grid">
+    <div class="svc"><div class="svc-icon">🧠</div><div class="svc-title">Smart Design</div><p>Our designers don't just make things look good — they make them work. Every layout, color, and font choice is intentional and built to represent your brand at its best.</p></div>
+    <div class="svc"><div class="svc-icon">👕</div><div class="svc-title">Smart Printing</div><p>Screen print, embroidery, DTG — we use the smartest method for your specific product to ensure the crispest, longest-lasting results every time.</p></div>
+    <div class="svc"><div class="svc-icon">🎁</div><div class="svc-title">Smart Promos</div><p>Branded mugs, bags, hats, stickers, and hundreds more. We help you pick the products that'll actually get used — so your brand keeps being seen, long after the event.</p></div>
+    <div class="svc"><div class="svc-icon">📦</div><div class="svc-title">Smart Fulfillment</div><p>12 units or 12,000 — we handle it all. Warehousing, kitting, and drop-shipping handled smartly so you never have to think twice about logistics.</p></div>
+    <div class="svc"><div class="svc-icon">⚡</div><div class="svc-title">Smart Rush</div><p>Forgot about your event? No worries — our smart production pipeline gets you production-ready in 48 hours without skipping a single quality check.</p></div>
+    <div class="svc"><div class="svc-icon">💡</div><div class="svc-title">Smart Strategy</div><p>Not sure where to start? We consult on product selection, budget, and distribution so every dollar you spend on merch returns something meaningful to your brand.</p></div>
+  </div>
+</section>
+
+<!-- SMART PROCESS -->
+<section class="process" id="process">
+  <div class="sec-tag">Smart Process</div>
+  <h2 class="sec-title">The <em>4-Step</em> Smart Method</h2>
+  <div class="steps">
+    <div class="step"><div class="step-n">💡</div><div class="step-title">Get the Idea</div><p>Share your vision, brand, and goals. No idea is too big or too small — we'll shape it into something great.</p></div>
+    <div class="step"><div class="step-n">✏️</div><div class="step-title">Design Smart</div><p>We create mockups built around your brand. Tweak until it's perfect — unlimited revisions, no rush.</p></div>
+    <div class="step"><div class="step-n">🏭</div><div class="step-title">Produce Smart</div><p>Premium materials, expert craftspeople, and the right printing method for the job. Quality is non-negotiable.</p></div>
+    <div class="step"><div class="step-n">📦</div><div class="step-title">Ship Smart</div><p>On time, every time. Delivered to one location or a thousand — tracked and handled with care.</p></div>
+  </div>
+</section>
+
+<!-- PRODUCTS -->
+<section class="products" id="products">
+  <div class="prod-head">
+    <div class="sec-tag" style="color:var(--orange)">Smart Catalog</div>
+    <h2 class="sec-title">The <em>Full</em> Smart Lineup</h2>
+  </div>
+  <div class="cat-grid">
+
+    <div class="cat">
+      <div class="cat-header"><span class="cat-icon">👕</span><span class="cat-name">Apparel</span><span class="cat-count">20 items</span></div>
+      <div class="chips">
+        <span class="chip"><span class="chip-i">👕</span> Unisex T-Shirt</span>
+        <span class="chip"><span class="chip-i">👚</span> Women's T-Shirt</span>
+        <span class="chip"><span class="chip-i">👔</span> Long Sleeve Shirt</span>
+        <span class="chip"><span class="chip-i">🧥</span> Pullover Hoodie</span>
+        <span class="chip"><span class="chip-i">🤐</span> Zip-Up Hoodie</span>
+        <span class="chip"><span class="chip-i">🌀</span> Crewneck Sweatshirt</span>
+        <span class="chip"><span class="chip-i">✂️</span> Crop Hoodie</span>
+        <span class="chip"><span class="chip-i">🎽</span> Tank Top</span>
+        <span class="chip"><span class="chip-i">💪</span> Muscle Tank</span>
+        <span class="chip"><span class="chip-i">🌸</span> Crop Top</span>
+        <span class="chip"><span class="chip-i">🏇</span> Polo Shirt</span>
+        <span class="chip"><span class="chip-i">🧨</span> Bomber Jacket</span>
+        <span class="chip"><span class="chip-i">🌬️</span> Windbreaker</span>
+        <span class="chip"><span class="chip-i">🦵</span> Leggings</span>
+        <span class="chip"><span class="chip-i">🏃</span> Joggers</span>
+        <span class="chip"><span class="chip-i">🩳</span> Shorts</span>
+        <span class="chip"><span class="chip-i">🏋️</span> Sports Bra</span>
+        <span class="chip"><span class="chip-i">🧦</span> Socks</span>
+        <span class="chip"><span class="chip-i">🩲</span> Boxer Briefs</span>
+        <span class="chip"><span class="chip-i">🦺</span> Puffer Vest</span>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-header"><span class="cat-icon">🧢</span><span class="cat-name">Headwear</span><span class="cat-count">7 items</span></div>
+      <div class="chips">
+        <span class="chip"><span class="chip-i">🧢</span> Dad Hat</span>
+        <span class="chip"><span class="chip-i">🎩</span> Snapback Cap</span>
+        <span class="chip"><span class="chip-i">🎓</span> Flexfit Cap</span>
+        <span class="chip"><span class="chip-i">🚚</span> Trucker Hat</span>
+        <span class="chip"><span class="chip-i">🪣</span> Bucket Hat</span>
+        <span class="chip"><span class="chip-i">🧶</span> Beanie</span>
+        <span class="chip"><span class="chip-i">☀️</span> Visor</span>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-header"><span class="cat-icon">👜</span><span class="cat-name">Bags</span><span class="cat-count">7 items</span></div>
+      <div class="chips">
+        <span class="chip"><span class="chip-i">🛍️</span> Tote Bag</span>
+        <span class="chip"><span class="chip-i">🎒</span> Backpack</span>
+        <span class="chip"><span class="chip-i">🎽</span> Drawstring Bag</span>
+        <span class="chip"><span class="chip-i">💼</span> Duffle Bag</span>
+        <span class="chip"><span class="chip-i">👝</span> Fanny Pack</span>
+        <span class="chip"><span class="chip-i">💻</span> Laptop Sleeve</span>
+        <span class="chip"><span class="chip-i">🛒</span> Mini Tote</span>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-header"><span class="cat-icon">📱</span><span class="cat-name">Tech Accessories</span><span class="cat-count">6 items</span></div>
+      <div class="chips">
+        <span class="chip"><span class="chip-i">🍎</span> iPhone Case</span>
+        <span class="chip"><span class="chip-i">📲</span> Samsung Case</span>
+        <span class="chip"><span class="chip-i">🎧</span> AirPods Case</span>
+        <span class="chip"><span class="chip-i">⌚</span> Apple Watch Band</span>
+        <span class="chip"><span class="chip-i">🖱️</span> Mouse Pad</span>
+        <span class="chip"><span class="chip-i">💻</span> Laptop Skin</span>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-header"><span class="cat-icon">🏠</span><span class="cat-name">Home & Living</span><span class="cat-count">14 items</span></div>
+      <div class="chips">
+        <span class="chip"><span class="chip-i">☕</span> Coffee Mug 11oz</span>
+        <span class="chip"><span class="chip-i">☕</span> Coffee Mug 15oz</span>
+        <span class="chip"><span class="chip-i">🍵</span> Enamel Mug</span>
+        <span class="chip"><span class="chip-i">🧋</span> Latte Mug</span>
+        <span class="chip"><span class="chip-i">🚗</span> Travel Mug</span>
+        <span class="chip"><span class="chip-i">🍺</span> Pint Glass</span>
+        <span class="chip"><span class="chip-i">🍷</span> Wine Glass</span>
+        <span class="chip"><span class="chip-i">🥃</span> Shot Glass</span>
+        <span class="chip"><span class="chip-i">💧</span> Water Bottle</span>
+        <span class="chip"><span class="chip-i">🛋️</span> Throw Pillow</span>
+        <span class="chip"><span class="chip-i">🛏️</span> Pillow Case</span>
+        <span class="chip"><span class="chip-i">🛁</span> Throw Blanket</span>
+        <span class="chip"><span class="chip-i">🏖️</span> Beach Towel</span>
+        <span class="chip"><span class="chip-i">👨‍🍳</span> Apron</span>
+      </div>
+    </div>
+
+    <div class="cat">
+      <div class="cat-header"><span class="cat-icon">🖼️</span><span class="cat-name">Art & Stationery</span><span class="cat-count">10 items</span></div>
+      <div class="chips">
+        <span class="chip"><span class="chip-i">🖼️</span> Canvas Print</span>
+        <span class="chip"><span class="chip-i">🪟</span> Framed Poster</span>
+        <span class="chip"><span class="chip-i">📜</span> Poster</span>
+        <span class="chip"><span class="chip-i">🔲</span> Metal Print</span>
+        <span class="chip"><span class="chip-i">📓</span> Spiral Notebook</span>
+        <span class="chip"><span class="chip-i">📔</span> Hardcover Journal</span>
+        <span class="chip"><span class="chip-i">🪧</span> Stickers</span>
+        <span class="chip"><span class="chip-i">🎄</span> Ornament</span>
+        <span class="chip"><span class="chip-i">🕯️</span> Candle</span>
+        <span class="chip"><span class="chip-i">🧩</span> Puzzle</span>
+      </div>
+    </div>
+
+    <div class="cat" style="grid-column:1/-1;display:flex;gap:36px;align-items:flex-start;">
+      <div style="flex:0 0 220px;">
+        <div class="cat-header" style="border:none;margin-bottom:8px;padding-bottom:0;">
+          <span class="cat-icon">👶</span>
+          <span class="cat-name">Kids & Baby</span>
+          <span class="cat-count">6 items</span>
+        </div>
+        <p style="font-size:12px;color:var(--muted);line-height:1.6;">Same smart quality, sized for the little ones.</p>
+      </div>
+      <div class="chips" style="align-content:flex-start;padding-top:4px;">
+        <span class="chip"><span class="chip-i">👕</span> Kids T-Shirt</span>
+        <span class="chip"><span class="chip-i">🧥</span> Youth Hoodie</span>
+        <span class="chip"><span class="chip-i">👔</span> Youth Long Sleeve</span>
+        <span class="chip"><span class="chip-i">👶</span> Baby Onesie</span>
+        <span class="chip"><span class="chip-i">🍼</span> Baby Bib</span>
+        <span class="chip"><span class="chip-i">🧶</span> Baby Beanie</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ETSY BANNER -->
+<div class="etsy-banner">
+  <div>
+    <div class="etsy-banner-tag">Shop Smart</div>
+    <div class="etsy-banner-title">The Smartest Way<br>to Order? <em>Etsy.</em></div>
+    <p class="etsy-banner-sub">Browse our full catalog, read real customer reviews, and check out securely — all in one place. Shopping for merch has never been this easy.</p>
+  </div>
+  <a class="etsy-banner-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Visit Our Etsy Store →</a>
+</div>
+
+<!-- RATINGS -->
+<section class="ratings" id="ratings">
+  <div class="sec-head">
+    <div class="sec-tag" style="color:var(--orange)">Smart Reviews</div>
+    <h2 class="sec-title">Smart Customers. <em>5-Star</em> Results.</h2>
+  </div>
+  <div class="rating-big">
+    <div class="rating-score">
+      <div class="score-num">5.0</div>
+      <div class="score-stars">★★★★★</div>
+      <div class="score-label">Average Rating · Etsy Store</div>
+    </div>
+    <div class="rating-divider"></div>
+    <div class="rating-counts">
+      <div class="rbar"><div class="rbar-label">5 ★</div><div class="rbar-track"><div class="rbar-fill" style="width:92%"></div></div><div class="rbar-pct">92%</div></div>
+      <div class="rbar"><div class="rbar-label">4 ★</div><div class="rbar-track"><div class="rbar-fill" style="width:6%"></div></div><div class="rbar-pct">6%</div></div>
+      <div class="rbar"><div class="rbar-label">3 ★</div><div class="rbar-track"><div class="rbar-fill" style="width:2%"></div></div><div class="rbar-pct">2%</div></div>
+      <div class="rbar"><div class="rbar-label">2 ★</div><div class="rbar-track"><div class="rbar-fill" style="width:0%"></div></div><div class="rbar-pct">0%</div></div>
+      <div class="rbar"><div class="rbar-label">1 ★</div><div class="rbar-track"><div class="rbar-fill" style="width:0%"></div></div><div class="rbar-pct">0%</div></div>
+    </div>
+  </div>
+  <div class="testi-grid">
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">Honestly the smartest decision we made for our company retreat was ordering through Smart Merch. Quality was incredible and everything came ahead of schedule.</p><div class="tc-author"><div class="tc-av">JR</div><div><div class="tc-name">Jessica R.</div><div class="tc-role">Marketing Director, TechCorp</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">These guys actually get it. They didn't just print a logo on a hoodie — they thought about the design and made it look like it belonged there. Smart merch indeed.</p><div class="tc-author"><div class="tc-av">MK</div><div><div class="tc-name">Marcus K.</div><div class="tc-role">Founder, Elevate Athletics</div></div></div></div>
+    <div class="tc"><div class="tc-stars">★★★★★</div><p class="tc-text">500 tote bags, 3 days early, zero issues. If you want merch done the smart way — with care, quality, and zero stress — this is your team.</p><div class="tc-author"><div class="tc-av">SL</div><div><div class="tc-name">Sarah L.</div><div class="tc-role">Events Manager, Spark Agency</div></div></div></div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="sec-tag" style="color:var(--orange)">Get Smart</div>
+  <h2 class="sec-title">Ready to Make a <em>Smart Move?</em></h2>
+  <p class="contact-sub">The smartest brands don't wait. Reach out today and let's build something your audience will actually love wearing, using, and talking about.</p>
+  <div class="contact-cards">
+    <a href="mailto:smartmerchdesign@gmail.com" class="ccard">
+      <div class="ccard-icon">📧</div>
+      <div><div class="ccard-label">Email Us</div><div class="ccard-val">smartmerchdesign@gmail.com</div></div>
+    </a>
+    <a href="tel:+13476085682" class="ccard">
+      <div class="ccard-icon">📞</div>
+      <div><div class="ccard-label">Call Us</div><div class="ccard-val">(347) 608-5682</div></div>
+    </a>
+    <a href="https://maps.google.com/?q=1700+Fanwood+St+Oakhurst+NJ+07755" target="_blank" class="ccard">
+      <div class="ccard-icon">📍</div>
+      <div><div class="ccard-label">Visit Us</div><div class="ccard-val">1700 Fanwood St<br>Oakhurst, NJ 07755</div></div>
+    </a>
+  </div>
+</section>
+
+<!-- FOOTER -->
 <footer>
   <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
-  <div class="footer-copy">© 2026 Smart Merch Design</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
   <div class="footer-links">
     <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
     <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
-    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="quote.html">Get a Quote</a>
   </div>
 </footer>
 
