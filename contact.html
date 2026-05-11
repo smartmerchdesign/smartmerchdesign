@@ -55,14 +55,25 @@
   <a class="logo" href="index.html"><span class="logo-bulb">💡</span>SMART <em>MERCH</em> DESIGN</a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
-    <li><a href="services.html">Services</a></li>
+    <li class="nav-dropdown"><a href="services.html">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+      </div>
+    </li>
     <li><a href="products.html">Products</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="pricing.html">Pricing</a></li>
     <li><a href="faq.html">FAQ</a></li>
-    <li><a href="contact.html">Contact</a></li>
+    <li><a href="contact.html" class="active">Contact</a></li>
   </ul>
-  <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
 </nav>
 
 <div class="contact-layout">

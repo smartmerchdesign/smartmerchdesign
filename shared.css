@@ -203,7 +203,7 @@ footer {
 /* ─── MOBILE ─── */
 @media (max-width: 768px) {
   nav { padding: 0 20px; }
-  .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; background: rgba(8,15,36,.98); padding: 20px; gap: 4px; border-bottom: 1px solid rgba(245,137,26,.15); }
+  .nav-links { display: none; flex-direction: column; position: absolute; top: 68px; left: 0; right: 0; z-index: 100; background: rgba(8,15,36,.98); padding: 20px; gap: 4px; border-bottom: 1px solid rgba(245,137,26,.15); }
   .nav-links.open { display: flex; }
   .nav-links a { padding: 10px 12px; border-radius: 8px; }
   .hamburger { display: flex; }
