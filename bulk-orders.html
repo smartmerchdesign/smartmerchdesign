@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Smart Merch Design bulk order services — 48+ units with volume pricing, dedicated account management, warehousing, kitting, and drop-shipping nationwide.">
+<title>Bulk Orders — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+.bulk-intro { padding: 72px 56px 0; display: grid; grid-template-columns: 1fr 420px; gap: 72px; align-items: center; }
+.bulk-intro-text .sec-title { color: var(--white); }
+.bulk-intro-text p { font-size: 15px; line-height: 1.9; color: var(--muted); margin-top: 20px; max-width: 560px; }
+.bulk-stats { background: linear-gradient(145deg, #152348, #0d1e3e); border: 1px solid rgba(245,137,26,.2); border-radius: 20px; padding: 40px 36px; position: relative; overflow: hidden; }
+.bulk-stats::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: linear-gradient(90deg, var(--orange), var(--orlo)); }
+.bulk-stats h3 { font-family: var(--display); font-size: 20px; font-weight: 700; color: var(--white); margin-bottom: 24px; letter-spacing: 1px; }
+.stat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.stat-box { background: rgba(255,255,255,.06); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 20px 16px; text-align: center; }
+.stat-box .n { font-family: var(--display); font-size: 38px; font-weight: 900; color: var(--orange); line-height: 1; }
+.stat-box .l { font-size: 12px; color: var(--muted); margin-top: 6px; font-weight: 500; }
+
+.tiers { padding: 72px 56px; }
+.tiers-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.tier-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.09); border-radius: 18px; padding: 36px 28px; transition: all .3s; position: relative; overflow: hidden; }
+.tier-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--orange); transform: scaleX(0); transform-origin: left; transition: transform .3s; }
+.tier-card:hover { border-color: rgba(245,137,26,.35); transform: translateY(-5px); }
+.tier-card:hover::after { transform: scaleX(1); }
+.tier-card.featured { background: linear-gradient(145deg, #152348, #0d1e3e); border-color: rgba(245,137,26,.35); }
+.tier-card.featured::after { transform: scaleX(1); }
+.tier-badge { display: inline-block; font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--orange); background: rgba(245,137,26,.1); border: 1px solid rgba(245,137,26,.25); padding: 4px 12px; border-radius: 100px; margin-bottom: 16px; }
+.tier-name { font-family: var(--display); font-size: 30px; font-weight: 900; color: var(--white); margin-bottom: 6px; }
+.tier-qty { font-size: 13px; color: var(--muted); margin-bottom: 20px; }
+.tier-price { font-family: var(--display); font-size: 52px; font-weight: 900; color: var(--white); line-height: 1; margin-bottom: 4px; }
+.tier-price em { color: var(--orange); font-style: normal; font-size: 26px; vertical-align: super; }
+.tier-per { font-size: 12px; color: var(--muted); margin-bottom: 24px; }
+.tier-divider { height: 1px; background: rgba(255,255,255,.07); margin: 20px 0; }
+.tier-features { list-style: none; }
+.tier-features li { font-size: 13.5px; color: rgba(255,255,255,.7); padding: 7px 0; display: flex; align-items: flex-start; gap: 10px; border-bottom: 1px solid rgba(255,255,255,.05); }
+.tier-features li:last-child { border-bottom: none; }
+.tier-features li::before { content: '✓'; color: var(--orange); font-weight: 700; flex-shrink: 0; }
+.tier-cta { display: block; text-align: center; margin-top: 24px; padding: 13px; background: rgba(245,137,26,.1); border: 1px solid rgba(245,137,26,.3); border-radius: 10px; color: var(--orange); font-family: var(--display); font-size: 17px; font-weight: 700; letter-spacing: 1px; text-decoration: none; transition: all .25s; }
+.tier-cta:hover { background: var(--orange); color: var(--white); }
+.tier-card.featured .tier-cta { background: var(--orange); color: var(--white); }
+
+.process { padding: 0 56px 72px; }
+.process-steps { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 48px; position: relative; }
+.process-steps::before { content: ''; position: absolute; top: 28px; left: 14%; right: 14%; height: 2px; background: linear-gradient(90deg, var(--orange), rgba(245,137,26,.2)); z-index: 0; }
+.proc-step { text-align: center; padding: 0 16px; position: relative; z-index: 1; }
+.proc-num { width: 56px; height: 56px; border-radius: 50%; background: rgba(245,137,26,.12); border: 2px solid rgba(245,137,26,.4); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 22px; font-weight: 900; color: var(--orange); margin: 0 auto 16px; }
+.proc-title { font-family: var(--display); font-size: 18px; font-weight: 700; color: var(--white); margin-bottom: 8px; }
+.proc-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
+
+.services-include { padding: 72px 56px; background: var(--offwhite); }
+.services-include .sec-title { color: var(--navy); }
+.si-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; margin-top: 48px; }
+.si-card { background: var(--white); border-radius: 14px; padding: 28px 24px; box-shadow: 0 4px 20px rgba(13,42,94,.07); transition: transform .3s; }
+.si-card:hover { transform: translateY(-4px); }
+.si-icon { font-size: 34px; margin-bottom: 14px; display: block; }
+.si-title { font-family: var(--display); font-size: 22px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.si-title em { color: var(--orange); font-style: normal; }
+.si-card p { font-size: 13.5px; line-height: 1.75; color: #6b7a99; }
+
+.faq-strip { padding: 72px 56px; }
+.faq-strip .sec-title { color: var(--white); }
+.faq-strip-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 48px; }
+.faq-item { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 24px 22px; }
+.faq-q { font-size: 15px; font-weight: 600; color: var(--white); margin-bottom: 10px; }
+.faq-a { font-size: 14px; color: var(--muted); line-height: 1.75; }
+.faq-a a { color: var(--orange); }
+
+.cta-band { background: linear-gradient(135deg, var(--navy), #0a1832); padding: 72px 56px; display: flex; align-items: center; justify-content: space-between; gap: 40px; }
+.cta-band h2 { font-family: var(--display); font-size: clamp(28px,4vw,52px); font-weight: 900; color: var(--white); line-height: 1; }
+.cta-band h2 em { color: var(--orange); font-style: normal; }
+.cta-band p { font-size: 15px; color: var(--muted); margin-top: 12px; max-width: 500px; }
+
+@media (max-width: 900px) {
+  .bulk-intro, .tiers-grid, .si-grid, .faq-strip-grid { grid-template-columns: 1fr; }
+  .bulk-intro, .tiers, .process, .services-include, .faq-strip { padding: 48px 20px; }
+  .process-steps { grid-template-columns: 1fr 1fr; }
+  .process-steps::before { display: none; }
+  .cta-band { flex-direction: column; padding: 48px 20px; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html" class="active">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html" class="active">Bulk Orders</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">📦 Bulk Orders</div>
+    <h1>BIG ORDERS. <em>BIGGER</em> SAVINGS.</h1>
+    <p>The more you order, the more you save — and the more we do for you. Volume pricing, dedicated account management, warehousing, kitting, and drop-shipping all under one roof.</p>
+  </div>
+</div>
+
+<!-- INTRO + STATS -->
+<div class="bulk-intro">
+  <div class="bulk-intro-text">
+    <div class="sec-tag">Why Bulk?</div>
+    <h2 class="sec-title">Merch at <em>Scale</em>, Done Right</h2>
+    <p>Whether you're outfitting a 50-person team or putting branded kits in the hands of 5,000 customers, our bulk order program is built to handle it without the headaches. Lower per-unit cost, faster production timelines, and a dedicated team watching your order from start to finish.</p>
+    <p>We've run large-scale orders for Fortune 500 companies, growing startups, sports leagues, nonprofits, and event organizers. The process is the same every time: streamlined, transparent, and stress-free.</p>
+    <a class="form-submit" href="contact.html" style="margin-top:28px;display:inline-flex;">Request a Bulk Quote →</a>
+  </div>
+  <div class="bulk-stats">
+    <h3>💡 BULK BY THE NUMBERS</h3>
+    <div class="stat-grid">
+      <div class="stat-box"><div class="n">$8</div><div class="l">Starting price/unit (200+)</div></div>
+      <div class="stat-box"><div class="n">48h</div><div class="l">Rush turnaround available</div></div>
+      <div class="stat-box"><div class="n">10K+</div><div class="l">Bulk orders shipped</div></div>
+      <div class="stat-box"><div class="n">∞</div><div class="l">Locations we can ship to</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- TIER PRICING -->
+<section class="tiers">
+  <div class="sec-tag">Volume Pricing</div>
+  <h2 class="sec-title">More Units = <em>Lower</em> Cost</h2>
+  <div class="tiers-grid">
+    <div class="tier-card">
+      <div class="tier-badge">Small Run</div>
+      <div class="tier-name">48–199 Units</div>
+      <div class="tier-qty">Smart Pro tier</div>
+      <div class="tier-price"><em>$</em>12</div>
+      <div class="tier-per">per unit, starting price</div>
+      <div class="tier-divider"></div>
+      <ul class="tier-features">
+        <li>Up to 4-color screen print</li>
+        <li>5–7 day standard turnaround</li>
+        <li>3 free digital mockups</li>
+        <li>Priority email + phone support</li>
+        <li>Rush available (48hr add-on)</li>
+        <li>Dedicated account manager</li>
+      </ul>
+      <a class="tier-cta" href="contact.html">Get a Quote →</a>
+    </div>
+    <div class="tier-card featured">
+      <div class="tier-badge">Most Popular</div>
+      <div class="tier-name">200–499 Units</div>
+      <div class="tier-qty">Smart Scale tier</div>
+      <div class="tier-price"><em>$</em>8</div>
+      <div class="tier-per">per unit, starting price</div>
+      <div class="tier-divider"></div>
+      <ul class="tier-features">
+        <li>Unlimited colors & methods</li>
+        <li>3–5 day standard turnaround</li>
+        <li>Unlimited mockups & revisions</li>
+        <li>Dedicated account manager</li>
+        <li>Rush always available</li>
+        <li>Warehousing & kitting included</li>
+      </ul>
+      <a class="tier-cta" href="contact.html">Get a Quote →</a>
+    </div>
+    <div class="tier-card">
+      <div class="tier-badge">Enterprise</div>
+      <div class="tier-name">500+ Units</div>
+      <div class="tier-qty">Custom enterprise pricing</div>
+      <div class="tier-price"><em>$</em>6</div>
+      <div class="tier-per">per unit, starting price</div>
+      <div class="tier-divider"></div>
+      <ul class="tier-features">
+        <li>Maximum volume discounts</li>
+        <li>Priority production queue</li>
+        <li>Custom packaging & inserts</li>
+        <li>Drop-ship to any number of locations</li>
+        <li>Inventory management & storage</li>
+        <li>Dedicated project coordinator</li>
+      </ul>
+      <a class="tier-cta" href="contact.html">Get a Quote →</a>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS (condensed) -->
+<section class="process" style="background:var(--offwhite);">
+  <div style="padding-top:72px;">
+    <div class="sec-tag" style="color:var(--navy);">The Process</div>
+    <h2 class="sec-title" style="color:var(--navy);">Bulk Orders, <em>Simplified</em></h2>
+    <div class="process-steps" style="margin-top:48px;">
+      <div class="proc-step">
+        <div class="proc-num">01</div>
+        <div class="proc-title">Submit Your Brief</div>
+        <p class="proc-desc">Tell us quantities, products, timeline, and share any artwork or ideas. Takes 5 minutes.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">02</div>
+        <div class="proc-title">Receive Your Quote</div>
+        <p class="proc-desc">We'll come back with per-unit pricing, mockups, and a production timeline — same business day.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">03</div>
+        <div class="proc-title">Approve & Deposit</div>
+        <p class="proc-desc">Approve the proof, pay 50% to kick off production. No mystery fees.</p>
+      </div>
+      <div class="proc-step">
+        <div class="proc-num">04</div>
+        <div class="proc-title">Produce & Ship</div>
+        <p class="proc-desc">We produce, QC every unit, and ship tracked — to one address or many.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICES INCLUDED -->
+<section class="services-include">
+  <div class="sec-tag" style="color:var(--navy);">What's Included</div>
+  <h2 class="sec-title">Everything Your <em>Bulk Order</em> Needs</h2>
+  <div class="si-grid">
+    <div class="si-card">
+      <span class="si-icon">🧠</span>
+      <div class="si-title"><em>Dedicated</em> Account Manager</div>
+      <p>One person owns your order from quote to delivery. You'll have their direct contact — no call centers, no ticketing systems.</p>
+    </div>
+    <div class="si-card">
+      <span class="si-icon">📦</span>
+      <div class="si-title">Kitting &amp; <em>Assembly</em></div>
+      <p>We bundle multiple products into branded kits — shirts, hats, mugs, stickers — assembled, packed, and ready to ship as a set.</p>
+    </div>
+    <div class="si-card">
+      <span class="si-icon">🏭</span>
+      <div class="si-title"><em>Warehousing</em> & Fulfillment</div>
+      <p>Need inventory stored and shipped on demand? We warehouse your merch and fulfill individual orders as you need them — no lease required.</p>
+    </div>
+    <div class="si-card">
+      <span class="si-icon">🚚</span>
+      <div class="si-title">Multi-Location <em>Drop-Ship</em></div>
+      <p>Ship to one address or 10,000 different ones. We'll handle the logistics — you just send us the list.</p>
+    </div>
+    <div class="si-card">
+      <span class="si-icon">⚡</span>
+      <div class="si-title"><em>Rush</em> Production</div>
+      <p>Need it fast? Our rush pipeline gets bulk orders from proof approval to shipped in as little as 48 hours — no quality compromise.</p>
+    </div>
+    <div class="si-card">
+      <span class="si-icon">🎁</span>
+      <div class="si-title">Custom <em>Packaging</em></div>
+      <p>Branded boxes, custom tissue paper, thank-you inserts, and poly bags. Make the unboxing moment part of your brand experience.</p>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK FAQ -->
+<section class="faq-strip">
+  <div class="sec-tag">Common Questions</div>
+  <h2 class="sec-title">Bulk Order <em>FAQ</em></h2>
+  <div class="faq-strip-grid">
+    <div class="faq-item">
+      <div class="faq-q">What's the minimum for a bulk order?</div>
+      <div class="faq-a">Our bulk pricing starts at 48 units for the Smart Pro tier. For enterprise pricing (from $6/unit), minimums start at 500 units. Smaller orders from 12 units are available at standard pricing — see our <a href="pricing.html">pricing page</a>.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">How long does a bulk order take?</div>
+      <div class="faq-a">Standard turnaround is 3–7 business days for bulk orders depending on size and method. Rush production (48 hours from approval) is available on most bulk orders for an additional fee.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Can you ship to multiple addresses?</div>
+      <div class="faq-a">Yes — our drop-ship service can ship to any number of individual addresses. Just provide us with the list and we'll handle all the packaging and fulfillment.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What if I need different sizes or colors?</div>
+      <div class="faq-a">Size and color breakdowns within a single order are standard. Just provide your size run (e.g. 20 S / 30 M / 30 L / 20 XL) when you submit your quote request.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">Do you offer ongoing fulfillment for e-commerce?</div>
+      <div class="faq-a">Yes. We can store your inventory and fulfill individual orders as they come in — great for merch stores, subscription boxes, and branded gifting programs. <a href="contact.html">Contact us</a> to discuss your setup.</div>
+    </div>
+    <div class="faq-item">
+      <div class="faq-q">What's included in the quote?</div>
+      <div class="faq-a">Your quote will include per-unit pricing, setup fees (if any), shipping cost to your location(s), production timeline, and payment terms. No hidden fees added later.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<div class="cta-band">
+  <div>
+    <h2>Ready to Place a <em>Bulk Order?</em></h2>
+    <p>Fill out our quote form and we'll get back to you same business day with pricing, mockups, and a timeline. No commitment required.</p>
+  </div>
+  <div style="display:flex;gap:14px;flex-shrink:0;flex-wrap:wrap;">
+    <a class="form-submit" href="contact.html">💡 Request a Bulk Quote</a>
+    <a class="form-submit" href="how-it-works.html" style="background:transparent;border:2px solid rgba(245,137,26,.5);color:var(--orange);box-shadow:none;">How It Works →</a>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-legal">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="shipping.html">Shipping Policy</a>
+    <a href="returns.html">Returns &amp; Refunds</a>
+  </div>
+</footer>
+
+</body>
+</html>

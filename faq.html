@@ -2,12 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
+<meta name="description" content="Frequently asked questions about ordering, design, printing, pricing, shipping, and returns at Smart Merch Design.">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>FAQ — Smart Merch Design</title>
 <link rel="stylesheet" href="shared.css">
 <style>
-.faq-layout { display:grid; grid-template-columns:200px 1fr; gap:60px; padding:72px 56px; align-items:start; }
-.faq-nav { position:sticky; top:96px; z-index: 0; }
+.faq-layout { display:grid; grid-template-columns:200px 1fr; gap:60px; padding:72px 56px; align-items:start; position:relative; isolation:isolate; }
+.faq-nav { position:sticky; top:96px; }
 .faq-nav a { display:block; font-size:13px; font-weight:600; color:var(--muted); text-decoration:none; padding:8px 12px; border-radius:8px; margin-bottom:2px; border-left:2px solid transparent; transition:all .2s; letter-spacing:0.5px; }
 .faq-nav a:hover, .faq-nav a.active { color:var(--orange); border-left-color:var(--orange); background:rgba(245,137,26,.06); }
 .faq-nav-title { font-size:10px; font-weight:700; letter-spacing:2.5px; text-transform:uppercase; color:rgba(255,255,255,.25); margin:20px 0 8px 12px; }
@@ -86,7 +87,7 @@
 
 <div class="faq-layout">
 
-  <nav class="faq-nav">
+  <div class="faq-nav">
     <a href="#ordering">Ordering</a>
     <a href="#design">Design</a>
     <a href="#printing">Printing</a>
@@ -94,7 +95,7 @@
     <a href="#shipping">Shipping</a>
     <a href="#returns">Returns</a>
     <a href="#bulk">Bulk Orders</a>
-  </nav>
+  </div>
 
   <div class="faq-content">
 
