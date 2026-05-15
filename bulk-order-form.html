@@ -59,6 +59,12 @@
   font-family: var(--body); font-size: 15px; transition: all .2s;
   appearance: none;
 }
+/* Never restyle checkboxes/radios inside .fg */
+.fg input[type="checkbox"],
+.fg input[type="radio"] {
+  width: auto; height: auto; background: none; border: none;
+  border-radius: 0; padding: 0; appearance: auto; flex-shrink: 0;
+}
 .fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,.22); }
 .fg input:focus, .fg textarea:focus, .fg select:focus {
   outline: none; border-color: rgba(245,137,26,.6); background: rgba(255,255,255,.08);
@@ -149,6 +155,22 @@
 
 /* ── Divider ── */
 .fg-divider { height: 1px; background: rgba(255,255,255,.07); margin: 28px 0; }
+
+/* ── Consent checkbox ── */
+.consent-row {
+  display: flex; align-items: flex-start; gap: 12px; cursor: pointer;
+  padding: 16px 20px; border-radius: 12px;
+  border: 1px solid rgba(255,255,255,.08); background: rgba(255,255,255,.03);
+  transition: border-color .2s; margin-bottom: 4px;
+}
+.consent-row:hover { border-color: rgba(245,137,26,.25); }
+.consent-row input[type="checkbox"] {
+  width: 18px; height: 18px; flex-shrink: 0; margin-top: 2px;
+  accent-color: var(--orange); cursor: pointer;
+}
+.consent-row span {
+  font-size: 13px; color: rgba(255,255,255,.5); line-height: 1.6;
+}
 
 /* ── Validation error ── */
 .fg-error { font-size: 12px; color: #ff6b6b; margin-top: 5px; display: none; }
@@ -664,12 +686,10 @@
       <textarea id="extraNotes" name="extraNotes" rows="4" placeholder="Any details we haven't asked about — past vendors you've used, quality concerns, inspiration examples, special requirements…"></textarea>
     </div>
 
-    <div class="fg">
-      <label style="display:flex;align-items:flex-start;gap:10px;text-transform:none;letter-spacing:0;font-size:13px;color:rgba(255,255,255,.55);cursor:pointer;">
-        <input type="checkbox" id="consent" name="consent" style="width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--orange);">
-        I agree that Smart Merch Design may contact me about this request by email and phone. I understand this is not a confirmed order — just a quote request.
-      </label>
-    </div>
+    <label class="consent-row" for="consent">
+      <input type="checkbox" id="consent" name="consent">
+      <span>I agree that Smart Merch Design may contact me about this request by email and phone. I understand this is not a confirmed order — just a quote request.</span>
+    </label>
 
     <div id="submitStatus" style="display:none;"></div>
 
@@ -853,72 +873,91 @@ function buildSummary() {
 /* ── Form submission ── */
 async function submitForm() {
   if (!validateStep(6)) return;
+
+  const status = document.getElementById('submitStatus');
+  const btn    = document.getElementById('submitBtn');
+
   if (!document.getElementById('consent').checked) {
-    const status = document.getElementById('submitStatus');
-    status.style.display = 'block';
-    status.style.background = 'rgba(255,0,0,.08)';
-    status.style.color = '#ff6b6b';
-    status.style.padding = '14px';
-    status.style.borderRadius = '10px';
-    status.style.marginBottom = '16px';
-    status.textContent = 'Please confirm you agree to be contacted about this request.';
+    showStatus('Please tick the agreement checkbox before submitting.', 'error');
     return;
   }
 
-  const btn = document.getElementById('submitBtn');
   btn.textContent = 'Sending…';
   btn.disabled = true;
+  status.style.display = 'none';
 
-  /* Collect all data into a FormData object */
+  /* ── Collect all form data ── */
   const data = new FormData();
   data.append('_subject', 'New Bulk Order Request — Smart Merch Design');
 
-  /* Text fields */
-  const textFields = ['firstName','lastName','company','role','email','phone','referral',
+  const textFields = [
+    'firstName','lastName','company','role','email','phone','referral',
     'specificProducts','totalQty','numStyles','budgetPerUnit','productDetails',
     'sizeXS','sizeS','sizeM','sizeL','sizeXL','size2XL',
-    'artworkStatus','printLocations','designColors','printMethod','designDescription','brandColors',
+    'artworkStatus','printLocations','designColors','printMethod',
+    'designDescription','brandColors',
     'neededBy','eventName','urgency','totalBudget','recurring',
-    'shipType','shipAddress','shipSpeed','kittingDetails','shipNotes','extraNotes'];
+    'shipType','shipAddress','shipSpeed','kittingDetails','shipNotes','extraNotes'
+  ];
   textFields.forEach(id => {
     const el = document.getElementById(id);
-    if (el && el.value) data.append(id, el.value);
+    if (el && el.value.trim()) data.append(id, el.value.trim());
   });
 
-  /* Checkbox groups */
   ['category','useCase','addons'].forEach(name => {
     const vals = [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(e => e.value);
     if (vals.length) data.append(name, vals.join(', '));
   });
 
-  /* File */
   const file = document.getElementById('artworkFile').files[0];
   if (file) data.append('artworkFile', file);
 
+  /* ── Submit to Formspree ── */
   try {
-    const res = await fetch('https://formspree.io/f/xykolgjb', {
-      method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    const res  = await fetch('https://formspree.io/f/xaqvgpdq', {
+      method: 'POST',
+      body: data,
+      headers: { 'Accept': 'application/json' }
     });
+
+    const json = await res.json();
+
     if (res.ok) {
+      /* Success */
       document.querySelector('.progress-bar').style.display = 'none';
       document.getElementById('step-6').style.display = 'none';
       document.getElementById('successPanel').style.display = 'block';
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } else {
-      throw new Error('Server error');
+      /* Formspree returned a structured error — surface it */
+      const msg = (json.errors && json.errors.length)
+        ? json.errors.map(e => e.message).join(' · ')
+        : 'Submission failed. Please try again.';
+      showStatus(msg, 'error');
+      btn.disabled = false;
+      btn.textContent = '💡 Submit Bulk Order Request';
     }
   } catch {
-    const status = document.getElementById('submitStatus');
-    status.style.display = 'block';
-    status.style.background = 'rgba(255,0,0,.08)';
-    status.style.color = '#ff6b6b';
-    status.style.padding = '14px';
-    status.style.borderRadius = '10px';
-    status.style.marginBottom = '16px';
-    status.textContent = 'Something went wrong — please try again or email us directly at smartmerchdesign@gmail.com';
+    showStatus(
+      'Network error — please check your connection and try again, or email us at smartmerchdesign@gmail.com',
+      'error'
+    );
     btn.disabled = false;
     btn.textContent = '💡 Submit Bulk Order Request';
   }
+}
+
+function showStatus(msg, type) {
+  const el = document.getElementById('submitStatus');
+  el.style.display    = 'block';
+  el.style.background = type === 'error' ? 'rgba(255,0,0,.08)' : 'rgba(245,137,26,.1)';
+  el.style.color      = type === 'error' ? '#ff6b6b' : 'var(--orange)';
+  el.style.padding    = '14px 18px';
+  el.style.borderRadius = '10px';
+  el.style.marginBottom = '16px';
+  el.style.fontSize   = '14px';
+  el.style.lineHeight = '1.5';
+  el.textContent = msg;
 }
 
 /* ── Set min date to today ── */
