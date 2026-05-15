@@ -221,9 +221,9 @@
 
 <div class="page-hero">
   <div class="page-hero-inner">
-    <div class="page-tag">📦 Bulk Orders</div>
-    <h1>GET YOUR <em>BULK</em> QUOTE</h1>
-    <p>Fill out the form below and we'll come back with pricing, mockups, and a timeline — same business day. No commitment required.</p>
+    <div class="page-tag">📦 Get a Quote</div>
+    <h1>GET YOUR <em>CUSTOM</em> QUOTE</h1>
+    <p>One piece or ten thousand — fill out the form and we'll come back with pricing, mockups, and a timeline same business day. No commitment required.</p>
   </div>
 </div>
 
@@ -335,7 +335,7 @@
       <div class="section-icon">👕</div>
       <div>
         <div class="section-title">Products &amp; <em>Quantities</em></div>
-        <div class="section-sub">What are you ordering and how many? Select all that apply.</div>
+        <div class="section-sub">What are you ordering and how many? Select all that apply — we handle everything from a single custom piece to thousands.</div>
       </div>
     </div>
 
@@ -367,15 +367,25 @@
       <label>Total Quantity Needed <span class="req">*</span></label>
       <select id="totalQty" name="totalQty">
         <option value="" disabled selected>Select a range…</option>
-        <option>48 – 99 units</option>
-        <option>100 – 199 units</option>
-        <option>200 – 499 units</option>
-        <option>500 – 999 units</option>
-        <option>1,000 – 2,499 units</option>
-        <option>2,500 – 4,999 units</option>
-        <option>5,000+ units</option>
+        <optgroup label="Small / Custom">
+          <option>1 piece (custom single item)</option>
+          <option>2 – 5 pieces</option>
+          <option>6 – 11 pieces</option>
+          <option>12 – 23 pieces</option>
+          <option>24 – 47 pieces</option>
+        </optgroup>
+        <optgroup label="Bulk — best pricing">
+          <option>48 – 99 units</option>
+          <option>100 – 199 units</option>
+          <option>200 – 499 units</option>
+          <option>500 – 999 units</option>
+          <option>1,000 – 2,499 units</option>
+          <option>2,500 – 4,999 units</option>
+          <option>5,000+ units</option>
+        </optgroup>
         <option>Not sure yet — need a recommendation</option>
       </select>
+      <div class="fg-hint">Per-unit price decreases with quantity. Orders under 12 pieces are DTG or single-item custom — we'll recommend the best method for your run size.</div>
       <div class="fg-error">Please select a quantity range.</div>
     </div>
 
@@ -412,10 +422,11 @@
         <option value="" disabled selected>Select a range…</option>
         <option>Under $5/unit</option>
         <option>$5 – $10/unit</option>
-        <option>$10 – $15/unit</option>
-        <option>$15 – $25/unit</option>
-        <option>$25 – $50/unit</option>
-        <option>$50+/unit</option>
+        <option>$10 – $20/unit</option>
+        <option>$20 – $35/unit</option>
+        <option>$35 – $50/unit</option>
+        <option>$50 – $100/unit</option>
+        <option>$100+/unit (premium / single item)</option>
         <option>Flexible — show me what's possible</option>
       </select>
     </div>
