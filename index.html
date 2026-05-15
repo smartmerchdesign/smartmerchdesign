@@ -382,30 +382,31 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
 
 /* ─── FOOTER ─── */
 footer {
-  background: #030810; padding: 36px 56px;
-  display: flex; justify-content: space-between; align-items: center;
-  border-top: 1px solid rgba(255,255,255,.06); flex-wrap: wrap; gap: 16px;
+  background: #030810; padding: 48px 56px 36px;
+  display: flex; flex-direction: column; align-items: center;
+  border-top: 1px solid rgba(255,255,255,.06); gap: 0; text-align: center;
 }
-.footer-logo { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 2px; display: flex; align-items: center; gap: 8px; }
+.footer-logo { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 2px; display: flex; align-items: center; justify-content: center; gap: 8px; margin-bottom: 8px; }
 .footer-logo em { color: var(--orange); font-style: normal; }
-.footer-copy { font-size: 12px; color: var(--muted); }
+.footer-copy { font-size: 12px; color: var(--muted); margin-bottom: 20px; }
 .footer-etsy {
   display: inline-flex; align-items: center; gap: 8px;
   background: rgba(241,101,33,.15); border: 1px solid rgba(241,101,33,.3);
   color: var(--etsy); font-size: 13px; font-weight: 600;
   padding: 8px 16px; border-radius: 6px; text-decoration: none; transition: all .2s;
+  margin-bottom: 24px;
 }
 .footer-etsy:hover { background: var(--etsy); color: var(--white); }
 .footer-links {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 24px;
-  margin-top: 10px; width: 100%;
+  margin-bottom: 16px; padding-top: 20px;
+  border-top: 1px solid rgba(255,255,255,.07); width: 100%;
 }
 .footer-links a { font-size: 12px; color: var(--muted); text-decoration: none; transition: color .2s; }
 .footer-links a:hover { color: var(--orange); }
 .footer-legal {
   display: flex; flex-wrap: wrap; justify-content: center; gap: 6px 20px;
-  width: 100%; padding-top: 14px; margin-top: 4px;
-  border-top: 1px solid rgba(255,255,255,.05);
+  padding-top: 14px; border-top: 1px solid rgba(255,255,255,.05); width: 100%;
 }
 .footer-legal a { font-size: 11px; color: rgba(255,255,255,.28); text-decoration: none; transition: color .2s; }
 .footer-legal a:hover { color: rgba(255,255,255,.55); }
