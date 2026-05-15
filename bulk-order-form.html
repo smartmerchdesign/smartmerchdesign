@@ -1,0 +1,929 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Request a bulk order quote from Smart Merch Design. Tell us about your products, quantities, artwork, timeline, and shipping needs — we'll get back to you same business day.">
+<title>Bulk Order Request — Smart Merch Design</title>
+<link rel="stylesheet" href="shared.css">
+<style>
+/* ── Layout ── */
+.bq-wrap { max-width: 860px; margin: 0 auto; padding: 64px 56px 80px; }
+
+/* ── Progress bar ── */
+.progress-bar { display: flex; align-items: center; gap: 0; margin-bottom: 52px; }
+.pb-step { display: flex; align-items: center; flex: 1; }
+.pb-dot {
+  width: 36px; height: 36px; border-radius: 50%; flex-shrink: 0;
+  display: flex; align-items: center; justify-content: center;
+  font-family: var(--display); font-size: 14px; font-weight: 900;
+  border: 2px solid rgba(255,255,255,.15); color: rgba(255,255,255,.3);
+  background: rgba(255,255,255,.04); transition: all .3s; cursor: default;
+}
+.pb-dot.done { background: rgba(245,137,26,.2); border-color: var(--orange); color: var(--orange); }
+.pb-dot.active { background: var(--orange); border-color: var(--orange); color: var(--white); box-shadow: 0 0 0 4px rgba(245,137,26,.2); }
+.pb-label { font-size: 11px; font-weight: 600; letter-spacing: .5px; color: rgba(255,255,255,.3); margin-left: 10px; white-space: nowrap; transition: color .3s; }
+.pb-label.active { color: var(--orange); }
+.pb-label.done { color: rgba(255,255,255,.55); }
+.pb-line { flex: 1; height: 2px; background: rgba(255,255,255,.08); margin: 0 12px; transition: background .3s; }
+.pb-line.done { background: rgba(245,137,26,.4); }
+
+/* ── Section cards ── */
+.form-section {
+  background: linear-gradient(145deg, #152348, #0d1e3e);
+  border: 1px solid rgba(245,137,26,.18); border-radius: 20px;
+  padding: 44px 44px 36px; margin-bottom: 24px;
+  position: relative; overflow: hidden; display: none;
+}
+.form-section.active { display: block; }
+.form-section::before {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: linear-gradient(90deg, var(--orange), var(--orlo));
+}
+.section-header { display: flex; align-items: flex-start; gap: 16px; margin-bottom: 32px; }
+.section-icon { font-size: 36px; line-height: 1; flex-shrink: 0; margin-top: 2px; }
+.section-title { font-family: var(--display); font-size: 28px; font-weight: 900; color: var(--white); line-height: 1; }
+.section-title em { color: var(--orange); font-style: normal; }
+.section-sub { font-size: 14px; color: var(--muted); margin-top: 6px; line-height: 1.6; }
+
+/* ── Form elements ── */
+.fg { margin-bottom: 22px; }
+.fg label {
+  display: block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+  letter-spacing: 1.5px; color: var(--orange); margin-bottom: 8px;
+}
+.fg label .req { color: rgba(245,137,26,.5); margin-left: 2px; }
+.fg input, .fg textarea, .fg select {
+  width: 100%; background: rgba(255,255,255,.05); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px; padding: 13px 16px; color: var(--white);
+  font-family: var(--body); font-size: 15px; transition: all .2s;
+  appearance: none;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(255,255,255,.22); }
+.fg input:focus, .fg textarea:focus, .fg select:focus {
+  outline: none; border-color: rgba(245,137,26,.6); background: rgba(255,255,255,.08);
+}
+.fg select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f5891a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+.fg select option { background: #0d2a5e; color: #fff; }
+.fg textarea { resize: vertical; min-height: 100px; }
+.fg-hint { font-size: 12px; color: rgba(255,255,255,.3); margin-top: 6px; line-height: 1.5; }
+
+.row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.row3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 14px; }
+
+/* ── Checkbox / radio tile groups ── */
+.tile-group { display: flex; flex-wrap: wrap; gap: 10px; }
+.tile {
+  position: relative;
+}
+.tile input { position: absolute; opacity: 0; width: 0; height: 0; }
+.tile label {
+  display: flex; align-items: center; gap: 8px; cursor: pointer;
+  background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.12);
+  border-radius: 9px; padding: 10px 16px; font-size: 13px; font-weight: 500;
+  color: rgba(255,255,255,.65); transition: all .2s;
+  text-transform: none; letter-spacing: 0;
+}
+.tile label .tile-icon { font-size: 16px; }
+.tile input:checked + label {
+  background: rgba(245,137,26,.12); border-color: var(--orange);
+  color: var(--white);
+}
+.tile label:hover { border-color: rgba(245,137,26,.4); color: var(--white); }
+
+/* ── Size breakdown table ── */
+.size-table { display: grid; grid-template-columns: repeat(6, 1fr); gap: 10px; }
+.size-cell { text-align: center; }
+.size-cell .size-label { font-size: 11px; font-weight: 700; color: rgba(255,255,255,.4); letter-spacing: 1px; text-transform: uppercase; margin-bottom: 6px; }
+.size-cell input { text-align: center; padding: 10px 8px; }
+
+/* ── File upload ── */
+.file-drop {
+  border: 2px dashed rgba(245,137,26,.3); border-radius: 12px;
+  padding: 32px 24px; text-align: center; cursor: pointer;
+  transition: all .2s; background: rgba(245,137,26,.03);
+}
+.file-drop:hover { border-color: rgba(245,137,26,.6); background: rgba(245,137,26,.06); }
+.file-drop input { display: none; }
+.file-drop .fd-icon { font-size: 32px; margin-bottom: 10px; }
+.file-drop .fd-text { font-size: 14px; color: var(--muted); }
+.file-drop .fd-text strong { color: var(--orange); }
+.file-drop .fd-hint { font-size: 12px; color: rgba(255,255,255,.25); margin-top: 6px; }
+.file-name { font-size: 13px; color: var(--orange); margin-top: 10px; }
+
+/* ── Nav buttons ── */
+.form-nav { display: flex; justify-content: space-between; align-items: center; margin-top: 32px; gap: 16px; }
+.btn-back {
+  display: inline-flex; align-items: center; gap: 8px; background: transparent;
+  border: 1px solid rgba(255,255,255,.15); border-radius: 10px;
+  color: rgba(255,255,255,.5); font-family: var(--display); font-size: 17px;
+  font-weight: 700; letter-spacing: 1px; padding: 13px 28px; cursor: pointer;
+  transition: all .2s;
+}
+.btn-back:hover { border-color: rgba(255,255,255,.3); color: var(--white); }
+.btn-next {
+  display: inline-flex; align-items: center; gap: 10px; background: var(--orange);
+  border: none; border-radius: 10px; color: var(--white);
+  font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 1px;
+  padding: 14px 36px; cursor: pointer; transition: all .2s;
+  box-shadow: 0 8px 24px rgba(245,137,26,.35);
+}
+.btn-next:hover { background: var(--orlo); transform: translateY(-2px); box-shadow: 0 12px 32px rgba(245,137,26,.5); }
+.btn-next:disabled { background: #444; cursor: not-allowed; box-shadow: none; transform: none; }
+
+/* ── Summary section ── */
+.summary-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.sum-card { background: rgba(255,255,255,.04); border: 1px solid rgba(255,255,255,.08); border-radius: 12px; padding: 18px 18px; }
+.sum-label { font-size: 10px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: rgba(255,255,255,.3); margin-bottom: 8px; }
+.sum-value { font-size: 14px; color: rgba(255,255,255,.8); line-height: 1.5; }
+.sum-value em { color: var(--orange); font-style: normal; }
+
+/* ── Success state ── */
+.success-panel {
+  text-align: center; padding: 64px 40px; display: none;
+}
+.success-panel .s-icon { font-size: 72px; margin-bottom: 24px; animation: pulse 2s infinite; }
+.success-panel h2 { font-family: var(--display); font-size: 48px; font-weight: 900; color: var(--white); margin-bottom: 14px; }
+.success-panel h2 em { color: var(--orange); font-style: normal; }
+.success-panel p { font-size: 16px; color: var(--muted); max-width: 480px; margin: 0 auto 32px; line-height: 1.8; }
+
+/* ── Divider ── */
+.fg-divider { height: 1px; background: rgba(255,255,255,.07); margin: 28px 0; }
+
+/* ── Validation error ── */
+.fg-error { font-size: 12px; color: #ff6b6b; margin-top: 5px; display: none; }
+.fg.has-error input, .fg.has-error textarea, .fg.has-error select { border-color: #ff6b6b; }
+.fg.has-error .fg-error { display: block; }
+
+@media (max-width: 768px) {
+  .bq-wrap { padding: 40px 20px 60px; }
+  .form-section { padding: 32px 24px 28px; }
+  .row2, .row3 { grid-template-columns: 1fr; }
+  .summary-grid { grid-template-columns: 1fr; }
+  .size-table { grid-template-columns: repeat(3, 1fr); }
+  .progress-bar { gap: 0; }
+  .pb-label { display: none; }
+  .pb-line { margin: 0 6px; }
+  .form-nav { flex-direction: column-reverse; }
+  .btn-back, .btn-next { width: 100%; justify-content: center; }
+}
+</style>
+</head>
+<body>
+
+<nav>
+  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <ul class="nav-links">
+    <li><a href="about.html">About</a></li>
+    <li class="nav-dropdown"><a href="services.html" class="active">Services ▾</a>
+      <div class="dropdown-menu">
+        <a href="services.html">All Services</a>
+        <a href="how-it-works.html">How It Works</a>
+        <a href="bulk-orders.html">Bulk Orders</a>
+        <a href="bulk-order-form.html">Request a Quote</a>
+      </div>
+    </li>
+    <li><a href="products.html">Products</a></li>
+    <li><a href="portfolio.html">Portfolio</a></li>
+    <li><a href="pricing.html">Pricing</a></li>
+    <li><a href="faq.html">FAQ</a></li>
+    <li><a href="contact.html">Contact</a></li>
+  </ul>
+  <div style="display:flex;gap:12px;align-items:center;">
+    <a class="etsy-btn" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+    <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<div class="page-hero">
+  <div class="page-hero-inner">
+    <div class="page-tag">📦 Bulk Orders</div>
+    <h1>GET YOUR <em>BULK</em> QUOTE</h1>
+    <p>Fill out the form below and we'll come back with pricing, mockups, and a timeline — same business day. No commitment required.</p>
+  </div>
+</div>
+
+<div class="bq-wrap">
+
+  <!-- PROGRESS BAR -->
+  <div class="progress-bar" id="progressBar">
+    <div class="pb-step">
+      <div class="pb-dot active" id="dot-1">1</div>
+      <div class="pb-label active" id="lbl-1">Contact</div>
+    </div>
+    <div class="pb-line" id="line-1"></div>
+    <div class="pb-step">
+      <div class="pb-dot" id="dot-2">2</div>
+      <div class="pb-label" id="lbl-2">Products</div>
+    </div>
+    <div class="pb-line" id="line-2"></div>
+    <div class="pb-step">
+      <div class="pb-dot" id="dot-3">3</div>
+      <div class="pb-label" id="lbl-3">Design</div>
+    </div>
+    <div class="pb-line" id="line-3"></div>
+    <div class="pb-step">
+      <div class="pb-dot" id="dot-4">4</div>
+      <div class="pb-label" id="lbl-4">Timeline</div>
+    </div>
+    <div class="pb-line" id="line-4"></div>
+    <div class="pb-step">
+      <div class="pb-dot" id="dot-5">5</div>
+      <div class="pb-label" id="lbl-5">Shipping</div>
+    </div>
+    <div class="pb-line" id="line-5"></div>
+    <div class="pb-step">
+      <div class="pb-dot" id="dot-6">6</div>
+      <div class="pb-label" id="lbl-6">Review</div>
+    </div>
+  </div>
+
+  <!-- ── STEP 1: CONTACT INFO ── -->
+  <div class="form-section active" id="step-1">
+    <div class="section-header">
+      <div class="section-icon">👤</div>
+      <div>
+        <div class="section-title">Your <em>Contact</em> Info</div>
+        <div class="section-sub">Who should we get back to? We respond same business day.</div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="fg" id="fg-firstName">
+        <label>First Name <span class="req">*</span></label>
+        <input type="text" id="firstName" name="firstName" placeholder="Jane" autocomplete="given-name">
+        <div class="fg-error">Please enter your first name.</div>
+      </div>
+      <div class="fg" id="fg-lastName">
+        <label>Last Name <span class="req">*</span></label>
+        <input type="text" id="lastName" name="lastName" placeholder="Smith" autocomplete="family-name">
+        <div class="fg-error">Please enter your last name.</div>
+      </div>
+    </div>
+
+    <div class="fg" id="fg-company">
+      <label>Company / Organization</label>
+      <input type="text" id="company" name="company" placeholder="Acme Corp, Jersey Shore FC, Green Future NJ…" autocomplete="organization">
+      <div class="fg-hint">Leave blank if this is a personal or individual order.</div>
+    </div>
+
+    <div class="fg" id="fg-role">
+      <label>Your Role / Title</label>
+      <input type="text" id="role" name="role" placeholder="Marketing Director, Event Coordinator, Owner…">
+    </div>
+
+    <div class="row2">
+      <div class="fg" id="fg-email">
+        <label>Email Address <span class="req">*</span></label>
+        <input type="email" id="email" name="email" placeholder="jane@company.com" autocomplete="email">
+        <div class="fg-error">Please enter a valid email address.</div>
+      </div>
+      <div class="fg" id="fg-phone">
+        <label>Phone Number <span class="req">*</span></label>
+        <input type="tel" id="phone" name="phone" placeholder="(555) 123-4567" autocomplete="tel">
+        <div class="fg-error">Please enter your phone number.</div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>How did you hear about us?</label>
+      <select id="referral" name="referral">
+        <option value="" disabled selected>Select one…</option>
+        <option>Google Search</option>
+        <option>Etsy</option>
+        <option>Instagram</option>
+        <option>Facebook</option>
+        <option>Word of mouth / referral</option>
+        <option>Returning customer</option>
+        <option>Other</option>
+      </select>
+    </div>
+
+    <div class="form-nav">
+      <div></div>
+      <button class="btn-next" onclick="goTo(2)">Next: Products &amp; Quantities →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 2: PRODUCTS & QUANTITIES ── -->
+  <div class="form-section" id="step-2">
+    <div class="section-header">
+      <div class="section-icon">👕</div>
+      <div>
+        <div class="section-title">Products &amp; <em>Quantities</em></div>
+        <div class="section-sub">What are you ordering and how many? Select all that apply.</div>
+      </div>
+    </div>
+
+    <div class="fg" id="fg-categories">
+      <label>Product Category <span class="req">*</span> — select all you need</label>
+      <div class="tile-group" id="categoryGroup">
+        <div class="tile"><input type="checkbox" id="cat-apparel" name="category" value="Apparel (T-shirts, Hoodies, Polos)"><label for="cat-apparel"><span class="tile-icon">👕</span> Apparel</label></div>
+        <div class="tile"><input type="checkbox" id="cat-headwear" name="category" value="Headwear (Hats, Beanies, Visors)"><label for="cat-headwear"><span class="tile-icon">🧢</span> Headwear</label></div>
+        <div class="tile"><input type="checkbox" id="cat-bags" name="category" value="Bags (Totes, Backpacks, Drawstring)"><label for="cat-bags"><span class="tile-icon">👜</span> Bags</label></div>
+        <div class="tile"><input type="checkbox" id="cat-drinkware" name="category" value="Drinkware (Mugs, Tumblers, Water Bottles)"><label for="cat-drinkware"><span class="tile-icon">☕</span> Drinkware</label></div>
+        <div class="tile"><input type="checkbox" id="cat-tech" name="category" value="Tech Accessories (Phone Cases, Mouse Pads, Cables)"><label for="cat-tech"><span class="tile-icon">📱</span> Tech Accessories</label></div>
+        <div class="tile"><input type="checkbox" id="cat-stickers" name="category" value="Stickers & Decals"><label for="cat-stickers"><span class="tile-icon">🏷️</span> Stickers</label></div>
+        <div class="tile"><input type="checkbox" id="cat-print" name="category" value="Art & Print (Posters, Canvas, Metal)"><label for="cat-print"><span class="tile-icon">🖼️</span> Art &amp; Print</label></div>
+        <div class="tile"><input type="checkbox" id="cat-kits" name="category" value="Gift Kits / Bundles (multiple items per set)"><label for="cat-kits"><span class="tile-icon">🎁</span> Gift Kits</label></div>
+        <div class="tile"><input type="checkbox" id="cat-other" name="category" value="Other / Not Sure Yet"><label for="cat-other"><span class="tile-icon">💡</span> Other / Not sure</label></div>
+      </div>
+      <div class="fg-error">Please select at least one product category.</div>
+    </div>
+
+    <div class="fg">
+      <label>Specific Products in Mind</label>
+      <textarea id="specificProducts" name="specificProducts" rows="3" placeholder="e.g. Gildan 18500 hoodies in black + grey, Richardson 112 snapback hats, 11oz ceramic mugs…"></textarea>
+      <div class="fg-hint">If you're not sure about specific styles, that's fine — we'll recommend the best options for your budget and use case.</div>
+    </div>
+
+    <div class="fg-divider"></div>
+
+    <div class="fg" id="fg-totalQty">
+      <label>Total Quantity Needed <span class="req">*</span></label>
+      <select id="totalQty" name="totalQty">
+        <option value="" disabled selected>Select a range…</option>
+        <option>48 – 99 units</option>
+        <option>100 – 199 units</option>
+        <option>200 – 499 units</option>
+        <option>500 – 999 units</option>
+        <option>1,000 – 2,499 units</option>
+        <option>2,500 – 4,999 units</option>
+        <option>5,000+ units</option>
+        <option>Not sure yet — need a recommendation</option>
+      </select>
+      <div class="fg-error">Please select a quantity range.</div>
+    </div>
+
+    <div class="fg">
+      <label>Number of Different Styles / SKUs</label>
+      <select id="numStyles" name="numStyles">
+        <option value="" disabled selected>Select…</option>
+        <option>1 style</option>
+        <option>2 – 3 styles</option>
+        <option>4 – 6 styles</option>
+        <option>7 – 10 styles</option>
+        <option>10+ styles</option>
+        <option>Not sure yet</option>
+      </select>
+      <div class="fg-hint">A "style" is a unique combination of product + color + design. e.g. black hoodie + grey t-shirt = 2 styles.</div>
+    </div>
+
+    <div class="fg" id="fg-sizeBreakdown" style="display:none;">
+      <label>Apparel Size Breakdown <span class="fg-hint" style="display:inline;margin:0;letter-spacing:0;text-transform:none;">— enter quantities per size (leave blank if unknown)</span></label>
+      <div class="size-table" style="margin-top:10px;">
+        <div class="size-cell"><div class="size-label">XS</div><input type="number" id="sizeXS" name="sizeXS" placeholder="0" min="0"></div>
+        <div class="size-cell"><div class="size-label">S</div><input type="number" id="sizeS" name="sizeS" placeholder="0" min="0"></div>
+        <div class="size-cell"><div class="size-label">M</div><input type="number" id="sizeM" name="sizeM" placeholder="0" min="0"></div>
+        <div class="size-cell"><div class="size-label">L</div><input type="number" id="sizeL" name="sizeL" placeholder="0" min="0"></div>
+        <div class="size-cell"><div class="size-label">XL</div><input type="number" id="sizeXL" name="sizeXL" placeholder="0" min="0"></div>
+        <div class="size-cell"><div class="size-label">2XL</div><input type="number" id="size2XL" name="size2XL" placeholder="0" min="0"></div>
+      </div>
+      <div class="fg-hint" style="margin-top:10px;">Need 3XL or larger? Note it in the details field below.</div>
+    </div>
+
+    <div class="fg">
+      <label>Budget Per Unit (approximate)</label>
+      <select id="budgetPerUnit" name="budgetPerUnit">
+        <option value="" disabled selected>Select a range…</option>
+        <option>Under $5/unit</option>
+        <option>$5 – $10/unit</option>
+        <option>$10 – $15/unit</option>
+        <option>$15 – $25/unit</option>
+        <option>$25 – $50/unit</option>
+        <option>$50+/unit</option>
+        <option>Flexible — show me what's possible</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label>Additional Product Details</label>
+      <textarea id="productDetails" name="productDetails" rows="3" placeholder="Preferred colors, gender cuts, fabric preferences, anything else we should know about the products…"></textarea>
+    </div>
+
+    <div class="form-nav">
+      <button class="btn-back" onclick="goTo(1)">← Back</button>
+      <button class="btn-next" onclick="goTo(3)">Next: Design &amp; Artwork →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 3: DESIGN & ARTWORK ── -->
+  <div class="form-section" id="step-3">
+    <div class="section-header">
+      <div class="section-icon">🎨</div>
+      <div>
+        <div class="section-title">Design &amp; <em>Artwork</em></div>
+        <div class="section-sub">Tell us about your design — we'll match the right print method to your artwork and budget.</div>
+      </div>
+    </div>
+
+    <div class="fg" id="fg-artworkStatus">
+      <label>Artwork Status <span class="req">*</span></label>
+      <div class="tile-group">
+        <div class="tile"><input type="radio" id="art-ready" name="artworkStatus" value="Ready — I have print-ready vector/high-res files"><label for="art-ready">✅ Ready to go</label></div>
+        <div class="tile"><input type="radio" id="art-rough" name="artworkStatus" value="I have a rough design / logo but need it cleaned up"><label for="art-rough">🖊️ Have a rough draft</label></div>
+        <div class="tile"><input type="radio" id="art-logo" name="artworkStatus" value="I have a logo only — need a full design around it"><label for="art-logo">📁 Logo only</label></div>
+        <div class="tile"><input type="radio" id="art-scratch" name="artworkStatus" value="Starting from scratch — need full custom design"><label for="art-scratch">💡 Need design from scratch</label></div>
+        <div class="tile"><input type="radio" id="art-unsure" name="artworkStatus" value="Not sure yet"><label for="art-unsure">🤷 Not sure yet</label></div>
+      </div>
+      <div class="fg-error">Please select your artwork status.</div>
+    </div>
+
+    <div class="row2">
+      <div class="fg">
+        <label>Number of Print Locations</label>
+        <select id="printLocations" name="printLocations">
+          <option value="" disabled selected>Select…</option>
+          <option>1 location (e.g. front chest only)</option>
+          <option>2 locations (e.g. front + back)</option>
+          <option>3 locations (e.g. front + back + sleeve)</option>
+          <option>4+ locations</option>
+          <option>All-over / edge-to-edge</option>
+          <option>Not sure yet</option>
+        </select>
+      </div>
+      <div class="fg">
+        <label>Number of Colors in Design</label>
+        <select id="designColors" name="designColors">
+          <option value="" disabled selected>Select…</option>
+          <option>1 color</option>
+          <option>2 colors</option>
+          <option>3 – 4 colors</option>
+          <option>5 – 6 colors</option>
+          <option>Full color / photographic</option>
+          <option>Not sure yet</option>
+        </select>
+        <div class="fg-hint">Fewer colors = lower cost for screen printing. Full-color designs work best with DTG.</div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>Preferred Print Method</label>
+      <div class="tile-group">
+        <div class="tile"><input type="radio" id="pm-screen" name="printMethod" value="Screen Print"><label for="pm-screen">🖨️ Screen Print</label></div>
+        <div class="tile"><input type="radio" id="pm-dtg" name="printMethod" value="DTG (Direct to Garment)"><label for="pm-dtg">🖥️ DTG</label></div>
+        <div class="tile"><input type="radio" id="pm-embroidery" name="printMethod" value="Embroidery"><label for="pm-embroidery">🧵 Embroidery</label></div>
+        <div class="tile"><input type="radio" id="pm-sublimation" name="printMethod" value="Sublimation"><label for="pm-sublimation">🌈 Sublimation</label></div>
+        <div class="tile"><input type="radio" id="pm-recommend" name="printMethod" value="Recommend the best method for me"><label for="pm-recommend">💡 Recommend for me</label></div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>Design Description</label>
+      <textarea id="designDescription" name="designDescription" rows="4" placeholder="Describe your design or brand — colors, style, mood, what the design should communicate. The more detail, the better we can match or build your vision…"></textarea>
+    </div>
+
+    <div class="fg">
+      <label>Upload Artwork or Logo</label>
+      <div class="file-drop" onclick="document.getElementById('artworkFile').click()">
+        <input type="file" id="artworkFile" name="artworkFile" accept=".ai,.eps,.svg,.pdf,.png,.jpg,.psd,.zip">
+        <div class="fd-icon">📎</div>
+        <div class="fd-text">Click to upload or drag &amp; drop your file<br><strong>AI, EPS, SVG, PDF, PNG, JPG, PSD, ZIP</strong></div>
+        <div class="fd-hint">Max 25MB. You can also email files to smartmerchdesign@gmail.com after submitting.</div>
+        <div class="file-name" id="fileName"></div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>Brand Colors</label>
+      <input type="text" id="brandColors" name="brandColors" placeholder="e.g. Navy Blue (PMS 289), Orange (PMS 021), White — or hex codes like #0d2a5e">
+      <div class="fg-hint">Pantone (PMS) codes give us the most accurate color matching. Hex codes and color names work too.</div>
+    </div>
+
+    <div class="form-nav">
+      <button class="btn-back" onclick="goTo(2)">← Back</button>
+      <button class="btn-next" onclick="goTo(4)">Next: Timeline &amp; Budget →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 4: TIMELINE & BUDGET ── -->
+  <div class="form-section" id="step-4">
+    <div class="section-header">
+      <div class="section-icon">📅</div>
+      <div>
+        <div class="section-title">Timeline &amp; <em>Budget</em></div>
+        <div class="section-sub">When do you need it and what's your overall budget? We'll build a plan that works.</div>
+      </div>
+    </div>
+
+    <div class="row2">
+      <div class="fg" id="fg-neededBy">
+        <label>Date Needed By <span class="req">*</span></label>
+        <input type="date" id="neededBy" name="neededBy">
+        <div class="fg-error">Please select the date you need your order.</div>
+        <div class="fg-hint">Standard turnaround is 7–10 business days from proof approval. Rush (48hr) available.</div>
+      </div>
+      <div class="fg">
+        <label>Event or Occasion</label>
+        <input type="text" id="eventName" name="eventName" placeholder="Annual company retreat, product launch, fundraiser…">
+      </div>
+    </div>
+
+    <div class="fg" id="fg-urgency">
+      <label>How Urgent Is This? <span class="req">*</span></label>
+      <div class="tile-group">
+        <div class="tile"><input type="radio" id="urg-standard" name="urgency" value="Standard — 7–10 business days is fine"><label for="urg-standard">📦 Standard (7–10 days)</label></div>
+        <div class="tile"><input type="radio" id="urg-rush" name="urgency" value="Rush — I need it in 48–72 hours"><label for="urg-rush">⚡ Rush (48–72 hrs)</label></div>
+        <div class="tile"><input type="radio" id="urg-flexible" name="urgency" value="Flexible — no hard deadline yet"><label for="urg-flexible">🗓️ Flexible</label></div>
+      </div>
+      <div class="fg-error">Please select your urgency level.</div>
+    </div>
+
+    <div class="fg">
+      <label>Total Project Budget</label>
+      <select id="totalBudget" name="totalBudget">
+        <option value="" disabled selected>Select a range…</option>
+        <option>Under $500</option>
+        <option>$500 – $1,000</option>
+        <option>$1,000 – $2,500</option>
+        <option>$2,500 – $5,000</option>
+        <option>$5,000 – $10,000</option>
+        <option>$10,000 – $25,000</option>
+        <option>$25,000+</option>
+        <option>No set budget — show me what's possible</option>
+      </select>
+    </div>
+
+    <div class="fg">
+      <label>What Is This Order For?</label>
+      <div class="tile-group">
+        <div class="tile"><input type="checkbox" id="use-corporate" name="useCase" value="Corporate / employee merchandise"><label for="use-corporate">🏢 Corporate / Employee</label></div>
+        <div class="tile"><input type="checkbox" id="use-event" name="useCase" value="Event giveaway or swag bags"><label for="use-event">🎉 Event Swag</label></div>
+        <div class="tile"><input type="checkbox" id="use-retail" name="useCase" value="Retail / resale merchandise"><label for="use-retail">🛍️ Retail / Resale</label></div>
+        <div class="tile"><input type="checkbox" id="use-sports" name="useCase" value="Sports team uniforms or fan gear"><label for="use-sports">🏆 Sports Team</label></div>
+        <div class="tile"><input type="checkbox" id="use-nonprofit" name="useCase" value="Nonprofit or fundraiser"><label for="use-nonprofit">🌍 Nonprofit / Fundraiser</label></div>
+        <div class="tile"><input type="checkbox" id="use-gifts" name="useCase" value="Client or employee gifts"><label for="use-gifts">🎁 Client Gifts</label></div>
+        <div class="tile"><input type="checkbox" id="use-merch" name="useCase" value="Brand merch / fan merchandise"><label for="use-merch">💡 Brand Merch</label></div>
+        <div class="tile"><input type="checkbox" id="use-other" name="useCase" value="Other"><label for="use-other">✏️ Other</label></div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>Is This a Recurring / Ongoing Order?</label>
+      <div class="tile-group">
+        <div class="tile"><input type="radio" id="rec-oneoff" name="recurring" value="One-time order"><label for="rec-oneoff">One-time order</label></div>
+        <div class="tile"><input type="radio" id="rec-monthly" name="recurring" value="Monthly or quarterly restocks"><label for="rec-monthly">Monthly / quarterly restocks</label></div>
+        <div class="tile"><input type="radio" id="rec-annual" name="recurring" value="Annual program"><label for="rec-annual">Annual program</label></div>
+        <div class="tile"><input type="radio" id="rec-unsure" name="recurring" value="Not sure yet"><label for="rec-unsure">Not sure yet</label></div>
+      </div>
+    </div>
+
+    <div class="form-nav">
+      <button class="btn-back" onclick="goTo(3)">← Back</button>
+      <button class="btn-next" onclick="goTo(5)">Next: Shipping &amp; Fulfillment →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 5: SHIPPING & FULFILLMENT ── -->
+  <div class="form-section" id="step-5">
+    <div class="section-header">
+      <div class="section-icon">🚚</div>
+      <div>
+        <div class="section-title">Shipping &amp; <em>Fulfillment</em></div>
+        <div class="section-sub">Where is your order going and how do you need it packed?</div>
+      </div>
+    </div>
+
+    <div class="fg" id="fg-shipType">
+      <label>Shipping Destination <span class="req">*</span></label>
+      <div class="tile-group">
+        <div class="tile"><input type="radio" id="ship-one" name="shipType" value="One address (single delivery)"><label for="ship-one">📍 One address</label></div>
+        <div class="tile"><input type="radio" id="ship-few" name="shipType" value="A few addresses (2–10 locations)"><label for="ship-few">📍📍 A few addresses (2–10)</label></div>
+        <div class="tile"><input type="radio" id="ship-many" name="shipType" value="Many addresses — employee / customer drop-ship list"><label for="ship-many">📬 Many addresses (drop-ship)</label></div>
+        <div class="tile"><input type="radio" id="ship-pickup" name="shipType" value="Local pickup — Oakhurst, NJ"><label for="ship-pickup">🏠 Local pickup (NJ)</label></div>
+        <div class="tile"><input type="radio" id="ship-tbd" name="shipType" value="TBD — not sure yet"><label for="ship-tbd">🤷 Not sure yet</label></div>
+      </div>
+      <div class="fg-error">Please select a shipping destination type.</div>
+    </div>
+
+    <div class="fg">
+      <label>Ship-To Address (if known)</label>
+      <textarea id="shipAddress" name="shipAddress" rows="3" placeholder="Company Name&#10;Street Address&#10;City, State ZIP&#10;&#10;If multiple locations, paste your list or note the number of addresses."></textarea>
+    </div>
+
+    <div class="fg">
+      <label>Shipping Speed Needed</label>
+      <div class="tile-group">
+        <div class="tile"><input type="radio" id="spd-ground" name="shipSpeed" value="Standard ground (3–7 days)"><label for="spd-ground">📦 Standard ground</label></div>
+        <div class="tile"><input type="radio" id="spd-2day" name="shipSpeed" value="2-day air"><label for="spd-2day">✈️ 2-day air</label></div>
+        <div class="tile"><input type="radio" id="spd-overnight" name="shipSpeed" value="Overnight / next day"><label for="spd-overnight">🚀 Overnight</label></div>
+        <div class="tile"><input type="radio" id="spd-recommend" name="shipSpeed" value="Recommend based on my timeline"><label for="spd-recommend">💡 You decide</label></div>
+      </div>
+    </div>
+
+    <div class="fg-divider"></div>
+
+    <div class="fg">
+      <label>Fulfillment &amp; Packaging Add-Ons — select all needed</label>
+      <div class="tile-group">
+        <div class="tile"><input type="checkbox" id="addon-kitting" name="addons" value="Kitting / bundle assembly (multiple items per set)"><label for="addon-kitting">🎁 Kitting / bundle assembly</label></div>
+        <div class="tile"><input type="checkbox" id="addon-custompkg" name="addons" value="Custom branded packaging (boxes, tissue paper, inserts)"><label for="addon-custompkg">📦 Custom branded packaging</label></div>
+        <div class="tile"><input type="checkbox" id="addon-polybag" name="addons" value="Individual poly bag per item"><label for="addon-polybag">🛍️ Individual poly bags</label></div>
+        <div class="tile"><input type="checkbox" id="addon-tags" name="addons" value="Custom neck tags / woven labels"><label for="addon-tags">🏷️ Custom neck tags</label></div>
+        <div class="tile"><input type="checkbox" id="addon-storage" name="addons" value="Warehousing / inventory storage for future fulfillment"><label for="addon-storage">🏭 Warehousing / storage</label></div>
+        <div class="tile"><input type="checkbox" id="addon-none" name="addons" value="None — just ship it"><label for="addon-none">✓ None needed</label></div>
+      </div>
+    </div>
+
+    <div class="fg">
+      <label>Kitting / Bundle Details</label>
+      <textarea id="kittingDetails" name="kittingDetails" rows="3" placeholder="e.g. Each kit = 1 hoodie + 1 hat + 1 mug, packed in a branded box with tissue paper and a thank-you card…"></textarea>
+    </div>
+
+    <div class="fg">
+      <label>Anything Else About Shipping or Fulfillment?</label>
+      <textarea id="shipNotes" name="shipNotes" rows="3" placeholder="Special instructions, recipient names on packages, international addresses, signature required, etc."></textarea>
+    </div>
+
+    <div class="form-nav">
+      <button class="btn-back" onclick="goTo(4)">← Back</button>
+      <button class="btn-next" onclick="goTo(6)">Next: Review &amp; Submit →</button>
+    </div>
+  </div>
+
+  <!-- ── STEP 6: REVIEW & SUBMIT ── -->
+  <div class="form-section" id="step-6">
+    <div class="section-header">
+      <div class="section-icon">✅</div>
+      <div>
+        <div class="section-title"><em>Review</em> &amp; Submit</div>
+        <div class="section-sub">Double-check your details below, then hit Submit. We'll follow up same business day.</div>
+      </div>
+    </div>
+
+    <div class="summary-grid" id="summaryGrid">
+      <!-- Populated by JS -->
+    </div>
+
+    <div class="fg-divider"></div>
+
+    <div class="fg">
+      <label>Anything Else We Should Know?</label>
+      <textarea id="extraNotes" name="extraNotes" rows="4" placeholder="Any details we haven't asked about — past vendors you've used, quality concerns, inspiration examples, special requirements…"></textarea>
+    </div>
+
+    <div class="fg">
+      <label style="display:flex;align-items:flex-start;gap:10px;text-transform:none;letter-spacing:0;font-size:13px;color:rgba(255,255,255,.55);cursor:pointer;">
+        <input type="checkbox" id="consent" name="consent" style="width:16px;height:16px;flex-shrink:0;margin-top:2px;accent-color:var(--orange);">
+        I agree that Smart Merch Design may contact me about this request by email and phone. I understand this is not a confirmed order — just a quote request.
+      </label>
+    </div>
+
+    <div id="submitStatus" style="display:none;"></div>
+
+    <div class="form-nav">
+      <button class="btn-back" onclick="goTo(5)">← Back</button>
+      <button class="btn-next" id="submitBtn" onclick="submitForm()" style="background:linear-gradient(90deg,var(--orange),var(--orlo));">
+        💡 Submit Bulk Order Request
+      </button>
+    </div>
+  </div>
+
+  <!-- ── SUCCESS ── -->
+  <div class="success-panel" id="successPanel">
+    <div class="s-icon">💡</div>
+    <h2>Request <em>Received!</em></h2>
+    <p>Thanks for reaching out. Our team has your bulk order request and will get back to you same business day with pricing, mockups, and a timeline.</p>
+    <p style="font-size:14px;color:rgba(255,255,255,.35);">Questions in the meantime? Call us at <a href="tel:+13476085682" style="color:var(--orange)">(347) 608-5682</a> or email <a href="mailto:smartmerchdesign@gmail.com" style="color:var(--orange)">smartmerchdesign@gmail.com</a>.</p>
+    <a class="form-submit" href="index.html" style="display:inline-flex;margin-top:16px;">← Back to Home</a>
+  </div>
+
+</div><!-- end bq-wrap -->
+
+<footer>
+  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
+  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
+  <div class="footer-links">
+    <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
+    <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
+    <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
+    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a>
+  </div>
+  <div class="footer-legal">
+    <a href="privacy.html">Privacy Policy</a>
+    <a href="terms.html">Terms of Service</a>
+    <a href="shipping.html">Shipping Policy</a>
+    <a href="returns.html">Returns &amp; Refunds</a>
+  </div>
+</footer>
+
+<script>
+let currentStep = 1;
+const totalSteps = 6;
+
+/* ── Navigation ── */
+function goTo(step) {
+  if (step > currentStep && !validateStep(currentStep)) return;
+  document.getElementById('step-' + currentStep).classList.remove('active');
+  currentStep = step;
+  document.getElementById('step-' + currentStep).classList.add('active');
+  updateProgress();
+  if (step === 6) buildSummary();
+  window.scrollTo({ top: document.querySelector('.progress-bar').offsetTop - 90, behavior: 'smooth' });
+}
+
+/* ── Progress indicator ── */
+function updateProgress() {
+  for (let i = 1; i <= totalSteps; i++) {
+    const dot = document.getElementById('dot-' + i);
+    const lbl = document.getElementById('lbl-' + i);
+    dot.className = 'pb-dot' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+    lbl.className = 'pb-label' + (i < currentStep ? ' done' : i === currentStep ? ' active' : '');
+  }
+  for (let i = 1; i < totalSteps; i++) {
+    const line = document.getElementById('line-' + i);
+    if (line) line.className = 'pb-line' + (i < currentStep ? ' done' : '');
+  }
+}
+
+/* ── Validation ── */
+function validateStep(step) {
+  let valid = true;
+  if (step === 1) {
+    valid = requireField('firstName') & requireField('lastName') & requireEmail('email') & requireField('phone');
+  } else if (step === 2) {
+    valid = requireCheckboxGroup('categoryGroup', 'fg-categories') & requireSelect('totalQty', 'fg-totalQty');
+  } else if (step === 3) {
+    valid = requireRadioGroup('artworkStatus', 'fg-artworkStatus');
+  } else if (step === 4) {
+    valid = requireDate('neededBy', 'fg-neededBy') & requireRadioGroup('urgency', 'fg-urgency');
+  } else if (step === 5) {
+    valid = requireRadioGroup('shipType', 'fg-shipType');
+  }
+  return !!valid;
+}
+
+function requireField(id) {
+  const el = document.getElementById(id);
+  const fg = el.closest('.fg');
+  const ok = el.value.trim().length > 0;
+  fg.classList.toggle('has-error', !ok);
+  return ok;
+}
+function requireEmail(id) {
+  const el = document.getElementById(id);
+  const fg = el.closest('.fg');
+  const ok = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(el.value.trim());
+  fg.classList.toggle('has-error', !ok);
+  return ok;
+}
+function requireSelect(id, fgId) {
+  const el = document.getElementById(id);
+  const fg = fgId ? document.getElementById(fgId) : el.closest('.fg');
+  const ok = el.value !== '';
+  fg.classList.toggle('has-error', !ok);
+  return ok;
+}
+function requireDate(id, fgId) {
+  const el = document.getElementById(id);
+  const fg = document.getElementById(fgId);
+  const ok = el.value.trim() !== '';
+  fg.classList.toggle('has-error', !ok);
+  return ok;
+}
+function requireCheckboxGroup(groupId, fgId) {
+  const group = document.getElementById(groupId);
+  const fg = document.getElementById(fgId);
+  const checked = group.querySelectorAll('input[type=checkbox]:checked').length > 0;
+  fg.classList.toggle('has-error', !checked);
+  return checked;
+}
+function requireRadioGroup(name, fgId) {
+  const fg = document.getElementById(fgId);
+  const checked = document.querySelector(`input[name="${name}"]:checked`) !== null;
+  fg.classList.toggle('has-error', !checked);
+  return checked;
+}
+
+/* ── Show size breakdown when apparel is checked ── */
+document.getElementById('cat-apparel').addEventListener('change', function() {
+  document.getElementById('fg-sizeBreakdown').style.display = this.checked ? 'block' : 'none';
+});
+
+/* ── File upload display ── */
+document.getElementById('artworkFile').addEventListener('change', function() {
+  const fn = document.getElementById('fileName');
+  fn.textContent = this.files.length ? '📎 ' + this.files[0].name : '';
+});
+
+/* ── Build review summary ── */
+function val(id) { const el = document.getElementById(id); return el ? el.value.trim() : ''; }
+function radVal(name) { const el = document.querySelector(`input[name="${name}"]:checked`); return el ? el.value : '—'; }
+function checkVals(name) {
+  const els = document.querySelectorAll(`input[name="${name}"]:checked`);
+  return els.length ? [...els].map(e => e.value).join(', ') : '—';
+}
+
+function buildSummary() {
+  const grid = document.getElementById('summaryGrid');
+  const sizeFields = ['XS','S','M','L','XL','2XL'].map(s => {
+    const v = val('size' + s.replace(/\s/g,''));
+    return v && v !== '0' ? s + ': ' + v : null;
+  }).filter(Boolean).join(' / ');
+
+  const cards = [
+    ['Contact', `${val('firstName')} ${val('lastName')}${val('company') ? ' — ' + val('company') : ''}`],
+    ['Email & Phone', `${val('email')}<br>${val('phone')}`],
+    ['Products', checkVals('category')],
+    ['Quantity', val('totalQty') || '—'],
+    ['Size Breakdown', sizeFields || 'Not specified'],
+    ['Budget / Unit', val('budgetPerUnit') || '—'],
+    ['Artwork Status', radVal('artworkStatus')],
+    ['Print Method', radVal('printMethod') || '—'],
+    ['Print Locations', val('printLocations') || '—'],
+    ['Colors in Design', val('designColors') || '—'],
+    ['Date Needed', val('neededBy') ? new Date(val('neededBy') + 'T00:00:00').toLocaleDateString('en-US', {month:'long',day:'numeric',year:'numeric'}) : '—'],
+    ['Urgency', radVal('urgency')],
+    ['Total Budget', val('totalBudget') || '—'],
+    ['Shipping', radVal('shipType')],
+    ['Packaging Add-ons', checkVals('addons')],
+    ['Recurring?', radVal('recurring') || '—'],
+  ];
+
+  grid.innerHTML = cards.map(([label, value]) => `
+    <div class="sum-card">
+      <div class="sum-label">${label}</div>
+      <div class="sum-value">${value || '—'}</div>
+    </div>`).join('');
+}
+
+/* ── Form submission ── */
+async function submitForm() {
+  if (!validateStep(6)) return;
+  if (!document.getElementById('consent').checked) {
+    const status = document.getElementById('submitStatus');
+    status.style.display = 'block';
+    status.style.background = 'rgba(255,0,0,.08)';
+    status.style.color = '#ff6b6b';
+    status.style.padding = '14px';
+    status.style.borderRadius = '10px';
+    status.style.marginBottom = '16px';
+    status.textContent = 'Please confirm you agree to be contacted about this request.';
+    return;
+  }
+
+  const btn = document.getElementById('submitBtn');
+  btn.textContent = 'Sending…';
+  btn.disabled = true;
+
+  /* Collect all data into a FormData object */
+  const data = new FormData();
+  data.append('_subject', 'New Bulk Order Request — Smart Merch Design');
+
+  /* Text fields */
+  const textFields = ['firstName','lastName','company','role','email','phone','referral',
+    'specificProducts','totalQty','numStyles','budgetPerUnit','productDetails',
+    'sizeXS','sizeS','sizeM','sizeL','sizeXL','size2XL',
+    'artworkStatus','printLocations','designColors','printMethod','designDescription','brandColors',
+    'neededBy','eventName','urgency','totalBudget','recurring',
+    'shipType','shipAddress','shipSpeed','kittingDetails','shipNotes','extraNotes'];
+  textFields.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.value) data.append(id, el.value);
+  });
+
+  /* Checkbox groups */
+  ['category','useCase','addons'].forEach(name => {
+    const vals = [...document.querySelectorAll(`input[name="${name}"]:checked`)].map(e => e.value);
+    if (vals.length) data.append(name, vals.join(', '));
+  });
+
+  /* File */
+  const file = document.getElementById('artworkFile').files[0];
+  if (file) data.append('artworkFile', file);
+
+  try {
+    const res = await fetch('https://formspree.io/f/xykolgjb', {
+      method: 'POST', body: data, headers: { 'Accept': 'application/json' }
+    });
+    if (res.ok) {
+      document.querySelector('.progress-bar').style.display = 'none';
+      document.getElementById('step-6').style.display = 'none';
+      document.getElementById('successPanel').style.display = 'block';
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    } else {
+      throw new Error('Server error');
+    }
+  } catch {
+    const status = document.getElementById('submitStatus');
+    status.style.display = 'block';
+    status.style.background = 'rgba(255,0,0,.08)';
+    status.style.color = '#ff6b6b';
+    status.style.padding = '14px';
+    status.style.borderRadius = '10px';
+    status.style.marginBottom = '16px';
+    status.textContent = 'Something went wrong — please try again or email us directly at smartmerchdesign@gmail.com';
+    btn.disabled = false;
+    btn.textContent = '💡 Submit Bulk Order Request';
+  }
+}
+
+/* ── Set min date to today ── */
+document.getElementById('neededBy').min = new Date().toISOString().split('T')[0];
+</script>
+
+</body>
+</html>
