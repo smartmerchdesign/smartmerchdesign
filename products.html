@@ -32,6 +32,13 @@
 .cat-title { font-family:var(--display); font-size:28px; font-weight:900; color:var(--white); flex:1; }
 .cat-count-badge { font-size:11px; font-weight:700; color:var(--orange); background:rgba(245,137,26,.12); border:1px solid rgba(245,137,26,.25); padding:4px 12px; border-radius:100px; }
 .products-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(160px, 1fr)); gap:10px; }
+
+/* ── Featured (split) category layout ── */
+.cat-featured-body {
+  display:grid; grid-template-columns:1fr 1fr; gap:32px; align-items:start;
+}
+.cat-featured-body .cat-header-row { margin-bottom:12px; }
+.cat-desc { font-size:14px; color:var(--muted); line-height:1.7; margin-top:4px; }
 .prod-chip {
   background:rgba(255,255,255,.04); border:1px solid rgba(255,255,255,.09);
   border-radius:10px; padding:14px 14px; display:flex; align-items:center; gap:10px;
@@ -55,25 +62,21 @@
 @media (max-width:900px) {
   .filter-bar, .cat-section { padding:24px 20px; }
   .etsy-cta { margin:0 20px 48px; flex-direction:column; padding:32px 24px; }
-  /* Smaller minimum so chips always fit 2+ per row even inside a narrow column */
+  /* Collapse featured split layout to single column */
+  .cat-featured-body { grid-template-columns:1fr; gap:16px; }
+  /* Items always show 2+ per row on mobile */
   .products-grid { grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:8px; }
-  /* If any cat-section uses a two-column split layout, collapse it on mobile */
-  .cat-section [class*="split"],
-  .cat-section [class*="two-col"],
-  .cat-section [class*="layout"] { display:block !important; }
-  .cat-section [class*="split"] > *,
-  .cat-section [class*="two-col"] > * { width:100% !important; }
   /* Chips: tighten padding so text fits on smaller screens */
   .prod-chip { padding:10px 10px; gap:7px; }
   .prod-chip-i { font-size:16px; }
-  .prod-chip-name { font-size:12px; }
+  .prod-chip-name { font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
 }
 </style>
 </head>
 <body>
 
 <nav>
-  <a class="logo" href="index.html">💡 SMART <em>MERCH</em> DESIGN</a>
+  <a class="logo" href="index.html"><img src="logo-nav.png" alt="" class="logo-img" height="38"> SMART <em>MERCH</em> DESIGN</a>
   <ul class="nav-links">
     <li><a href="about.html">About</a></li>
     <li class="nav-dropdown"><a href="services.html">Services ▾</a>
@@ -255,18 +258,23 @@
 </div>
 
 <div class="cat-section" data-cat="kids">
-  <div class="cat-header-row">
-    <span class="cat-emoji">👶</span>
-    <span class="cat-title">Kids & Baby</span>
-    <span class="cat-count-badge">6 items</span>
-  </div>
-  <div class="products-grid">
-    <div class="prod-chip"><span class="prod-chip-i">👕</span><span class="prod-chip-name">Kids T-Shirt</span></div>
-    <div class="prod-chip"><span class="prod-chip-i">🧥</span><span class="prod-chip-name">Youth Hoodie</span></div>
-    <div class="prod-chip"><span class="prod-chip-i">👔</span><span class="prod-chip-name">Youth Long Sleeve</span></div>
-    <div class="prod-chip"><span class="prod-chip-i">👶</span><span class="prod-chip-name">Baby Onesie</span></div>
-    <div class="prod-chip"><span class="prod-chip-i">🍼</span><span class="prod-chip-name">Baby Bib</span></div>
-    <div class="prod-chip"><span class="prod-chip-i">🧶</span><span class="prod-chip-name">Baby Beanie</span></div>
+  <div class="cat-featured-body">
+    <div class="cat-featured-info">
+      <div class="cat-header-row">
+        <span class="cat-emoji">👶</span>
+        <span class="cat-title">Kids & Baby</span>
+        <span class="cat-count-badge">6 items</span>
+      </div>
+      <p class="cat-desc">Same smart quality, sized for the little ones.</p>
+    </div>
+    <div class="products-grid">
+      <div class="prod-chip"><span class="prod-chip-i">👕</span><span class="prod-chip-name">Kids T-Shirt</span></div>
+      <div class="prod-chip"><span class="prod-chip-i">🧥</span><span class="prod-chip-name">Youth Hoodie</span></div>
+      <div class="prod-chip"><span class="prod-chip-i">👔</span><span class="prod-chip-name">Youth Long Sleeve</span></div>
+      <div class="prod-chip"><span class="prod-chip-i">👶</span><span class="prod-chip-name">Baby Onesie</span></div>
+      <div class="prod-chip"><span class="prod-chip-i">🍼</span><span class="prod-chip-name">Baby Bib</span></div>
+      <div class="prod-chip"><span class="prod-chip-i">🧶</span><span class="prod-chip-name">Baby Beanie</span></div>
+    </div>
   </div>
 </div>
 
@@ -281,7 +289,7 @@
 </div>
 
 <footer>
-  <div class="footer-logo">💡 SMART <em>MERCH</em> DESIGN</div>
+  <div class="footer-logo"><img src="logo-nav.png" alt="" height="28" style="vertical-align:middle;margin-right:8px;"> SMART <em>MERCH</em> DESIGN</div>
   <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
   <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop on Etsy</a>
   <div class="footer-links">

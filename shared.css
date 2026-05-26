@@ -220,3 +220,7 @@ footer {
   .footer-etsy { justify-self: center; }
   .form-row { grid-template-columns: 1fr; }
 }
+
+/* ── Logo image ── */
+.logo-img { height: 38px; width: auto; display: inline-block; vertical-align: middle; filter: drop-shadow(0 0 6px rgba(245,137,26,.25)); }
+@media (max-width: 768px) { .logo-img { height: 32px; } }
