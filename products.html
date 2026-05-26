@@ -7,6 +7,7 @@
   <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
   <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
   <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <meta name="google-site-verification" content="rdIVYI-Hhbv9k_6phOWy34JehxmeWtSAQysovSNCH0M">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Products — Smart Merch Design</title>
 <link rel="stylesheet" href="shared.css">
@@ -54,7 +55,18 @@
 @media (max-width:900px) {
   .filter-bar, .cat-section { padding:24px 20px; }
   .etsy-cta { margin:0 20px 48px; flex-direction:column; padding:32px 24px; }
-  .products-grid { grid-template-columns:repeat(auto-fill, minmax(140px, 1fr)); }
+  /* Smaller minimum so chips always fit 2+ per row even inside a narrow column */
+  .products-grid { grid-template-columns:repeat(auto-fill, minmax(120px, 1fr)); gap:8px; }
+  /* If any cat-section uses a two-column split layout, collapse it on mobile */
+  .cat-section [class*="split"],
+  .cat-section [class*="two-col"],
+  .cat-section [class*="layout"] { display:block !important; }
+  .cat-section [class*="split"] > *,
+  .cat-section [class*="two-col"] > * { width:100% !important; }
+  /* Chips: tighten padding so text fits on smaller screens */
+  .prod-chip { padding:10px 10px; gap:7px; }
+  .prod-chip-i { font-size:16px; }
+  .prod-chip-name { font-size:12px; }
 }
 </style>
 </head>
