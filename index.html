@@ -122,6 +122,23 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
 }
 .hero-etsy:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 44px rgba(241,101,33,.55); }
 
+/* ── Typed cursor ── */
+.typed-cursor {
+  display: inline-block; color: var(--orange); font-weight: 300;
+  animation: blink .75s step-end infinite; margin-left: 1px;
+}
+@keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
+
+/* ── Homepage button shimmer ── */
+.hero-etsy { position: relative; overflow: hidden; }
+.hero-etsy::after {
+  content: ''; position: absolute; top: 0; left: -110%;
+  width: 60%; height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
+  transform: skewX(-20deg); transition: left .55s ease; pointer-events: none;
+}
+.hero-etsy:hover::after { left: 150%; }
+
 /* hero card */
 .hero-right { position: relative; z-index: 1; animation: up .7s .32s ease both; }
 .card {
@@ -526,7 +543,7 @@ footer {
 <section class="hero" id="top">
   <div class="hero-glow"></div>
   <div class="hero-left">
-    <div class="hero-tag">💡 Think Smart. Look Great.</div>
+    <div class="hero-tag">💡 <span class="hero-tag-typed">Custom Merch</span><span class="typed-cursor">|</span></div>
     <h1>MERCH AS<br><span class="org">SMART</span> AS<br><span class="out">YOUR BRAND</span></h1>
     <p class="hero-sub">Not just merch — <strong>smart merch.</strong> We design custom branded products that make people stop, stare, and remember your name. Your brand deserves more than a logo slapped on a shirt.</p>
     <a class="hero-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank">🛍️ Shop Our Etsy Store</a>
@@ -834,5 +851,6 @@ footer {
     </div>
 </footer>
 
+<script src="shared.js" defer></script>
 </body>
 </html>
