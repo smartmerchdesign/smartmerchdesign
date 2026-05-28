@@ -241,3 +241,182 @@
   }
 
 })();
+
+/* ═══════════════════════════════════════════════════
+   EXTRA ANIMATIONS v2
+   ═══════════════════════════════════════════════════ */
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ── 1. SCROLL PROGRESS BAR ── */
+  var bar = document.createElement('div');
+  bar.id = 'scroll-progress';
+  document.body.prepend(bar);
+
+  function updateProgress() {
+    var scrolled = window.scrollY;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
+  }
+  window.addEventListener('scroll', updateProgress, { passive: true });
+
+  /* ── 2. CURSOR GLOW (desktop only) ── */
+  if (!reduced && window.matchMedia('(pointer: fine)').matches) {
+    var glow = document.createElement('div');
+    glow.id = 'cursor-glow';
+    document.body.appendChild(glow);
+    var glowVisible = false;
+
+    document.addEventListener('mousemove', function (e) {
+      glow.style.left = e.clientX + 'px';
+      glow.style.top  = e.clientY + 'px';
+      if (!glowVisible) { glow.style.opacity = '1'; glowVisible = true; }
+    });
+    document.addEventListener('mouseleave', function () {
+      glow.style.opacity = '0'; glowVisible = false;
+    });
+  }
+
+  /* ── 3. CLICK RIPPLE ON BUTTONS ── */
+  if (!reduced) {
+    document.addEventListener('click', function (e) {
+      var btn = e.target.closest('.form-submit, .etsy-btn, .btn-next, .hero-etsy, .price-cta, .tier-cta');
+      if (!btn) return;
+      var r = btn.getBoundingClientRect();
+      var size = Math.max(r.width, r.height);
+      var ripple = document.createElement('span');
+      ripple.className = 'ripple-ring';
+      ripple.style.cssText =
+        'width:' + size + 'px;height:' + size + 'px;' +
+        'left:' + (e.clientX - r.left - size / 2) + 'px;' +
+        'top:'  + (e.clientY - r.top  - size / 2) + 'px;';
+      btn.style.position = btn.style.position || 'relative';
+      btn.style.overflow = 'hidden';
+      btn.appendChild(ripple);
+      ripple.addEventListener('animationend', function () { ripple.remove(); });
+    });
+  }
+
+  /* ── 4. 3D CARD TILT ── */
+  if (!reduced && window.matchMedia('(pointer: fine)').matches) {
+    var TILT_SELECTORS =
+      '.svc-card,.value-card,.price-card,.port-card,.team-card,.tier-card,.tc,.si-card';
+
+    function addTilt(el) {
+      el.addEventListener('mousemove', function (e) {
+        var r = el.getBoundingClientRect();
+        var x = (e.clientX - r.left) / r.width  - 0.5;
+        var y = (e.clientY - r.top)  / r.height - 0.5;
+        el.style.transform =
+          'perspective(700px) rotateX(' + (-y * 8) + 'deg) rotateY(' + (x * 8) + 'deg) scale(1.02)';
+      });
+      el.addEventListener('mouseleave', function () {
+        el.style.transition = 'transform .5s cubic-bezier(.22,1,.36,1)';
+        el.style.transform  = '';
+        setTimeout(function () { el.style.transition = ''; }, 500);
+      });
+    }
+
+    document.querySelectorAll(TILT_SELECTORS).forEach(addTilt);
+  }
+
+  /* ── 5. SCROLL-TO-TOP BUTTON ── */
+  var topBtn = document.createElement('button');
+  topBtn.id = 'scroll-top';
+  topBtn.setAttribute('aria-label', 'Back to top');
+  topBtn.innerHTML = '&#8679;';
+  document.body.appendChild(topBtn);
+
+  window.addEventListener('scroll', function () {
+    topBtn.classList.toggle('visible', window.scrollY > 500);
+  }, { passive: true });
+
+  topBtn.addEventListener('click', function () {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  /* ── 6. TEXT SCRAMBLE ON SECTION TITLES ── */
+  if (!reduced) {
+    var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
+
+    function scramble(el) {
+      var original = el.textContent;
+      var resolved = Array(original.length).fill(false);
+      var frame = 0;
+
+      var interval = setInterval(function () {
+        var out = '';
+        for (var i = 0; i < original.length; i++) {
+          if (original[i] === ' ' || original[i] === '\n') {
+            out += original[i];
+          } else if (resolved[i]) {
+            out += original[i];
+          } else if (frame > i * 1.5) {
+            resolved[i] = true;
+            out += original[i];
+          } else {
+            out += CHARS[Math.floor(Math.random() * CHARS.length)];
+          }
+        }
+        el.textContent = out;
+        frame++;
+        if (resolved.every(Boolean)) {
+          el.textContent = original;
+          clearInterval(interval);
+        }
+      }, 35);
+    }
+
+    var scrambleObserver = new IntersectionObserver(function (entries) {
+      entries.forEach(function (entry) {
+        if (entry.isIntersecting) {
+          scramble(entry.target);
+          scrambleObserver.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.5 });
+
+    document.querySelectorAll('.sec-title').forEach(function (el) {
+      scrambleObserver.observe(el);
+    });
+  }
+
+  /* ── 7. MOUSE PARALLAX ON HOMEPAGE HERO ── */
+  var heroSection = document.querySelector('.hero');
+  if (heroSection && !reduced) {
+    var heroLeft  = heroSection.querySelector('.hero-left');
+    var heroRight = heroSection.querySelector('.hero-right');
+
+    heroSection.addEventListener('mousemove', function (e) {
+      var r = heroSection.getBoundingClientRect();
+      var x = (e.clientX - r.left - r.width  / 2) / r.width;
+      var y = (e.clientY - r.top  - r.height / 2) / r.height;
+      if (heroLeft)  heroLeft.style.transform  = 'translate(' + (x * 10) + 'px,' + (y * 6) + 'px)';
+      if (heroRight) heroRight.style.transform = 'translate(' + (x * -14) + 'px,' + (y * -8) + 'px)';
+    });
+    heroSection.addEventListener('mouseleave', function () {
+      if (heroLeft)  { heroLeft.style.transition  = 'transform .8s ease'; heroLeft.style.transform  = ''; }
+      if (heroRight) { heroRight.style.transition = 'transform .8s ease'; heroRight.style.transform = ''; }
+      setTimeout(function () {
+        if (heroLeft)  heroLeft.style.transition  = '';
+        if (heroRight) heroRight.style.transition = '';
+      }, 800);
+    });
+  }
+
+  /* ── 8. GLITCH FLASH ON NAV LOGO ── */
+  if (!reduced) {
+    var logoEm = document.querySelector('.logo em');
+    if (logoEm) {
+      function triggerGlitch() {
+        logoEm.classList.add('glitch-active');
+        logoEm.addEventListener('animationend', function () {
+          logoEm.classList.remove('glitch-active');
+        }, { once: true });
+        setTimeout(triggerGlitch, 6000 + Math.random() * 8000);
+      }
+      setTimeout(triggerGlitch, 3000 + Math.random() * 4000);
+    }
+  }
+
+})();

@@ -326,3 +326,87 @@ nav.nav-scrolled {
   .form-submit::after, .etsy-btn::after { display:none; }
   html { transition:none; }
 }
+
+/* ═══════════════════════════════════════════════════
+   EXTRA ANIMATIONS v2
+   ═══════════════════════════════════════════════════ */
+
+/* ── Scroll progress bar ── */
+#scroll-progress {
+  position: fixed; top: 0; left: 0; height: 3px; width: 0%;
+  background: linear-gradient(90deg, var(--orange), var(--orlo), #ffcc70);
+  z-index: 9999; transition: width .1s linear;
+  box-shadow: 0 0 10px rgba(245,137,26,.6);
+}
+
+/* ── Cursor glow ── */
+#cursor-glow {
+  position: fixed; pointer-events: none; z-index: 9998;
+  width: 320px; height: 320px; border-radius: 50%;
+  background: radial-gradient(circle, rgba(245,137,26,.07) 0%, transparent 70%);
+  transform: translate(-50%, -50%);
+  transition: transform .08s linear, opacity .3s;
+  opacity: 0;
+}
+
+/* ── Click ripple ── */
+.ripple-ring {
+  position: absolute; border-radius: 50%;
+  background: rgba(255,255,255,.25);
+  transform: scale(0); animation: rippleOut .55s ease-out forwards;
+  pointer-events: none;
+}
+@keyframes rippleOut {
+  to { transform: scale(4); opacity: 0; }
+}
+
+/* ── 3D card tilt ── */
+.svc-card, .value-card, .price-card, .port-card,
+.team-card, .tier-card, .tc, .si-card {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+/* ── Scroll-to-top button ── */
+#scroll-top {
+  position: fixed; bottom: 32px; right: 32px; z-index: 999;
+  width: 44px; height: 44px; border-radius: 50%;
+  background: var(--orange); color: #fff; border: none;
+  font-size: 20px; cursor: pointer; display: flex;
+  align-items: center; justify-content: center;
+  box-shadow: 0 6px 24px rgba(245,137,26,.45);
+  opacity: 0; transform: translateY(20px) scale(.8);
+  transition: opacity .3s, transform .3s cubic-bezier(.34,1.56,.64,1);
+  pointer-events: none;
+}
+#scroll-top.visible {
+  opacity: 1; transform: translateY(0) scale(1);
+  pointer-events: all;
+}
+#scroll-top:hover { background: var(--orlo); transform: translateY(-3px) scale(1.08); }
+#scroll-top:active { transform: scale(.95); }
+
+/* ── Text scramble ── */
+.scramble-char { display: inline; }
+
+/* ── Glitch flash on logo em ── */
+@keyframes glitch {
+  0%   { text-shadow: none; transform: none; }
+  20%  { text-shadow: -2px 0 #00ffff, 2px 0 #ff00ff; transform: skewX(-2deg); }
+  40%  { text-shadow:  2px 0 #ff00ff, -2px 0 #00ffff; transform: skewX(2deg); }
+  60%  { text-shadow: -1px 0 #00ffff; transform: skewX(0); }
+  80%  { text-shadow: none; transform: skewX(-1deg); }
+  100% { text-shadow: none; transform: none; }
+}
+.glitch-active { animation: glitch .4s steps(1) forwards; }
+
+/* ── Mouse parallax layers on homepage hero ── */
+.hero-parallax { transition: transform .1s ease-out; will-change: transform; }
+
+/* ── Reduced motion overrides ── */
+@media (prefers-reduced-motion: reduce) {
+  #scroll-progress, #cursor-glow, .ripple-ring { display: none; }
+  .glitch-active { animation: none; }
+  .svc-card, .value-card, .price-card, .port-card,
+  .team-card, .tier-card, .tc, .si-card { transform: none !important; }
+}
