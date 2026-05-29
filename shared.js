@@ -14,23 +14,18 @@
      2. NAV SHADOW ON SCROLL
   ══════════════════════════════════════════════ */
   var nav = document.querySelector('nav');
-  if (nav) {
-    function updateNav() {
-      nav.classList.toggle('nav-scrolled', window.scrollY > 50);
-    }
-    window.addEventListener('scroll', updateNav, { passive: true });
-    updateNav();
-  }
-
-  /* ══════════════════════════════════════════════
-     3. HERO PARALLAX DOT GRID
-  ══════════════════════════════════════════════ */
   var hero = document.querySelector('.page-hero');
-  if (hero) {
-    window.addEventListener('scroll', function () {
-      hero.style.setProperty('--px', (window.scrollY * 0.22) + 'px');
-    }, { passive: true });
+  var topBtn;
+  function onScroll() {
+    var sy = window.scrollY;
+    var total = document.documentElement.scrollHeight - window.innerHeight;
+    if (nav) nav.classList.toggle('nav-scrolled', sy > 50);
+    if (hero) hero.style.setProperty('--px', (sy * 0.22) + 'px');
+    if (bar) bar.style.width = (total > 0 ? (sy / total * 100) : 0) + '%';
+    if (topBtn) topBtn.classList.toggle('visible', sy > 500);
   }
+  window.addEventListener('scroll', onScroll, { passive: true });
+  onScroll();
 
   /* ══════════════════════════════════════════════
      4. SCROLL REVEAL WITH STAGGER
@@ -258,7 +253,7 @@
     var total = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.width = (total > 0 ? (scrolled / total) * 100 : 0) + '%';
   }
-  window.addEventListener('scroll', updateProgress, { passive: true });
+  // progress updated in unified onScroll
 
   /* ── 2. CURSOR GLOW (desktop only) ── */
   if (!reduced && window.matchMedia('(pointer: fine)').matches) {
@@ -321,67 +316,19 @@
   }
 
   /* ── 5. SCROLL-TO-TOP BUTTON ── */
-  var topBtn = document.createElement('button');
+  topBtn = document.createElement('button');
   topBtn.id = 'scroll-top';
   topBtn.setAttribute('aria-label', 'Back to top');
   topBtn.innerHTML = '&#8679;';
   document.body.appendChild(topBtn);
 
-  window.addEventListener('scroll', function () {
-    topBtn.classList.toggle('visible', window.scrollY > 500);
-  }, { passive: true });
+  // scroll-top updated in unified onScroll
 
   topBtn.addEventListener('click', function () {
     window.scrollTo({ top: 0, behavior: 'smooth' });
   });
 
-  /* ── 6. TEXT SCRAMBLE ON SECTION TITLES ── */
-  if (!reduced) {
-    var CHARS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789@#$%';
-
-    function scramble(el) {
-      var original = el.textContent;
-      var resolved = Array(original.length).fill(false);
-      var frame = 0;
-
-      var interval = setInterval(function () {
-        var out = '';
-        for (var i = 0; i < original.length; i++) {
-          if (original[i] === ' ' || original[i] === '\n') {
-            out += original[i];
-          } else if (resolved[i]) {
-            out += original[i];
-          } else if (frame > i * 1.5) {
-            resolved[i] = true;
-            out += original[i];
-          } else {
-            out += CHARS[Math.floor(Math.random() * CHARS.length)];
-          }
-        }
-        el.textContent = out;
-        frame++;
-        if (resolved.every(Boolean)) {
-          el.textContent = original;
-          clearInterval(interval);
-        }
-      }, 35);
-    }
-
-    var scrambleObserver = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (entry.isIntersecting) {
-          scramble(entry.target);
-          scrambleObserver.unobserve(entry.target);
-        }
-      });
-    }, { threshold: 0.5 });
-
-    document.querySelectorAll('.sec-title').forEach(function (el) {
-      scrambleObserver.observe(el);
-    });
-  }
-
-  /* ── 7. MOUSE PARALLAX ON HOMEPAGE HERO ── */
+  /* ── 6. MOUSE PARALLAX ON HOMEPAGE HERO ── MOUSE PARALLAX ON HOMEPAGE HERO ── */
   var heroSection = document.querySelector('.hero');
   if (heroSection && !reduced) {
     var heroLeft  = heroSection.querySelector('.hero-left');
