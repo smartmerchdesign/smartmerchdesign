@@ -365,3 +365,8 @@ nav.nav-scrolled {
   .svc-card,.value-card,.price-card,.port-card,
   .team-card,.tier-card,.tc,.si-card{transform:none !important}
 }
+
+/* Legal page links must not override button colors */
+.legal-layout a.form-submit,
+.legal-layout a.etsy-btn,
+.legal-layout a.footer-etsy { color: var(--white) !important; }
