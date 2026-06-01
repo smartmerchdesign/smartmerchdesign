@@ -370,12 +370,3 @@ nav.nav-scrolled {
 .legal-layout a.form-submit,
 .legal-layout a.etsy-btn,
 .legal-layout a.footer-etsy { color: var(--white) !important; }
-
-/* ── Instagram link ── */
-.footer-instagram {
-  display: inline-flex; align-items: center; gap: 8px;
-  color: var(--muted); font-size: 13px; font-weight: 600;
-  text-decoration: none; transition: color .2s;
-}
-.footer-instagram:hover { color: #e1306c; }
-.footer-instagram svg { width: 16px; height: 16px; flex-shrink: 0; }
