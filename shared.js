@@ -295,4 +295,16 @@
     init();
   }
 
+
+
+  /* ── 13. QUICK CHAT / WHATSAPP LAUNCHER ── */
+  var chat = document.createElement('div');
+  chat.className = 'quick-chat';
+  chat.innerHTML = '<div class="quick-chat-panel"><div class="quick-chat-title">Need merch help?</div><p>Send a quick message, request samples, or start a quote. We usually reply same business day.</p><div class="quick-chat-actions"><a href="https://wa.me/13476085682?text=Hi%20Smart%20Merch%20Design%2C%20I%20would%20like%20help%20with%20a%20custom%20merch%20order." target="_blank" rel="noopener">WhatsApp Us</a><a href="sample-request.html">Request Samples</a><a href="bulk-order-form.html">Start a Quote</a></div></div><button class="quick-chat-toggle" type="button" aria-expanded="false">Chat</button>';
+  document.body.appendChild(chat);
+  var chatToggle = chat.querySelector('.quick-chat-toggle');
+  chatToggle.addEventListener('click', function () {
+    var open = chat.classList.toggle('open');
+    chatToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+  });
 })();

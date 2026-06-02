@@ -14,17 +14,26 @@
 <!-- Smart Merch SEO Enhancements -->
 <link rel="canonical" href="https://smartmerchdesign.com/pricing.html">
 <meta property="og:type" content="website">
+<meta property="og:site_name" content="Smart Merch Design">
+<meta property="og:locale" content="en_US">
 <meta property="og:title" content="Pricing — Smart Merch Design">
 <meta property="og:description" content="Transparent custom merch pricing with personalized quotes based on product, quantity, print method, locations, timeline, and shipping needs.">
 <meta property="og:image" content="https://smartmerchdesign.com/logo-512.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta property="og:image:alt" content="Smart Merch Design logo">
 <meta property="og:url" content="https://smartmerchdesign.com/pricing.html">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Pricing — Smart Merch Design">
 <meta name="twitter:description" content="Transparent custom merch pricing with personalized quotes based on product, quantity, print method, locations, timeline, and shipping needs.">
+<meta name="twitter:image" content="https://smartmerchdesign.com/logo-512.png">
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": ["LocalBusiness", "Organization"],
+  "@type": [
+    "LocalBusiness",
+    "Organization"
+  ],
   "name": "Smart Merch Design",
   "url": "https://smartmerchdesign.com/",
   "logo": "https://smartmerchdesign.com/logo-512.png",
@@ -32,6 +41,7 @@
   "description": "Transparent custom merch pricing with personalized quotes based on product, quantity, print method, locations, timeline, and shipping needs.",
   "telephone": "+1-347-608-5682",
   "email": "smartmerchdesign@gmail.com",
+  "priceRange": "$-$$",
   "address": {
     "@type": "PostalAddress",
     "streetAddress": "1700 Fanwood St",
@@ -40,8 +50,51 @@
     "postalCode": "07755",
     "addressCountry": "US"
   },
-  "areaServed": ["Oakhurst NJ", "Monmouth County NJ", "Ocean Township NJ", "Deal NJ", "Long Branch NJ", "Lakewood NJ", "New Jersey", "United States"],
-  "sameAs": ["https://smartmerchdesignco.etsy.com"]
+  "geo": {
+    "@type": "GeoCoordinates",
+    "latitude": "40.2709",
+    "longitude": "-74.0193"
+  },
+  "openingHoursSpecification": [
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": [
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday"
+      ],
+      "opens": "09:00",
+      "closes": "18:00"
+    },
+    {
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": "Saturday",
+      "opens": "10:00",
+      "closes": "14:00"
+    }
+  ],
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "5",
+    "reviewCount": "100"
+  },
+  "areaServed": [
+    "Oakhurst NJ",
+    "Monmouth County NJ",
+    "Ocean Township NJ",
+    "Deal NJ",
+    "Long Branch NJ",
+    "Lakewood NJ",
+    "New Jersey",
+    "United States"
+  ],
+  "sameAs": [
+    "https://smartmerchdesignco.etsy.com",
+    "https://www.instagram.com/smartmerchdesign",
+    "https://www.facebook.com/Smartmerchdesign/"
+  ]
 }
 </script>
 <!-- /Smart Merch SEO Enhancements -->
@@ -112,6 +165,29 @@
   .guarantee { margin:0 20px 48px; flex-direction:column; padding:32px 24px; }
   .price-card.popular { transform:none; }
 }
+.quote-calculator { padding:0 56px 72px; }
+.quote-calc { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; background:linear-gradient(145deg,#152348,#0d1e3e); border:1px solid rgba(245,137,26,.22); border-radius:20px; padding:32px; }
+.calc-fields { display:grid; grid-template-columns:repeat(2,1fr); gap:18px; }
+.calc-field { position:relative; }
+.calc-field label { display:block; color:var(--orange); font-size:11px; font-weight:700; letter-spacing:1.4px; text-transform:uppercase; margin-bottom:8px; }
+.calc-field input, .calc-field select { width:100%; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.12); border-radius:10px; padding:13px 14px; color:var(--white); font:inherit; }
+.calc-field select option { background:#ffffff; color:#0b1736; }
+.calc-field select option:checked { background:#f5891a; color:#ffffff; }
+.calc-native-select { position:absolute; width:1px !important; height:1px !important; padding:0 !important; border:0 !important; opacity:0; pointer-events:none; }
+.calc-select { position:relative; }
+.calc-select-trigger { width:100%; min-height:56px; display:flex; align-items:center; justify-content:space-between; gap:16px; background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.14); border-radius:10px; padding:13px 14px; color:var(--white); font:inherit; text-align:left; cursor:pointer; transition:border-color .2s ease, background .2s ease, box-shadow .2s ease; }
+.calc-select-trigger:hover, .calc-select.open .calc-select-trigger { border-color:rgba(245,137,26,.48); background:rgba(245,137,26,.08); box-shadow:0 12px 28px rgba(0,0,0,.2); }
+.calc-select-arrow { color:var(--orange); font-size:18px; line-height:1; transition:transform .2s ease; }
+.calc-select.open .calc-select-arrow { transform:rotate(180deg); }
+.calc-select-menu { position:absolute; top:calc(100% + 8px); left:0; right:0; z-index:50; display:none; max-height:300px; overflow:auto; background:#122348; border:1px solid rgba(245,137,26,.28); border-radius:12px; padding:6px; box-shadow:0 22px 45px rgba(0,0,0,.38); }
+.calc-select.open .calc-select-menu { display:block; }
+.calc-select-option { width:100%; display:block; border:0; border-radius:8px; background:transparent; color:var(--white); padding:11px 12px; font:inherit; text-align:left; cursor:pointer; }
+.calc-select-option:hover, .calc-select-option[aria-selected="true"] { background:rgba(245,137,26,.16); color:#fff; }
+.calc-select-option[aria-selected="true"] { box-shadow:inset 3px 0 0 var(--orange); }
+.calc-result { background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.08); border-radius:16px; padding:24px; }
+.calc-price { font-family:var(--display); font-size:56px; line-height:1; color:var(--orange); font-weight:900; margin:12px 0; }
+.calc-note { color:var(--muted); font-size:13px; line-height:1.7; }
+@media (max-width:900px){ .quote-calculator{padding:0 20px 48px;} .quote-calc{grid-template-columns:1fr;padding:24px;} .calc-fields{grid-template-columns:1fr;} }
 </style>
 </head>
 <body>
@@ -125,16 +201,22 @@
         <a href="services.html">All Services</a>
         <a href="how-it-works.html">How It Works</a>
         <a href="bulk-orders.html">Bulk Orders</a>
+        <a href="rush-orders.html">Rush Orders</a>
+        <a href="artwork-guide.html">Artwork Guide</a>
+        <a href="size-guide.html">Size Guide</a>
+        <a href="sample-request.html">Request Samples</a>
         <a href="bulk-order-form.html">Request a Quote</a>
       </div>
     </li>
     <li><a href="products.html">Products</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="pricing.html" class="active">Pricing</a></li>
+    <li><a href="size-guide.html">Size Guide</a></li>
     <li><a href="faq.html">FAQ</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div style="display:flex;gap:12px;align-items:center;">
+    <a class="rush-nav" href="rush-orders.html">⚡ Rush</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
     <a class="etsy-btn secondary-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
@@ -225,6 +307,27 @@
   </div>
 </section>
 
+<section class="quote-calculator" id="instant-quote">
+  <div class="sec-tag">Instant Estimate</div>
+  <h2 class="sec-title">Build A <em>Quick</em> Quote</h2>
+  <p class="sec-sub" style="margin-bottom:28px;">Use this as a planning estimate. Final pricing depends on blanks, artwork, print complexity, shipping, and inventory availability.</p>
+  <div class="quote-calc">
+    <div class="calc-fields">
+      <div class="calc-field"><label for="calcProduct">Product</label><select id="calcProduct"><option value="tee">T-Shirt</option><option value="longsleeve">Long Sleeve Shirt</option><option value="crewneck">Crewneck Sweatshirt</option><option value="hoodie">Hoodie</option><option value="polo">Polo Shirt</option><option value="jacket">Jacket / Windbreaker</option><option value="hat">Hat / Cap</option><option value="beanie">Beanie</option><option value="tote">Tote Bag</option><option value="mug">Mug / Drinkware</option><option value="bottle">Water Bottle / Tumbler</option><option value="sticker">Stickers</option><option value="notebook">Notebook / Journal</option><option value="kids">Kids Apparel</option><option value="baby">Baby Item</option></select></div>
+      <div class="calc-field"><label for="calcQty">Quantity</label><input id="calcQty" type="number" min="12" value="48"></div>
+      <div class="calc-field"><label for="calcMethod">Decoration</label><select id="calcMethod"><option value="screen">Screen Print</option><option value="dtg">DTG</option><option value="embroidery">Embroidery</option><option value="sublimation">Sublimation</option><option value="vinyl">Heat Transfer Vinyl</option><option value="foil">Foil Print</option><option value="patch">Embroidered Patch</option><option value="engraving">Laser Engraving</option><option value="uv">UV / Full Color Print</option><option value="label">Custom Label / Tag</option></select></div>
+      <div class="calc-field"><label for="calcLocations">Print Locations</label><select id="calcLocations"><option value="1">1 Location</option><option value="2">2 Locations</option><option value="3">3 Locations</option><option value="4">4 Locations</option><option value="5">5+ Locations</option></select></div>
+      <div class="calc-field"><label for="calcRush">Timeline</label><select id="calcRush"><option value="0">Standard</option><option value="priority">Priority</option><option value="rush">Rush</option><option value="event">Event / Hard Deadline</option></select></div>
+    </div>
+    <div class="calc-result">
+      <div class="price-tier">Estimated Total</div>
+      <div class="calc-price" id="calcTotal">$0</div>
+      <p class="calc-note" id="calcBreakdown"></p>
+      <a class="price-cta" href="bulk-order-form.html">Request Exact Quote →</a>
+    </div>
+  </div>
+</section>
+
 <!-- ADD-ONS -->
 <section class="add-ons">
   <h3><em>Smart</em> Add-Ons</h3>
@@ -273,6 +376,24 @@
   </div>
 </section>
 
+<section class="minimum-band">
+  <div class="sec-tag">Minimums</div>
+  <h2 class="sec-title">Order Size <em>Guidelines</em></h2>
+  <p class="sec-sub">Minimums vary by product and decoration method. These notes help you choose the right path before requesting final pricing.</p>
+  <div class="minimum-grid">
+    <div class="minimum-card"><span>Screen Print</span><h3>12+ Units</h3><p>Best value for apparel runs with the same artwork. Mix sizes freely; garment colors and ink colors can affect setup and pricing.</p></div>
+    <div class="minimum-card"><span>DTG / Full Color</span><h3>1+ Unit</h3><p>Useful for samples, small batches, and complex full-color art. Per-piece pricing is higher, but setup is simpler.</p></div>
+    <div class="minimum-card"><span>Embroidery</span><h3>12+ Units</h3><p>Strong for hats, polos, bags, jackets, and premium apparel. Digitizing is reviewed with the artwork before production.</p></div>
+    <div class="minimum-card"><span>Promo Products</span><h3>Varies By Item</h3><p>Mugs, pens, stickers, bottles, and specialty items each have different vendor minimums. We confirm realistic options in your quote.</p></div>
+    <div class="minimum-card"><span>Samples</span><h3>Best For 100+ Unit Plans</h3><p>Physical samples make the most sense when you are comparing blanks or decoration quality before a larger order.</p></div>
+    <div class="minimum-card"><span>Rush Orders</span><h3>Depends On Availability</h3><p>Rush timing depends on blank inventory, artwork readiness, proof approval, decoration method, quantity, and shipping distance.</p></div>
+  </div>
+  <div class="section-actions">
+    <a class="form-submit" href="bulk-order-form.html">Confirm Your Minimum</a>
+    <a class="text-link-cta" href="sample-request.html">Need to see samples first?</a>
+  </div>
+</section>
+
 <!-- GUARANTEE -->
 <div class="guarantee">
   <div class="guarantee-icon">💡</div>
@@ -286,12 +407,19 @@
 <footer>
   <div class="footer-logo"><img src="logo-nav.png" alt="Smart Merch Design Logo" height="28" style="vertical-align:middle;margin-right:8px;"> SMART <em>MERCH</em> DESIGN</div>
   <div class="footer-copy">© 2026 Smart Merch Design · Think Smart. Look Great.</div>
-  <a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Shop on Etsy</a>
+  <div class="footer-actions"><span class="footer-social" aria-label="Social links"><a class="social-icon-link social-whatsapp" href="https://wa.me/13476085682?text=Hi%20Smart%20Merch%20Design%2C%20I%20would%20like%20help%20with%20a%20custom%20merch%20order." target="_blank" rel="noopener" aria-label="Chat with Smart Merch Design on WhatsApp" title="WhatsApp">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M12.04 2.5a9.43 9.43 0 0 0-8.15 14.16L2.5 21.5l4.96-1.3a9.42 9.42 0 0 0 4.58 1.17h.01A9.44 9.44 0 0 0 12.04 2.5Zm0 17.27h-.01a7.8 7.8 0 0 1-3.98-1.09l-.29-.17-2.94.77.79-2.86-.19-.3a7.79 7.79 0 1 1 6.62 3.65Zm4.28-5.83c-.23-.12-1.38-.68-1.59-.76-.21-.08-.37-.12-.52.12-.15.23-.6.76-.73.91-.13.15-.27.17-.5.06-.23-.12-.99-.36-1.88-1.16-.69-.62-1.16-1.38-1.3-1.61-.13-.23-.01-.36.1-.48.1-.1.23-.27.35-.4.12-.13.15-.23.23-.38.08-.15.04-.29-.02-.4-.06-.12-.52-1.25-.71-1.71-.19-.45-.38-.39-.52-.4h-.44c-.15 0-.4.06-.61.29-.21.23-.8.78-.8 1.91 0 1.13.82 2.22.94 2.37.12.15 1.62 2.47 3.92 3.46.55.24.98.38 1.31.49.55.17 1.05.15 1.45.09.44-.07 1.38-.56 1.57-1.1.19-.54.19-1.01.13-1.1-.06-.1-.21-.15-.44-.27Z"/></svg>
+</a><a class="social-icon-link social-instagram" href="https://www.instagram.com/smartmerchdesign" target="_blank" rel="noopener" aria-label="Follow Smart Merch Design on Instagram" title="Instagram">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.8 2.75h8.4A5.06 5.06 0 0 1 21.25 7.8v8.4a5.06 5.06 0 0 1-5.05 5.05H7.8a5.06 5.06 0 0 1-5.05-5.05V7.8A5.06 5.06 0 0 1 7.8 2.75Zm0 1.8A3.25 3.25 0 0 0 4.55 7.8v8.4a3.25 3.25 0 0 0 3.25 3.25h8.4a3.25 3.25 0 0 0 3.25-3.25V7.8a3.25 3.25 0 0 0-3.25-3.25H7.8Zm4.2 3.22a4.23 4.23 0 1 1 0 8.46 4.23 4.23 0 0 1 0-8.46Zm0 1.8a2.43 2.43 0 1 0 0 4.86 2.43 2.43 0 0 0 0-4.86Zm5.04-2.18a1.03 1.03 0 1 1 0 2.06 1.03 1.03 0 0 1 0-2.06Z"/></svg>
+</a><a class="social-icon-link social-facebook" href="https://www.facebook.com/Smartmerchdesign/" target="_blank" rel="noopener" aria-label="Follow Smart Merch Design on Facebook" title="Facebook">
+  <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.5 21.5v-8.1h2.72l.41-3.16H13.5V8.22c0-.91.25-1.54 1.57-1.54h1.68V3.85c-.29-.04-1.29-.13-2.45-.13-2.42 0-4.08 1.48-4.08 4.19v2.34H7.48v3.16h2.74v8.1h3.28Z"/></svg>
+</a></span><a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Shop on Etsy</a></div>
   <div class="footer-links">
     <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
     <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
     <a href="how-it-works.html">How It Works</a><a href="bulk-orders.html">Bulk Orders</a>
-    <a href="faq.html">FAQ</a><a href="contact.html">Contact</a><a href="bulk-order-form.html">Get a Quote</a>
+    <a href="rush-orders.html">Rush Orders</a><a href="artwork-guide.html">Artwork Guide</a>
+    <a href="faq.html">FAQ</a><a href="size-guide.html">Size Guide</a><a href="sample-request.html">Samples</a><a href="contact.html">Contact</a><a href="bulk-order-form.html">Get a Quote</a>
   </div>
 
     <div class="footer-legal">
@@ -301,6 +429,134 @@
       <a href="returns.html">Returns &amp; Refunds</a>
     </div>
 </footer>
+<script>
+(function(){
+  const productBase = {
+    tee: 12,
+    longsleeve: 16,
+    crewneck: 24,
+    hoodie: 28,
+    polo: 22,
+    jacket: 34,
+    hat: 18,
+    beanie: 16,
+    tote: 9,
+    mug: 11,
+    bottle: 15,
+    sticker: 3,
+    notebook: 12,
+    kids: 11,
+    baby: 10
+  };
+  const methodAdd = {
+    screen: 0,
+    dtg: 3,
+    embroidery: 6,
+    sublimation: 5,
+    vinyl: 4,
+    foil: 5,
+    patch: 7,
+    engraving: 4,
+    uv: 3,
+    label: 2
+  };
+  const timelineMultiplier = {
+    0: 1,
+    priority: 1.08,
+    rush: 1.18,
+    event: 1.25
+  };
+  const els = ['calcProduct','calcQty','calcMethod','calcLocations','calcRush'].map(id => document.getElementById(id));
+  const calcSelects = els.filter(el => el && el.tagName === 'SELECT');
+
+  function closeCalcSelects(except){
+    document.querySelectorAll('.calc-select.open').forEach(menu => {
+      if(menu !== except) {
+        menu.classList.remove('open');
+        const trigger = menu.querySelector('.calc-select-trigger');
+        if(trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function syncCustomSelect(select, wrapper){
+    const current = select.options[select.selectedIndex];
+    const value = current ? current.value : '';
+    wrapper.querySelector('.calc-select-value').textContent = current ? current.textContent : '';
+    wrapper.querySelectorAll('.calc-select-option').forEach(option => {
+      option.setAttribute('aria-selected', option.dataset.value === value ? 'true' : 'false');
+    });
+  }
+
+  function enhanceCalcSelect(select){
+    select.classList.add('calc-native-select');
+    const wrapper = document.createElement('div');
+    wrapper.className = 'calc-select';
+    const trigger = document.createElement('button');
+    trigger.className = 'calc-select-trigger';
+    trigger.type = 'button';
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.innerHTML = '<span class="calc-select-value"></span><span class="calc-select-arrow" aria-hidden="true">v</span>';
+    const menu = document.createElement('div');
+    menu.className = 'calc-select-menu';
+    menu.setAttribute('role', 'listbox');
+
+    Array.from(select.options).forEach(option => {
+      const item = document.createElement('button');
+      item.className = 'calc-select-option';
+      item.type = 'button';
+      item.setAttribute('role', 'option');
+      item.dataset.value = option.value;
+      item.textContent = option.textContent;
+      item.addEventListener('click', () => {
+        select.value = option.value;
+        select.dispatchEvent(new Event('input', { bubbles:true }));
+        syncCustomSelect(select, wrapper);
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+      menu.appendChild(item);
+    });
+
+    trigger.addEventListener('click', () => {
+      const isOpen = wrapper.classList.contains('open');
+      closeCalcSelects(wrapper);
+      wrapper.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+    trigger.addEventListener('keydown', event => {
+      if(event.key === 'Escape'){
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    wrapper.append(trigger, menu);
+    select.after(wrapper);
+    syncCustomSelect(select, wrapper);
+  }
+
+  calcSelects.forEach(enhanceCalcSelect);
+  document.addEventListener('click', event => {
+    if(!event.target.closest('.calc-select')) closeCalcSelects();
+  });
+
+  function discount(qty){ if(qty >= 500) return .68; if(qty >= 200) return .76; if(qty >= 100) return .86; if(qty >= 48) return .94; return 1.08; }
+  function update(){
+    const product = els[0].value;
+    const qty = Math.max(parseInt(els[1].value || '12', 10), 12);
+    const locations = parseInt(els[3].value, 10);
+    const rushMultiplier = timelineMultiplier[els[4].value] || 1;
+    const unit = (productBase[product] + methodAdd[els[2].value] + ((locations - 1) * 4)) * discount(qty) * rushMultiplier;
+    const total = Math.round(unit * qty);
+    document.getElementById('calcTotal').textContent = '$' + total.toLocaleString();
+    document.getElementById('calcBreakdown').textContent = qty.toLocaleString() + ' units at about $' + unit.toFixed(2) + ' each before shipping, taxes, or unusual artwork requirements.';
+  }
+  els.forEach(el => el && el.addEventListener('input', update));
+  update();
+})();
+</script>
 <script src="shared.js" defer></script>
 </body>
 </html>
