@@ -366,7 +366,34 @@ nav.nav-scrolled {
   .team-card,.tier-card,.tc,.si-card{transform:none !important}
 }
 
-/* Legal page links must not override button colors */
-.legal-layout a.form-submit,
-.legal-layout a.etsy-btn,
-.legal-layout a.footer-etsy { color: var(--white) !important; }
+/* =========================================================
+   Smart Merch Design — Conversion & Local SEO Enhancements
+   ========================================================= */
+.quote-btn {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--orange); color: var(--white);
+  font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 1px;
+  padding: 9px 20px; border-radius: 6px; text-decoration: none;
+  transition: background .2s, transform .2s, box-shadow .2s;
+  box-shadow: 0 4px 18px rgba(245,137,26,.35);
+}
+.quote-btn:hover { background: var(--orlo); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,137,26,.45); }
+.secondary-etsy { background: transparent; border: 1px solid rgba(241,101,33,.45); box-shadow: none; padding-inline: 16px; }
+.secondary-etsy:hover { background: rgba(241,101,33,.14); }
+.local-seo-section {
+  padding: 64px 56px;
+  background: linear-gradient(145deg, rgba(13,42,94,.98), rgba(8,15,36,.98));
+  border-top: 1px solid rgba(245,137,26,.16);
+  border-bottom: 1px solid rgba(245,137,26,.16);
+}
+.local-seo-inner { max-width: 980px; margin: 0 auto; }
+.local-seo-section h2 { font-family: var(--display); font-size: clamp(30px,4vw,48px); line-height: 1; color: var(--white); margin-bottom: 16px; }
+.local-seo-section h2 em { color: var(--orange); font-style: normal; }
+.local-seo-section p { color: var(--muted); font-size: 15px; line-height: 1.85; max-width: 760px; }
+.local-keywords { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 24px; }
+.local-keywords span { border: 1px solid rgba(245,137,26,.28); background: rgba(245,137,26,.08); color: rgba(255,255,255,.78); padding: 8px 13px; border-radius: 999px; font-size: 13px; }
+@media (max-width: 900px) {
+  .quote-btn { display: inline-flex; }
+  .secondary-etsy { display: none; }
+  .local-seo-section { padding: 48px 24px; }
+}
