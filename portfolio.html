@@ -170,7 +170,14 @@
 }
 .proof-process { padding:0 56px 72px; }
 .proof-card { min-height:260px; display:flex; flex-direction:column; justify-content:space-between; background:linear-gradient(145deg,#152348,#0d1e3e); border:1px solid rgba(245,137,26,.18); border-radius:16px; padding:24px; }
-.proof-visual { height:120px; border-radius:12px; background:rgba(255,255,255,.05); display:grid; place-items:center; font-family:var(--display); font-size:34px; color:var(--orange); margin-bottom:18px; }
+.proof-visual { height:120px; border-radius:12px; background:rgba(255,255,255,.05); display:grid; place-items:center; margin-bottom:18px; position:relative; overflow:hidden; border:1px solid rgba(255,255,255,.07); }
+.proof-art { width:74px; height:74px; border-radius:16px; display:grid; place-items:center; background:rgba(245,137,26,.12); border:1px solid rgba(245,137,26,.3); color:var(--orange); font-family:var(--display); font-size:28px; font-weight:900; }
+.proof-shirt { width:86px; height:92px; position:relative; background:linear-gradient(145deg,#f4f6fb,#b9c4d8); border-radius:16px 16px 22px 22px; box-shadow:0 16px 28px rgba(0,0,0,.25); }
+.proof-shirt::before, .proof-shirt::after { content:''; position:absolute; top:14px; width:26px; height:34px; background:#cfd6e4; border-radius:12px; }
+.proof-shirt::before { left:-17px; transform:rotate(18deg); }
+.proof-shirt::after { right:-17px; transform:rotate(-18deg); }
+.proof-mark { position:absolute; top:34px; left:50%; transform:translateX(-50%); width:34px; height:20px; border-radius:8px; background:var(--orange); box-shadow:0 0 0 4px rgba(245,137,26,.16); }
+.proof-finished { width:96px; height:86px; border-radius:14px; background:linear-gradient(145deg,rgba(245,137,26,.9),rgba(241,101,33,.9)); display:grid; place-items:center; color:#fff; font-family:var(--display); font-size:38px; box-shadow:0 16px 34px rgba(245,137,26,.25); }
 .proof-card h3 { font-family:var(--display); font-size:25px; margin-bottom:8px; }
 .proof-card p { color:var(--muted); font-size:14px; line-height:1.7; }
 @media(max-width:900px){.proof-process{padding:0 20px 48px;}}
@@ -228,9 +235,9 @@
   <h2 class="sec-title">Logo To <em>Finished</em> Merch</h2>
   <p class="sec-sub" style="margin-bottom:32px;">Every order gets a clear proof path before production, so buyers can approve the look before the full run starts.</p>
   <div class="proof-grid">
-    <div class="proof-card"><div class="proof-visual">LOGO</div><h3>1. Artwork Check</h3><p>We review your logo, colors, placement, sizing, and print method so the file is production-ready.</p></div>
-    <div class="proof-card"><div class="proof-visual">MOCKUP</div><h3>2. Digital Proof</h3><p>You receive a mockup showing the product, print location, scale, and color direction before approval.</p></div>
-    <div class="proof-card"><div class="proof-visual">DONE</div><h3>3. Finished Order</h3><p>Once approved, we produce, quality-check, pack, and ship the finished merch to your team or event.</p></div>
+    <div class="proof-card"><div class="proof-visual"><div class="proof-art">SMD</div></div><h3>1. Artwork Check</h3><p>We review your logo, colors, placement, sizing, and print method so the file is production-ready.</p></div>
+    <div class="proof-card"><div class="proof-visual"><div class="proof-shirt"><span class="proof-mark"></span></div></div><h3>2. Digital Proof</h3><p>You receive a mockup showing the product, print location, scale, and color direction before approval.</p></div>
+    <div class="proof-card"><div class="proof-visual"><div class="proof-finished">✓</div></div><h3>3. Finished Order</h3><p>Once approved, we produce, quality-check, pack, and ship the finished merch to your team or event.</p></div>
   </div>
 </section>
 

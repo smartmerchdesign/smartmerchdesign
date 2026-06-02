@@ -118,6 +118,98 @@
   font-family: var(--display); font-size: 32px; font-weight: 900; margin-bottom: 8px; color: var(--white);
 }
 .contact-form-card p { font-size: 14px; color: var(--muted); margin-bottom: 32px; }
+.contact-info-card {
+  background: linear-gradient(145deg, rgba(21,35,72,.92), rgba(13,30,62,.88));
+  border: 1px solid rgba(255,255,255,.08);
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow: 0 18px 44px rgba(0,0,0,.18);
+}
+.contact-info-card h3 {
+  font-family: var(--display);
+  font-size: 28px;
+  line-height: 1;
+  margin-bottom: 24px;
+  color: var(--white);
+}
+.contact-info-list {
+  display: grid;
+  gap: 14px;
+}
+.contact-info-row {
+  display: grid;
+  grid-template-columns: 42px 1fr;
+  gap: 14px;
+  align-items: center;
+  min-width: 0;
+  padding: 14px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.07);
+  border-radius: 14px;
+}
+.contact-info-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 12px;
+  background: rgba(245,137,26,.12);
+  color: var(--orange);
+  font-size: 20px;
+}
+.contact-info-label {
+  display: block;
+  margin-bottom: 4px;
+  color: rgba(255,255,255,.48);
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+}
+.contact-info-value {
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 700;
+  text-decoration: none;
+  overflow-wrap: anywhere;
+}
+.contact-info-value:hover { color: var(--orange); }
+.contact-info-value.is-phone {
+  color: var(--orange);
+  font-family: var(--display);
+  font-size: 22px;
+  letter-spacing: .5px;
+}
+.whatsapp-cta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+  margin: 16px 0 6px;
+  background: rgba(37,211,102,.14);
+  color: #8df0ad;
+  border: 1px solid rgba(37,211,102,.32);
+  border-radius: 12px;
+  padding: 13px 16px;
+  text-decoration: none;
+  font-weight: 900;
+  box-shadow: 0 12px 26px rgba(37,211,102,.08);
+  transition: transform .2s, box-shadow .2s, background .2s, border-color .2s;
+}
+.whatsapp-cta:hover {
+  transform: translateY(-1px);
+  background: rgba(37,211,102,.2);
+  border-color: rgba(37,211,102,.52);
+  box-shadow: 0 16px 34px rgba(37,211,102,.14);
+}
+.contact-info-note {
+  margin-top: 16px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
 
 .form-group { margin-bottom: 24px; }
 .form-group label { display: block; font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: var(--orange); margin-bottom: 8px; }
@@ -140,14 +232,164 @@
 #formStatus { margin-top: 20px; padding: 16px; border-radius: 10px; font-weight: 600; display: none; text-align: center; }
 .form-row-2 { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
 .form-group select { appearance:none; cursor:pointer; }
-.form-group input[type="file"] { padding:12px; }
+.form-native-select {
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+.calc-select { position: relative; }
+.calc-select-trigger {
+  width: 100%;
+  min-height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  padding: 13px 14px;
+  color: var(--white);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.calc-select-trigger:hover,
+.calc-select.open .calc-select-trigger {
+  border-color: rgba(245,137,26,.48);
+  background: rgba(245,137,26,.08);
+  box-shadow: 0 12px 28px rgba(0,0,0,.2);
+}
+.calc-select-arrow {
+  color: var(--orange);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+.calc-select.open .calc-select-arrow { transform: rotate(180deg); }
+.calc-select-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 80;
+  display: none;
+  max-height: min(420px, calc(100vh - 24px));
+  overflow: auto;
+  background: #122348;
+  border: 1px solid rgba(245,137,26,.28);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 22px 45px rgba(0,0,0,.38);
+}
+.calc-select.open .calc-select-menu { display: block; }
+.calc-select-option {
+  width: 100%;
+  display: block;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--white);
+  padding: 11px 12px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.calc-select-option:hover,
+.calc-select-option[aria-selected="true"] {
+  background: rgba(245,137,26,.16);
+  color: #fff;
+}
+.calc-select-option[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--orange); }
+.form-group input[type="file"].file-input-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  opacity: 0;
+  pointer-events: none;
+}
+.upload-control {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  min-height: 56px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px;
+  padding: 10px;
+  transition: border-color .2s, background .2s, box-shadow .2s;
+}
+.upload-control:hover,
+.upload-control:focus-within {
+  border-color: rgba(245,137,26,.7);
+  background: rgba(255,255,255,.08);
+  box-shadow: 0 0 0 3px rgba(245,137,26,.1);
+}
+.upload-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  flex: 0 0 auto;
+  background: var(--orange);
+  color: var(--white);
+  border: 0;
+  border-radius: 8px;
+  padding: 12px;
+  font-family: var(--body);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  cursor: pointer;
+  line-height: 1;
+  box-shadow: 0 8px 20px rgba(245,137,26,.22);
+  transition: background .2s, transform .2s, box-shadow .2s;
+}
+.form-group label.upload-button {
+  display: inline-flex;
+  color: var(--white);
+  font-size: 13px;
+  font-weight: 800;
+  letter-spacing: .2px;
+  line-height: 1;
+  margin: 0;
+  text-transform: none;
+}
+.upload-button:hover {
+  background: var(--orlo);
+  color: var(--white);
+  transform: translateY(-1px);
+  box-shadow: 0 10px 26px rgba(245,137,26,.34);
+}
+.upload-file-name {
+  min-width: 0;
+  color: var(--muted);
+  font-size: 14px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
 .form-hint { font-size:12px; color:rgba(255,255,255,.35); margin-top:6px; line-height:1.45; }
-.quote-shortcut { display:block; margin-top:18px; color:var(--orange); text-decoration:none; font-weight:700; font-size:14px; }
+.quote-shortcut { display:block; margin:18px 0 28px; color:var(--orange); text-decoration:none; font-weight:700; font-size:14px; line-height:1.4; }
 .quote-shortcut:hover { text-decoration:underline; }
 
 @media (max-width: 900px) {
   .contact-layout { grid-template-columns: 1fr; padding: 40px 24px; }
   .form-row-2 { grid-template-columns:1fr; }
+}
+@media (max-width: 460px) {
+  .contact-info-card { padding: 24px 18px; }
+  .contact-info-row { grid-template-columns: 38px 1fr; padding: 12px; }
+  .contact-info-icon { width: 38px; height: 38px; }
+  .upload-control { align-items: stretch; flex-direction: column; }
+  .upload-button { width: 100%; min-height: 46px; }
+  .upload-file-name { white-space: normal; line-height: 1.35; }
 }
 </style>
 </head>
@@ -247,7 +489,11 @@
         </div>
         <div class="form-group">
           <label>Logo / Artwork Upload</label>
-          <input type="file" name="artwork" accept="image/*,.pdf,.ai,.eps,.svg">
+          <div class="upload-control">
+            <input class="file-input-hidden" id="contactArtwork" type="file" name="artwork" accept="image/*,.pdf,.ai,.eps,.svg">
+            <label class="upload-button" for="contactArtwork">📎 Upload</label>
+            <span class="upload-file-name" id="contactArtworkName">No file selected</span>
+          </div>
           <div class="form-hint">Upload a logo, design, mockup, or reference image if you have one.</div>
         </div>
       </div>
@@ -262,13 +508,33 @@
   </div>
 
   <div class="sidebar">
-    <div style="background:rgba(255,255,255,.03); padding:32px; border-radius:20px; border:1px solid rgba(255,255,255,.05);">
-       <h3 style="font-family:var(--display); margin-bottom:16px;">Contact Info</h3>
-       <p style="color:rgba(255,255,255,.4); font-size:11px; font-weight:700; letter-spacing:1.5px; text-transform:uppercase; margin-bottom:4px;">Call or Text Us Anytime</p>
-       <p style="color:var(--orange); font-size:18px; font-weight:700; font-family:var(--display); margin-bottom:10px; letter-spacing:1px;"><a href="tel:+13476085682" style="color:inherit; text-decoration:none;">📞 (347) 608-5682</a></p>
-       <p style="margin-bottom:20px;"><a href="https://wa.me/13476085682?text=Hi%20Smart%20Merch%20Design%2C%20I%20would%20like%20help%20with%20a%20custom%20merch%20order." target="_blank" rel="noopener" style="display:inline-flex;color:#062714;background:#25d366;border-radius:8px;padding:10px 14px;text-decoration:none;font-weight:700;">WhatsApp Us</a></p>
-       <p style="color:var(--muted); font-size:14px; margin-bottom:8px;">📧 smartmerchdesign@gmail.com</p>
-       <p style="color:var(--muted); font-size:14px;">📍 Oakhurst, NJ 07755</p>
+    <div class="contact-info-card">
+       <h3>Contact Info</h3>
+       <div class="contact-info-list">
+         <div class="contact-info-row">
+           <span class="contact-info-icon" aria-hidden="true">📞</span>
+           <span>
+             <span class="contact-info-label">Call Or Text</span>
+             <a class="contact-info-value is-phone" href="tel:+13476085682">(347) 608-5682</a>
+           </span>
+         </div>
+         <a class="whatsapp-cta" href="https://wa.me/13476085682?text=Hi%20Smart%20Merch%20Design%2C%20I%20would%20like%20help%20with%20a%20custom%20merch%20order." target="_blank" rel="noopener">💬 WhatsApp Us</a>
+         <div class="contact-info-row">
+           <span class="contact-info-icon" aria-hidden="true">✉️</span>
+           <span>
+             <span class="contact-info-label">Email</span>
+             <a class="contact-info-value" href="mailto:smartmerchdesign@gmail.com">smartmerchdesign@gmail.com</a>
+           </span>
+         </div>
+         <div class="contact-info-row">
+           <span class="contact-info-icon" aria-hidden="true">📍</span>
+           <span>
+             <span class="contact-info-label">Location</span>
+             <span class="contact-info-value">Oakhurst, NJ 07755</span>
+           </span>
+         </div>
+       </div>
+       <p class="contact-info-note">Send product ideas, deadlines, artwork questions, or order details. We will point you to the fastest next step.</p>
     </div>
   </div>
 </div>
@@ -301,6 +567,89 @@
   const form = document.getElementById('contactForm');
   const status = document.getElementById('formStatus');
   const btn = document.getElementById('submitBtn');
+  const artworkInput = document.getElementById('contactArtwork');
+  const artworkName = document.getElementById('contactArtworkName');
+  const contactSelects = Array.from(document.querySelectorAll('.contact-form-card select'));
+
+  function closeContactSelects(except) {
+    document.querySelectorAll('.contact-form-card .calc-select.open').forEach(menu => {
+      if (menu !== except) {
+        menu.classList.remove('open');
+        const trigger = menu.querySelector('.calc-select-trigger');
+        if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+  }
+
+  function syncContactSelect(select, wrapper) {
+    const current = select.options[select.selectedIndex];
+    const value = current ? current.value : '';
+    wrapper.querySelector('.calc-select-value').textContent = current ? current.textContent : '';
+    wrapper.querySelectorAll('.calc-select-option').forEach(option => {
+      option.setAttribute('aria-selected', option.dataset.value === value ? 'true' : 'false');
+    });
+  }
+
+  function enhanceContactSelect(select) {
+    select.classList.add('form-native-select');
+    const wrapper = document.createElement('div');
+    wrapper.className = 'calc-select';
+    const trigger = document.createElement('button');
+    trigger.className = 'calc-select-trigger';
+    trigger.type = 'button';
+    trigger.setAttribute('aria-haspopup', 'listbox');
+    trigger.setAttribute('aria-expanded', 'false');
+    trigger.innerHTML = '<span class="calc-select-value"></span><span class="calc-select-arrow" aria-hidden="true">v</span>';
+    const menu = document.createElement('div');
+    menu.className = 'calc-select-menu';
+    menu.setAttribute('role', 'listbox');
+
+    Array.from(select.options).forEach(option => {
+      const item = document.createElement('button');
+      item.className = 'calc-select-option';
+      item.type = 'button';
+      item.setAttribute('role', 'option');
+      item.dataset.value = option.value;
+      item.textContent = option.textContent;
+      item.addEventListener('click', () => {
+        select.value = option.value;
+        select.dispatchEvent(new Event('input', { bubbles: true }));
+        select.dispatchEvent(new Event('change', { bubbles: true }));
+        syncContactSelect(select, wrapper);
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      });
+      menu.appendChild(item);
+    });
+
+    trigger.addEventListener('click', () => {
+      const isOpen = wrapper.classList.contains('open');
+      closeContactSelects(wrapper);
+      wrapper.classList.toggle('open', !isOpen);
+      trigger.setAttribute('aria-expanded', String(!isOpen));
+    });
+    trigger.addEventListener('keydown', event => {
+      if (event.key === 'Escape') {
+        wrapper.classList.remove('open');
+        trigger.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    wrapper.append(trigger, menu);
+    select.after(wrapper);
+    syncContactSelect(select, wrapper);
+  }
+
+  contactSelects.forEach(enhanceContactSelect);
+  document.addEventListener('click', event => {
+    if (!event.target.closest('.contact-form-card .calc-select')) closeContactSelects();
+  });
+
+  if (artworkInput && artworkName) {
+    artworkInput.addEventListener('change', function() {
+      artworkName.textContent = this.files.length ? this.files[0].name : 'No file selected';
+    });
+  }
 
   form.addEventListener("submit", async function(event) {
     event.preventDefault();
@@ -319,6 +668,11 @@
         status.style.color = "var(--orange)";
         status.innerHTML = "Thanks! Your message has been sent successfully.";
         form.reset();
+        document.querySelectorAll('.contact-form-card .calc-select').forEach(wrapper => {
+          const select = wrapper.previousElementSibling;
+          if (select && select.tagName === 'SELECT') syncContactSelect(select, wrapper);
+        });
+        if (artworkName) artworkName.textContent = 'No file selected';
         btn.style.display = "none";
       } else {
         status.style.background = "rgba(255,0,0,.1)";

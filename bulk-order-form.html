@@ -165,6 +165,84 @@
 }
 .fg select { cursor: pointer; background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23f5891a' stroke-width='1.5' fill='none' stroke-linecap='round'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
 .fg select option { background: #0d2a5e; color: #fff; }
+.bq-native-select {
+  position: absolute;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  border: 0 !important;
+  opacity: 0;
+  pointer-events: none;
+}
+.bq-select { position: relative; }
+.bq-select-trigger {
+  width: 100%;
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.14);
+  border-radius: 10px;
+  padding: 13px 14px;
+  color: var(--white);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .2s ease, background .2s ease, box-shadow .2s ease;
+}
+.bq-select-trigger:hover,
+.bq-select.open .bq-select-trigger {
+  border-color: rgba(245,137,26,.48);
+  background: rgba(245,137,26,.08);
+  box-shadow: 0 12px 28px rgba(0,0,0,.2);
+}
+.bq-select-arrow {
+  color: var(--orange);
+  font-size: 18px;
+  line-height: 1;
+  transition: transform .2s ease;
+}
+.bq-select.open .bq-select-arrow { transform: rotate(180deg); }
+.bq-select-menu {
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  z-index: 90;
+  display: none;
+  max-height: min(360px, calc(100vh - 24px));
+  overflow: auto;
+  background: #122348;
+  border: 1px solid rgba(245,137,26,.28);
+  border-radius: 12px;
+  padding: 6px;
+  box-shadow: 0 22px 45px rgba(0,0,0,.38);
+}
+.bq-select.open .bq-select-menu { display: block; }
+.bq-select-option {
+  width: 100%;
+  display: block;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--white);
+  padding: 11px 12px;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+.bq-select-option:hover,
+.bq-select-option[aria-selected="true"] {
+  background: rgba(245,137,26,.16);
+  color: #fff;
+}
+.bq-select-option[aria-selected="true"] { box-shadow: inset 3px 0 0 var(--orange); }
+.bq-select-option:disabled {
+  color: rgba(255,255,255,.42);
+  cursor: default;
+}
 .fg textarea { resize: vertical; min-height: 100px; }
 .fg-hint { font-size: 12px; color: rgba(255,255,255,.3); margin-top: 6px; line-height: 1.5; }
 
@@ -852,10 +930,88 @@
 <script>
 let currentStep = 1;
 const totalSteps = 6;
+const quoteSelects = Array.from(document.querySelectorAll('.bq-wrap select'));
+
+function closeQuoteSelects(except) {
+  document.querySelectorAll('.bq-select.open').forEach(menu => {
+    if (menu !== except) {
+      menu.classList.remove('open');
+      const trigger = menu.querySelector('.bq-select-trigger');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+}
+
+function syncQuoteSelect(select, wrapper) {
+  const current = select.options[select.selectedIndex];
+  const value = current ? current.value : '';
+  wrapper.querySelector('.bq-select-value').textContent = current ? current.textContent : '';
+  wrapper.querySelectorAll('.bq-select-option').forEach(option => {
+    option.setAttribute('aria-selected', option.dataset.value === value ? 'true' : 'false');
+  });
+}
+
+function enhanceQuoteSelect(select) {
+  select.classList.add('bq-native-select');
+  const wrapper = document.createElement('div');
+  wrapper.className = 'bq-select';
+  const trigger = document.createElement('button');
+  trigger.className = 'bq-select-trigger';
+  trigger.type = 'button';
+  trigger.setAttribute('aria-haspopup', 'listbox');
+  trigger.setAttribute('aria-expanded', 'false');
+  trigger.innerHTML = '<span class="bq-select-value"></span><span class="bq-select-arrow" aria-hidden="true">v</span>';
+  const menu = document.createElement('div');
+  menu.className = 'bq-select-menu';
+  menu.setAttribute('role', 'listbox');
+
+  Array.from(select.options).forEach(option => {
+    const item = document.createElement('button');
+    item.className = 'bq-select-option';
+    item.type = 'button';
+    item.setAttribute('role', 'option');
+    item.dataset.value = option.value;
+    item.textContent = option.textContent;
+    item.disabled = option.disabled;
+    item.addEventListener('click', () => {
+      if (option.disabled) return;
+      select.value = option.value;
+      select.dispatchEvent(new Event('input', { bubbles: true }));
+      select.dispatchEvent(new Event('change', { bubbles: true }));
+      syncQuoteSelect(select, wrapper);
+      wrapper.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    });
+    menu.appendChild(item);
+  });
+
+  trigger.addEventListener('click', () => {
+    const isOpen = wrapper.classList.contains('open');
+    closeQuoteSelects(wrapper);
+    wrapper.classList.toggle('open', !isOpen);
+    trigger.setAttribute('aria-expanded', String(!isOpen));
+  });
+  trigger.addEventListener('keydown', event => {
+    if (event.key === 'Escape') {
+      wrapper.classList.remove('open');
+      trigger.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  wrapper.append(trigger, menu);
+  select.after(wrapper);
+  syncQuoteSelect(select, wrapper);
+}
+
+quoteSelects.forEach(enhanceQuoteSelect);
+document.addEventListener('click', event => {
+  if (!event.target.closest('.bq-select')) closeQuoteSelects();
+});
 
 /* ── Navigation ── */
 function goTo(step) {
   if (step > currentStep && !validateStep(currentStep)) return;
+  closeQuoteSelects();
   document.getElementById('step-' + currentStep).classList.remove('active');
   currentStep = step;
   document.getElementById('step-' + currentStep).classList.add('active');

@@ -317,6 +317,7 @@
       <div class="calc-field"><label for="calcQty">Quantity</label><input id="calcQty" type="number" min="12" value="48"></div>
       <div class="calc-field"><label for="calcMethod">Decoration</label><select id="calcMethod"><option value="screen">Screen Print</option><option value="dtg">DTG</option><option value="embroidery">Embroidery</option><option value="sublimation">Sublimation</option><option value="vinyl">Heat Transfer Vinyl</option><option value="foil">Foil Print</option><option value="patch">Embroidered Patch</option><option value="engraving">Laser Engraving</option><option value="uv">UV / Full Color Print</option><option value="label">Custom Label / Tag</option></select></div>
       <div class="calc-field"><label for="calcLocations">Print Locations</label><select id="calcLocations"><option value="1">1 Location</option><option value="2">2 Locations</option><option value="3">3 Locations</option><option value="4">4 Locations</option><option value="5">5+ Locations</option></select></div>
+      <div class="calc-field"><label for="calcColors">Design Colors</label><select id="calcColors"><option value="1">1 Color</option><option value="2">2 Colors</option><option value="3">3 Colors</option><option value="4">4 Colors</option><option value="5">5+ Colors</option><option value="full">Full Color / Photo</option></select></div>
       <div class="calc-field"><label for="calcRush">Timeline</label><select id="calcRush"><option value="0">Standard</option><option value="priority">Priority</option><option value="rush">Rush</option><option value="event">Event / Hard Deadline</option></select></div>
     </div>
     <div class="calc-result">
@@ -466,7 +467,8 @@
     rush: 1.18,
     event: 1.25
   };
-  const els = ['calcProduct','calcQty','calcMethod','calcLocations','calcRush'].map(id => document.getElementById(id));
+  const fullColorMethods = new Set(['dtg', 'sublimation', 'uv', 'engraving']);
+  const els = ['calcProduct','calcQty','calcMethod','calcLocations','calcColors','calcRush'].map(id => document.getElementById(id));
   const calcSelects = els.filter(el => el && el.tagName === 'SELECT');
 
   function closeCalcSelects(except){
@@ -546,12 +548,16 @@
   function update(){
     const product = els[0].value;
     const qty = Math.max(parseInt(els[1].value || '12', 10), 12);
+    const method = els[2].value;
     const locations = parseInt(els[3].value, 10);
-    const rushMultiplier = timelineMultiplier[els[4].value] || 1;
-    const unit = (productBase[product] + methodAdd[els[2].value] + ((locations - 1) * 4)) * discount(qty) * rushMultiplier;
+    const colorValue = els[4].value;
+    const colorCount = colorValue === 'full' ? 6 : parseInt(colorValue, 10);
+    const colorAdd = fullColorMethods.has(method) ? 0 : Math.max(colorCount - 1, 0) * 1.25;
+    const rushMultiplier = timelineMultiplier[els[5].value] || 1;
+    const unit = (productBase[product] + methodAdd[method] + ((locations - 1) * 4) + colorAdd) * discount(qty) * rushMultiplier;
     const total = Math.round(unit * qty);
     document.getElementById('calcTotal').textContent = '$' + total.toLocaleString();
-    document.getElementById('calcBreakdown').textContent = qty.toLocaleString() + ' units at about $' + unit.toFixed(2) + ' each before shipping, taxes, or unusual artwork requirements.';
+    document.getElementById('calcBreakdown').textContent = qty.toLocaleString() + ' units at about $' + unit.toFixed(2) + ' each before shipping, taxes, or unusual artwork requirements. ' + (colorAdd > 0 ? 'Includes an estimated design color adjustment.' : 'Color count has little impact for this decoration method.');
   }
   els.forEach(el => el && el.addEventListener('input', update));
   update();
