@@ -664,16 +664,7 @@
     }).then(response => {
       status.style.display = "block";
       if (response.ok) {
-        status.style.background = "rgba(245,137,26,.1)";
-        status.style.color = "var(--orange)";
-        status.innerHTML = "Thanks! Your message has been sent successfully.";
-        form.reset();
-        document.querySelectorAll('.contact-form-card .calc-select').forEach(wrapper => {
-          const select = wrapper.previousElementSibling;
-          if (select && select.tagName === 'SELECT') syncContactSelect(select, wrapper);
-        });
-        if (artworkName) artworkName.textContent = 'No file selected';
-        btn.style.display = "none";
+        window.location.href = "thank-you.html";
       } else {
         status.style.background = "rgba(255,0,0,.1)";
         status.style.color = "#ff6b6b";
@@ -692,6 +683,6 @@
   });
 </script>
 
-<script src="shared.js" defer></script>
+<script src="shared.js?v=mobile-thanks" defer></script>
 </body>
 </html>

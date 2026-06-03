@@ -1199,10 +1199,7 @@ async function submitForm() {
 
     if (res.ok) {
       /* Success */
-      document.querySelector('.progress-bar').style.display = 'none';
-      document.getElementById('step-6').style.display = 'none';
-      document.getElementById('successPanel').style.display = 'block';
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      window.location.href = 'thank-you.html';
     } else {
       /* Formspree returned a structured error — surface it */
       const msg = (json.errors && json.errors.length)
@@ -1239,6 +1236,6 @@ function showStatus(msg, type) {
 document.getElementById('neededBy').min = new Date().toISOString().split('T')[0];
 </script>
 
-<script src="shared.js" defer></script>
+<script src="shared.js?v=mobile-thanks" defer></script>
 </body>
 </html>

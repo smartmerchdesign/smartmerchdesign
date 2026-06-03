@@ -101,7 +101,9 @@
     '.story-text','.story-visual',
     '.mission-strip blockquote',
     '.sec-title','.sec-tag','.tl-day',
-    '.why-card','.ccard','.contact-card','.rbar','.etsy-cta'
+    '.why-card','.what-card','.trust-pill','.svc','.step','.cat',
+    '.audience-card','.proof-card',
+    '.ccard','.contact-card','.rbar','.etsy-cta'
   ];
 
   var revealObserver = new IntersectionObserver(function (entries) {
@@ -297,14 +299,21 @@
 
 
 
-  /* ── 13. QUICK CHAT / WHATSAPP LAUNCHER ── */
+  /* ── 13. QUICK CONTACT FORM ── */
   var chat = document.createElement('div');
   chat.className = 'quick-chat';
-  chat.innerHTML = '<div class="quick-chat-panel"><div class="quick-chat-title">Need merch help?</div><p>Send a quick message, request samples, or start a quote. We usually reply same business day.</p><div class="quick-chat-actions"><a href="https://wa.me/13476085682?text=Hi%20Smart%20Merch%20Design%2C%20I%20would%20like%20help%20with%20a%20custom%20merch%20order." target="_blank" rel="noopener">WhatsApp Us</a><a href="sample-request.html">Request Samples</a><a href="bulk-order-form.html">Start a Quote</a></div></div><button class="quick-chat-toggle" type="button" aria-expanded="false">Chat</button>';
+  chat.innerHTML = '<div class="quick-chat-panel"><div class="quick-chat-title">Quick Message</div><p>Send a note and we will reply as soon as possible.</p><form class="quick-chat-form" action="https://formspree.io/f/xykolgjb" method="POST"><input type="hidden" name="request_type" value="Quick chat message"><input type="hidden" name="_next" value="https://smartmerchdesign.com/thank-you.html"><label><span>Name</span><input type="text" name="name" autocomplete="name" required></label><label><span>Email</span><input type="email" name="email" autocomplete="email" required></label><label><span>Message</span><textarea name="message" rows="3" required></textarea></label><button type="submit">Send Message</button></form></div><button class="quick-chat-toggle" type="button" aria-expanded="false" aria-label="Open quick contact form">Chat</button>';
   document.body.appendChild(chat);
   var chatToggle = chat.querySelector('.quick-chat-toggle');
   chatToggle.addEventListener('click', function () {
     var open = chat.classList.toggle('open');
     chatToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
+
+  var mobileCall = document.createElement('a');
+  mobileCall.className = 'mobile-call-text';
+  mobileCall.href = 'tel:+13476085682';
+  mobileCall.setAttribute('aria-label', 'Call or text Smart Merch Design');
+  mobileCall.innerHTML = '<span>📞</span><strong>Call/Text</strong>';
+  document.body.appendChild(mobileCall);
 })();

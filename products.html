@@ -147,6 +147,9 @@
 .etsy-cta p { font-size:14px; color:rgba(255,255,255,.6); margin-top:10px; max-width:400px; line-height:1.7; }
 .etsy-cta-btn { display:inline-flex; align-items:center; gap:10px; background:var(--etsy); color:var(--white); font-family:var(--display); font-weight:700; font-size:18px; letter-spacing:1px; padding:16px 40px; border-radius:10px; text-decoration:none; flex-shrink:0; transition:all .25s; box-shadow:0 8px 32px rgba(241,101,33,.4); }
 .etsy-cta-btn:hover { background:#ff7535; transform:translateY(-2px); }
+.blank-band .section-actions { align-items:center; gap:18px 24px; }
+.blank-band .section-actions .form-submit { min-width:260px; }
+.blank-band .section-actions .text-link-cta { font-size:18px; }
 
 @media (max-width:900px) {
   .filter-bar, .cat-section { padding:24px 20px; }
@@ -159,6 +162,9 @@
   .prod-chip { padding:10px 10px; gap:7px; }
   .prod-chip-i { font-size:16px; }
   .prod-chip-name { font-size:12px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+  .blank-band .section-actions { align-items:stretch; }
+  .blank-band .section-actions .form-submit,
+  .blank-band .section-actions .text-link-cta { width:100%; justify-content:center; text-align:center; }
 }
 </style>
 </head>
@@ -437,6 +443,6 @@ function filterCat(btn, cat) {
   });
 }
 </script>
-<script src="shared.js" defer></script>
+<script src="shared.js?v=mobile-thanks" defer></script>
 </body>
 </html>

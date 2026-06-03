@@ -157,6 +157,20 @@
 .guarantee h3 { font-family:var(--display); font-size:32px; font-weight:900; color:var(--white); margin-bottom:10px; }
 .guarantee h3 em { color:var(--orange); font-style:normal; }
 .guarantee p { font-size:14px; color:var(--muted); line-height:1.8; }
+.minimum-band .section-actions { align-items:center; gap:18px 24px; }
+.minimum-band .section-actions .form-submit {
+  min-width:280px;
+  min-height:48px;
+  display:inline-flex;
+  align-items:center;
+  justify-content:center;
+}
+.minimum-band .section-actions .text-link-cta {
+  min-height:48px;
+  display:inline-flex;
+  align-items:center;
+  font-size:18px;
+}
 
 @media (max-width:900px) {
   .pricing-section, .add-ons { padding:40px 20px; }
@@ -164,6 +178,9 @@
   .addons-grid { grid-template-columns:1fr 1fr; }
   .guarantee { margin:0 20px 48px; flex-direction:column; padding:32px 24px; }
   .price-card.popular { transform:none; }
+  .minimum-band .section-actions { align-items:stretch; }
+  .minimum-band .section-actions .form-submit,
+  .minimum-band .section-actions .text-link-cta { width:100%; justify-content:center; text-align:center; }
 }
 .quote-calculator { padding:0 56px 72px; }
 .quote-calc { display:grid; grid-template-columns:1.15fr .85fr; gap:24px; background:linear-gradient(145deg,#152348,#0d1e3e); border:1px solid rgba(245,137,26,.22); border-radius:20px; padding:32px; }
@@ -563,6 +580,6 @@
   update();
 })();
 </script>
-<script src="shared.js" defer></script>
+<script src="shared.js?v=mobile-thanks" defer></script>
 </body>
 </html>
