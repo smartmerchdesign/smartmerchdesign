@@ -310,6 +310,47 @@
     chatToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
   });
 
+  document.addEventListener('submit', function (event) {
+    var form = event.target;
+    if (!form || !form.matches || !form.matches('form[action*="formspree.io"]')) return;
+    if (event.defaultPrevented || form.dataset.ajaxHandled === 'true') return;
+
+    event.preventDefault();
+    form.dataset.ajaxHandled = 'true';
+
+    var submitButton = form.querySelector('button[type="submit"], input[type="submit"]');
+    var originalText = submitButton ? submitButton.textContent : '';
+    if (submitButton) {
+      submitButton.disabled = true;
+      submitButton.textContent = 'Sending...';
+    }
+
+    fetch(form.action, {
+      method: form.method || 'POST',
+      body: new FormData(form),
+      headers: { 'Accept': 'application/json' }
+    }).then(function (response) {
+      if (response.ok) {
+        window.location.href = 'thank-you.html';
+        return;
+      }
+      throw new Error('Formspree returned an error');
+    }).catch(function () {
+      form.dataset.ajaxHandled = 'false';
+      if (submitButton) {
+        submitButton.disabled = false;
+        submitButton.textContent = originalText || 'Submit';
+      }
+      var error = form.querySelector('.form-error-message');
+      if (!error) {
+        error = document.createElement('p');
+        error.className = 'form-error-message';
+        form.appendChild(error);
+      }
+      error.textContent = 'Sorry, something went wrong. Please call or text us at (347) 608-5682.';
+    });
+  });
+
   var mobileCall = document.createElement('a');
   mobileCall.className = 'mobile-call-text';
   mobileCall.href = 'tel:+13476085682';
