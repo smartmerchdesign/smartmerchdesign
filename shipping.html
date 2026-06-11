@@ -149,8 +149,13 @@
   <div style="display:flex;gap:12px;align-items:center;">
     <a class="rush-nav" href="rush-orders.html">⚡ Rush</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
-    <a class="etsy-btn secondary-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
-    <a class="etsy-btn secondary-ebay" href="https://www.ebay.com/usr/smartmerchdesign" target="_blank" rel="noopener">🛒 eBay</a>
+    <div class="nav-store">
+      <button class="etsy-btn store-toggle" type="button" aria-haspopup="true">🛍️ Stores ▾</button>
+      <div class="store-menu">
+        <a href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
+        <a href="https://www.ebay.com/usr/smartmerchdesign" target="_blank" rel="noopener">🛒 eBay</a>
+      </div>
+    </div>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
     </div>

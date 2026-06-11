@@ -147,6 +147,7 @@ nav {
 .nav-links a:hover { color: var(--orange); }
 .etsy-btn {
   display: inline-flex; align-items: center; gap: 8px;
+  flex: 0 0 auto;
   background: var(--etsy); color: var(--white);
   font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 1px;
   padding: 9px 20px; border-radius: 6px; text-decoration: none;
@@ -155,6 +156,62 @@ nav {
   white-space: nowrap; line-height: 1.05; min-height: 40px; justify-content: center;
 }
 .etsy-btn:hover { background: #ff7535; transform: translateY(-1px); }
+.etsy-btn:focus-visible {
+  outline: 2px solid rgba(255,168,64,.85);
+  outline-offset: 3px;
+}
+.nav-store {
+  position: relative;
+  flex: 0 0 auto;
+}
+.store-toggle {
+  border: 1px solid rgba(241,101,33,.45);
+  background: transparent;
+  box-shadow: none;
+  cursor: pointer;
+}
+.store-toggle:hover,
+.nav-store:focus-within .store-toggle {
+  background: rgba(241,101,33,.14);
+}
+.store-menu {
+  position: absolute;
+  top: calc(100% + 10px);
+  right: 0;
+  min-width: 172px;
+  padding: 8px;
+  border-radius: 10px;
+  background: rgba(8,15,36,.98);
+  border: 1px solid rgba(245,137,26,.22);
+  box-shadow: 0 18px 44px rgba(0,0,0,.45);
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-4px);
+  transition: opacity .18s, transform .18s;
+}
+.nav-store:hover .store-menu,
+.nav-store:focus-within .store-menu {
+  opacity: 1;
+  pointer-events: auto;
+  transform: translateY(0);
+}
+.store-menu a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border-radius: 7px;
+  color: var(--white);
+  text-decoration: none;
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: .8px;
+  white-space: nowrap;
+}
+.store-menu a:hover {
+  background: rgba(255,255,255,.08);
+}
 
 /* ─── HERO ─── */
 .hero {
@@ -650,7 +707,7 @@ nav > div:last-child { flex: 0 0 auto; }
   .quote-btn, .rush-nav, .etsy-btn { font-size: 14px; padding: 8px 13px; }
 }
 @media (max-width: 1080px) {
-  .secondary-etsy, .secondary-ebay { display:none; }
+  .nav-store, .secondary-etsy, .secondary-ebay { display:none; }
 }
 @media (max-width: 1020px) {
   nav { padding: 0 24px; }
@@ -664,7 +721,7 @@ nav > div:last-child { flex: 0 0 auto; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 10px 12px; border-radius: 8px; }
   .hamburger { display: flex; }
-  .etsy-btn, .secondary-etsy, .secondary-ebay { display: none; }
+  .etsy-btn, .nav-store, .secondary-etsy, .secondary-ebay { display: none; }
   .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; min-height: auto; }
   .hero-right { display: none; }
   .why, .services, .process, .products, .ratings, .contact { padding: 72px 24px; }
@@ -948,8 +1005,13 @@ nav > div:last-child { flex: 0 0 auto; }
   <div style="display:flex;gap:12px;align-items:center;">
     <a class="rush-nav" href="rush-orders.html">⚡ Rush</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
-    <a class="etsy-btn secondary-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
-    <a class="etsy-btn secondary-ebay" href="https://www.ebay.com/usr/smartmerchdesign" target="_blank" rel="noopener">🛒 eBay</a>
+    <div class="nav-store">
+      <button class="etsy-btn store-toggle" type="button" aria-haspopup="true">🛍️ Stores ▾</button>
+      <div class="store-menu">
+        <a href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
+        <a href="https://www.ebay.com/usr/smartmerchdesign" target="_blank" rel="noopener">🛒 eBay</a>
+      </div>
+    </div>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
     </div>
