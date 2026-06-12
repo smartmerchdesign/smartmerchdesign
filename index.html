@@ -91,7 +91,6 @@
   ],
   "sameAs": [
     "https://smartmerchdesignco.etsy.com",
-    "https://www.ebay.com/usr/smartmerchdesign",
     "https://www.instagram.com/smartmerchdesign",
     "https://www.facebook.com/Smartmerchdesign/"
   ]
@@ -111,7 +110,6 @@
   --orange:  #f5891a;
   --orlo:    #ffa840;
   --etsy:    #f16521;
-  --ebay:    #3665f3;
   --white:   #ffffff;
   --offwhite:#f4f6fb;
   --muted:   rgba(255,255,255,0.52);
@@ -148,6 +146,8 @@ nav {
 .etsy-btn {
   display: inline-flex; align-items: center; gap: 8px;
   flex: 0 0 auto;
+  width: auto;
+  max-width: max-content;
   background: var(--etsy); color: var(--white);
   font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 1px;
   padding: 9px 20px; border-radius: 6px; text-decoration: none;
@@ -160,59 +160,6 @@ nav {
   outline: 2px solid rgba(255,168,64,.85);
   outline-offset: 3px;
 }
-.nav-store {
-  position: relative;
-  flex: 0 0 auto;
-}
-.store-toggle {
-  border: 1px solid rgba(241,101,33,.45);
-  background: transparent;
-  box-shadow: none;
-  cursor: pointer;
-}
-.store-toggle:hover,
-.nav-store:focus-within .store-toggle {
-  background: rgba(241,101,33,.14);
-}
-.store-menu {
-  position: absolute;
-  top: calc(100% + 10px);
-  right: 0;
-  min-width: 172px;
-  padding: 8px;
-  border-radius: 10px;
-  background: rgba(8,15,36,.98);
-  border: 1px solid rgba(245,137,26,.22);
-  box-shadow: 0 18px 44px rgba(0,0,0,.45);
-  opacity: 0;
-  pointer-events: none;
-  transform: translateY(-4px);
-  transition: opacity .18s, transform .18s;
-}
-.nav-store:hover .store-menu,
-.nav-store:focus-within .store-menu {
-  opacity: 1;
-  pointer-events: auto;
-  transform: translateY(0);
-}
-.store-menu a {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 10px 12px;
-  border-radius: 7px;
-  color: var(--white);
-  text-decoration: none;
-  font-family: var(--display);
-  font-size: 15px;
-  font-weight: 700;
-  letter-spacing: .8px;
-  white-space: nowrap;
-}
-.store-menu a:hover {
-  background: rgba(255,255,255,.08);
-}
-
 /* ─── HERO ─── */
 .hero {
   min-height: calc(100vh - 68px);
@@ -586,16 +533,13 @@ footer {
 .footer-logo { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 2px; display: flex; align-items: center; gap: 8px; }
 .footer-logo em { color: var(--orange); font-style: normal; }
 .footer-copy { font-size: 12px; color: var(--muted); text-align: center; }
-.footer-etsy,
-.footer-ebay {
+.footer-etsy {
   display: inline-flex; align-items: center; gap: 8px; justify-self: end;
   background: rgba(241,101,33,.15); border: 1px solid rgba(241,101,33,.3);
   color: var(--etsy); font-size: 13px; font-weight: 600;
   padding: 8px 16px; border-radius: 6px; text-decoration: none; transition: all .2s;
 }
 .footer-etsy:hover { background: var(--etsy); color: var(--white); }
-.footer-ebay { background: rgba(54,101,243,.14); border-color: rgba(54,101,243,.32); color: #8ea8ff; }
-.footer-ebay:hover { background: var(--ebay); color: var(--white); }
 .footer-actions {
   display: inline-flex;
   align-items: center;
@@ -682,7 +626,7 @@ footer {
   display: block; width: 22px; height: 2px;
   background: var(--white); border-radius: 2px; transition: all .3s;
 }
-nav > div:last-child { flex: 0 0 auto; }
+nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
 
 /* ─── ANIMATIONS ─── */
 @keyframes up {
@@ -706,8 +650,8 @@ nav > div:last-child { flex: 0 0 auto; }
   .nav-links a { font-size: 12px; letter-spacing: .55px; }
   .quote-btn, .rush-nav, .etsy-btn { font-size: 14px; padding: 8px 13px; }
 }
-@media (max-width: 1080px) {
-  .nav-store, .secondary-etsy, .secondary-ebay { display:none; }
+@media (max-width: 1140px) {
+  .secondary-etsy { display:none; }
 }
 @media (max-width: 1020px) {
   nav { padding: 0 24px; }
@@ -721,7 +665,7 @@ nav > div:last-child { flex: 0 0 auto; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 10px 12px; border-radius: 8px; }
   .hamburger { display: flex; }
-  .etsy-btn, .nav-store, .secondary-etsy, .secondary-ebay { display: none; }
+  .etsy-btn, .secondary-etsy { display: none; }
   .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; min-height: auto; }
   .hero-right { display: none; }
   .why, .services, .process, .products, .ratings, .contact { padding: 72px 24px; }
@@ -756,10 +700,8 @@ nav > div:last-child { flex: 0 0 auto; }
   white-space: nowrap; line-height: 1.05; min-height: 40px; justify-content: center;
 }
 .quote-btn:hover { background: var(--orlo); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,137,26,.45); }
-.secondary-etsy { background: transparent; border: 1px solid rgba(241,101,33,.45); box-shadow: none; padding-inline: 16px; }
+.secondary-etsy { background: transparent; border: 1px solid rgba(241,101,33,.45); box-shadow: none; padding-inline: 16px; width:auto !important; max-width:max-content; }
 .secondary-etsy:hover { background: rgba(241,101,33,.14); }
-.secondary-ebay { background: transparent; border: 1px solid rgba(54,101,243,.48); color: var(--white); box-shadow: none; padding-inline: 16px; }
-.secondary-ebay:hover { background: rgba(54,101,243,.16); }
 .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:16px; animation: up .7s .24s ease both; }
 .hero-actions .hero-etsy { animation:none; flex:0 0 auto; width:auto; max-width:100%; min-height:0; line-height:1.2; white-space:normal; align-self:flex-start; }
 .hero-secondary, .banner-secondary { color: var(--white); text-decoration:none; font-weight:700; font-size:14px; opacity:.78; transition:opacity .2s,color .2s; }
@@ -793,7 +735,7 @@ nav > div:last-child { flex: 0 0 auto; }
 .local-keywords { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
 .local-keywords span { border:1px solid rgba(245,137,26,.28); background:rgba(245,137,26,.08); color:rgba(255,255,255,.78); padding:8px 13px; border-radius:999px; font-size:13px; }
 @media (max-width: 900px) {
-  .secondary-etsy, .secondary-ebay { display:none; }
+  .secondary-etsy { display:none; }
   .what-grid { grid-template-columns:1fr; }
   .what-we-do, .local-seo-section { padding:48px 24px; }
 }
@@ -1005,13 +947,7 @@ nav > div:last-child { flex: 0 0 auto; }
   <div style="display:flex;gap:12px;align-items:center;">
     <a class="rush-nav" href="rush-orders.html">⚡ Rush</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
-    <div class="nav-store">
-      <button class="etsy-btn store-toggle" type="button" aria-haspopup="true">🛍️ Stores ▾</button>
-      <div class="store-menu">
-        <a href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
-        <a href="https://www.ebay.com/usr/smartmerchdesign" target="_blank" rel="noopener">🛒 eBay</a>
-      </div>
-    </div>
+    <a class="etsy-btn secondary-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
     </div>
@@ -1392,7 +1328,7 @@ nav > div:last-child { flex: 0 0 auto; }
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M7.8 2.75h8.4A5.06 5.06 0 0 1 21.25 7.8v8.4a5.06 5.06 0 0 1-5.05 5.05H7.8a5.06 5.06 0 0 1-5.05-5.05V7.8A5.06 5.06 0 0 1 7.8 2.75Zm0 1.8A3.25 3.25 0 0 0 4.55 7.8v8.4a3.25 3.25 0 0 0 3.25 3.25h8.4a3.25 3.25 0 0 0 3.25-3.25V7.8a3.25 3.25 0 0 0-3.25-3.25H7.8Zm4.2 3.22a4.23 4.23 0 1 1 0 8.46 4.23 4.23 0 0 1 0-8.46Zm0 1.8a2.43 2.43 0 1 0 0 4.86 2.43 2.43 0 0 0 0-4.86Zm5.04-2.18a1.03 1.03 0 1 1 0 2.06 1.03 1.03 0 0 1 0-2.06Z"/></svg>
 </a><a class="social-icon-link social-facebook" href="https://www.facebook.com/Smartmerchdesign/" target="_blank" rel="noopener" aria-label="Follow Smart Merch Design on Facebook" title="Facebook">
   <svg viewBox="0 0 24 24" aria-hidden="true" focusable="false"><path d="M13.5 21.5v-8.1h2.72l.41-3.16H13.5V8.22c0-.91.25-1.54 1.57-1.54h1.68V3.85c-.29-.04-1.29-.13-2.45-.13-2.42 0-4.08 1.48-4.08 4.19v2.34H7.48v3.16h2.74v8.1h3.28Z"/></svg>
-</a></span><a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Shop on Etsy</a><a class="footer-ebay" href="https://www.ebay.com/usr/smartmerchdesign" target="_blank" rel="noopener">🛒 Shop on eBay</a></div>
+</a></span><a class="footer-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Shop on Etsy</a></div>
   <div class="footer-links">
     <a href="index.html">Home</a><a href="about.html">About</a><a href="services.html">Services</a>
     <a href="products.html">Products</a><a href="portfolio.html">Portfolio</a><a href="pricing.html">Pricing</a>
