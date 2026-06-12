@@ -160,6 +160,39 @@ nav {
   outline: 2px solid rgba(255,168,64,.85);
   outline-offset: 3px;
 }
+.marketplace-nav-btn {
+  flex: 0 0 auto;
+  width: 92px;
+  height: 44px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
+  padding: 0;
+  border-radius: 8px;
+  border: 1px solid rgba(241,101,33,.5);
+  background: transparent;
+  color: var(--white);
+  font-family: var(--display);
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  line-height: 1;
+  text-decoration: none;
+  white-space: nowrap;
+  overflow: hidden;
+  align-self: center;
+  box-shadow: none;
+  transition: background .2s, transform .2s, border-color .2s;
+}
+.marketplace-nav-btn:hover {
+  background: rgba(241,101,33,.14);
+  transform: translateY(-1px);
+}
+.marketplace-nav-btn:focus-visible {
+  outline: 2px solid rgba(255,168,64,.85);
+  outline-offset: 3px;
+}
 /* ─── HERO ─── */
 .hero {
   min-height: calc(100vh - 68px);
@@ -651,7 +684,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   .quote-btn, .rush-nav, .etsy-btn { font-size: 14px; padding: 8px 13px; }
 }
 @media (max-width: 1140px) {
-  .secondary-etsy { display:none; }
+  .marketplace-nav-btn, .secondary-etsy { display:none; }
 }
 @media (max-width: 1020px) {
   nav { padding: 0 24px; }
@@ -665,7 +698,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 10px 12px; border-radius: 8px; }
   .hamburger { display: flex; }
-  .etsy-btn, .secondary-etsy { display: none; }
+  .etsy-btn, .marketplace-nav-btn, .secondary-etsy { display: none; }
   .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; min-height: auto; }
   .hero-right { display: none; }
   .why, .services, .process, .products, .ratings, .contact { padding: 72px 24px; }
@@ -947,7 +980,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   <div style="display:flex;gap:12px;align-items:center;">
     <a class="rush-nav" href="rush-orders.html">⚡ Rush</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
-    <a class="etsy-btn secondary-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
+    <a class="marketplace-nav-btn" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
     </div>

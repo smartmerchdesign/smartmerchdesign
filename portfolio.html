@@ -113,17 +113,24 @@
 .port-card:hover .port-overlay { opacity:1; }
 .port-card.tall { grid-row:span 2; aspect-ratio:auto; min-height:480px; }
 .port-card.wide { grid-column:span 2; aspect-ratio:16/9; }
-.port-bg {
-  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
-  font-size:72px; position:absolute; inset:0;
-  background:linear-gradient(135deg, var(--from), var(--to));
-}
-.port-overlay {
-  position:absolute; inset:0; background:rgba(8,15,36,.85);
-  display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
-  padding:24px 22px; opacity:0; transition:opacity .3s;
-  backdrop-filter:blur(4px);
-}
+	.port-bg {
+	  width:100%; height:100%; display:flex; align-items:center; justify-content:center;
+	  font-size:72px; position:absolute; inset:0;
+	  background:linear-gradient(135deg, var(--from), var(--to));
+	}
+	.port-img {
+	  position:absolute; inset:0; width:100%; height:100%;
+	  object-fit:cover; display:block; transform:scale(1.01);
+	  transition:transform .35s ease, filter .35s ease;
+	}
+	.port-card:hover .port-img { transform:scale(1.06); filter:saturate(1.08) contrast(1.04); }
+	.port-overlay {
+	  position:absolute; inset:0; background:linear-gradient(180deg,rgba(8,15,36,.06),rgba(8,15,36,.92));
+	  display:flex; flex-direction:column; align-items:flex-start; justify-content:flex-end;
+	  padding:24px 22px; opacity:1; transition:background .3s;
+	  backdrop-filter:none;
+	}
+	.port-card:hover .port-overlay { background:linear-gradient(180deg,rgba(8,15,36,.18),rgba(8,15,36,.96)); }
 .port-tag { font-size:10px; font-weight:700; letter-spacing:2px; text-transform:uppercase; color:var(--orange); margin-bottom:6px; }
 .port-title { font-family:var(--display); font-size:22px; font-weight:900; color:var(--white); margin-bottom:6px; line-height:1.1; }
 .port-sub { font-size:12px; color:var(--muted); }
@@ -210,7 +217,7 @@
   <div style="display:flex;gap:12px;align-items:center;">
     <a class="rush-nav" href="rush-orders.html">⚡ Rush</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
-    <a class="etsy-btn secondary-etsy" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
+    <a class="marketplace-nav-btn" href="https://smartmerchdesignco.etsy.com" target="_blank" rel="noopener">🛍️ Etsy</a>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
     </div>
@@ -221,12 +228,12 @@
   <div class="page-hero-inner">
     <div class="page-tag">💡 Our Work</div>
     <h1>MERCH THAT <em>MOVES</em> PEOPLE</h1>
-    <p>Hundreds of customers helped. Thousands of custom products produced. Every single one made with strategy, craft, and care. Here's a taste of what smart merch looks like in the wild.</p>
+	    <p>Realistic sample product examples for the kinds of custom apparel, drinkware, event kits, and branded merch Smart Merch Design can help create.</p>
   </div>
 </div>
 
 <div class="portfolio-intro">
-  <p style="font-size:15px;color:var(--muted);line-height:1.8;">Hover over any project to learn more. From startup launch kits to corporate event merch to sports team uniforms — we've done it all.</p>
+	  <p style="font-size:15px;color:var(--muted);line-height:1.8;">These sample visuals show product styles and presentation ideas. Send your logo, colors, quantity, and deadline, and we will recommend the right blanks, decoration method, and budget path.</p>
 </div>
 
 <section class="proof-process">
@@ -242,126 +249,135 @@
 
 <div class="portfolio-grid">
 
-  <div class="port-card tall" style="--from:#0d2a5e;--to:#152348;">
-    <div class="port-bg">👕</div>
-    <div class="port-overlay">
-      <div class="port-tag">Corporate Apparel</div>
-      <div class="port-title">TechCorp Annual Retreat</div>
-      <div class="port-sub">300 custom hoodies · Screen print · 2-color</div>
-    </div>
-  </div>
+		  <div class="port-card tall" style="--from:#0d2a5e;--to:#152348;">
+		    <img class="port-img" src="assets/portfolio/tshirt-design-variety.jpg" alt="Sample custom t-shirts with different graphic design styles">
+		    <div class="port-overlay">
+		      <div class="port-tag">Custom T-Shirts</div>
+		      <div class="port-title">Different Designs, Same Clean Finish</div>
+		      <div class="port-sub">Mascot graphics, event numbers, chest icons, and bold back-print styles</div>
+		    </div>
+		  </div>
 
-  <div class="port-card" style="--from:#2a1000;--to:#5c2500;">
-    <div class="port-bg">🧢</div>
-    <div class="port-overlay">
-      <div class="port-tag">Headwear</div>
-      <div class="port-title">Elevate Athletics Dad Hats</div>
-      <div class="port-sub">144 units · Embroidery · 3 colorways</div>
-    </div>
-  </div>
+		  <div class="port-card" style="--from:#111f3f;--to:#263f72;">
+		    <img class="port-img" src="assets/portfolio/apparel-stack.jpg" alt="Sample custom hoodies and apparel stacked in a merch studio">
+		    <div class="port-overlay">
+		      <div class="port-tag">Hoodies & Apparel</div>
+		      <div class="port-title">Layered Merch Sets</div>
+		      <div class="port-sub">Hoodies, tees, crewnecks, and apparel bundles for teams or shops</div>
+		    </div>
+		  </div>
 
-  <div class="port-card" style="--from:#1a2a0a;--to:#2a4a10;">
-    <div class="port-bg">🛍️</div>
-    <div class="port-overlay">
-      <div class="port-tag">Promotional</div>
-      <div class="port-title">Spark Agency Event Kit</div>
-      <div class="port-sub">500 tote bags · Screen print · 1-color</div>
-    </div>
-  </div>
+		  <div class="port-card" style="--from:#2a1000;--to:#5c2500;">
+	    <img class="port-img" src="assets/portfolio/embroidered-hats.jpg" alt="Sample embroidered hats arranged on a merch studio table">
+	    <div class="port-overlay">
+	      <div class="port-tag">Headwear</div>
+	      <div class="port-title">Embroidered Hats</div>
+	      <div class="port-sub">Dad hats, snapbacks, beanies, and custom thread colors</div>
+	    </div>
+	  </div>
 
-  <div class="port-card wide" style="--from:#1a0a2a;--to:#2a104a;">
-    <div class="port-bg">☕</div>
-    <div class="port-overlay">
-      <div class="port-tag">Drinkware</div>
-      <div class="port-title">Morning Ritual Coffee Co. — Full Drinkware Line</div>
-      <div class="port-sub">Mugs, tumblers, water bottles · Custom branding · 6 SKUs</div>
-    </div>
-  </div>
+	  <div class="port-card" style="--from:#1a2a0a;--to:#2a4a10;">
+	    <img class="port-img" src="assets/portfolio/tote-event-kit.jpg" alt="Sample tote bags and event kit products arranged as a flat lay">
+	    <div class="port-overlay">
+	      <div class="port-tag">Promotional</div>
+	      <div class="port-title">Totes & Event Kits</div>
+	      <div class="port-sub">Giveaways, welcome bags, stickers, notebooks, and inserts</div>
+	    </div>
+	  </div>
 
-  <div class="port-card" style="--from:#0a1a2a;--to:#102a3a;">
-    <div class="port-bg">🎽</div>
-    <div class="port-overlay">
-      <div class="port-tag">Sports Team</div>
-      <div class="port-title">Jersey Shore FC Uniforms</div>
-      <div class="port-sub">Sublimation · Full roster · Custom numbers & names</div>
-    </div>
-  </div>
+	  <div class="port-card wide" style="--from:#1a0a2a;--to:#2a104a;">
+	    <img class="port-img" src="assets/portfolio/drinkware-lineup.jpg" alt="Sample custom drinkware lineup with mugs, tumblers, and bottles">
+	    <div class="port-overlay">
+	      <div class="port-tag">Drinkware</div>
+	      <div class="port-title">Mugs, Tumblers & Bottles</div>
+	      <div class="port-sub">Custom drinkware for teams, events, shops, and gifts</div>
+	    </div>
+	  </div>
 
-  <div class="port-card" style="--from:#2a0a0a;--to:#4a1010;">
-    <div class="port-bg">🎒</div>
-    <div class="port-overlay">
-      <div class="port-tag">Accessories</div>
-      <div class="port-title">Red Brick Realty Welcome Kits</div>
-      <div class="port-sub">Backpack + notebook + pen + mug · Kitted sets · 80 units</div>
-    </div>
-  </div>
+	  <div class="port-card" style="--from:#0a1a2a;--to:#102a3a;">
+	    <img class="port-img" src="assets/portfolio/team-jerseys.jpg" alt="Sample custom team jerseys and performance shirts on a rack">
+	    <div class="port-overlay">
+	      <div class="port-tag">Sports Team</div>
+	      <div class="port-title">Team Jerseys & Performance Gear</div>
+	      <div class="port-sub">Roster apparel, event shirts, names, numbers, and sizing support</div>
+	    </div>
+	  </div>
 
-  <div class="port-card" style="--from:#0a2a1a;--to:#104a2a;">
-    <div class="port-bg">🧥</div>
-    <div class="port-overlay">
-      <div class="port-tag">Nonprofit</div>
-      <div class="port-title">Green Future NJ Awareness Run</div>
-      <div class="port-sub">200 zip-ups · Embroidery + screen print combo</div>
-    </div>
-  </div>
+	  <div class="port-card" style="--from:#2a0a0a;--to:#4a1010;">
+	    <img class="port-img" src="assets/portfolio/welcome-kits.jpg" alt="Sample corporate welcome kits with boxes, notebooks, mugs, and apparel">
+	    <div class="port-overlay">
+	      <div class="port-tag">Accessories</div>
+	      <div class="port-title">Welcome Kits & Packaging</div>
+	      <div class="port-sub">Kitting, boxed sets, inserts, and multi-item branded packages</div>
+	    </div>
+	  </div>
 
-  <div class="port-card" style="--from:#2a2a0a;--to:#4a4a10;">
-    <div class="port-bg">📱</div>
-    <div class="port-overlay">
-      <div class="port-tag">Tech Accessories</div>
-      <div class="port-title">DevCon Hackathon Swag</div>
-      <div class="port-sub">Phone cases, mouse pads, stickers · 250 attendees</div>
-    </div>
-  </div>
+	  <div class="port-card" style="--from:#0a2a1a;--to:#104a2a;">
+	    <img class="port-img" src="assets/portfolio/embroidered-fleece.jpg" alt="Sample embroidered fleece and zip-up jackets in a merch studio">
+	    <div class="port-overlay">
+	      <div class="port-tag">Nonprofit</div>
+	      <div class="port-title">Fleece, Jackets & Outerwear</div>
+	      <div class="port-sub">Premium blanks, embroidery placement, and seasonal apparel</div>
+	    </div>
+	  </div>
 
-  <div class="port-card" style="--from:#2a0a2a;--to:#4a104a;">
-    <div class="port-bg">🖼️</div>
-    <div class="port-overlay">
-      <div class="port-tag">Art Prints</div>
-      <div class="port-title">Boardwalk Gallery Pop-Up</div>
-      <div class="port-sub">Canvas prints, framed posters, metal prints · 12 artworks</div>
-    </div>
-  </div>
+	  <div class="port-card" style="--from:#2a2a0a;--to:#4a4a10;">
+	    <img class="port-img" src="assets/portfolio/tech-swag.jpg" alt="Sample tech swag with mouse pads, phone cases, stickers, and lanyards">
+	    <div class="port-overlay">
+	      <div class="port-tag">Tech Accessories</div>
+	      <div class="port-title">Tech Swag & Desk Items</div>
+	      <div class="port-sub">Mouse pads, stickers, phone cases, lanyards, and desk gifts</div>
+	    </div>
+	  </div>
+
+	  <div class="port-card" style="--from:#2a0a2a;--to:#4a104a;">
+	    <img class="port-img" src="assets/portfolio/art-prints.jpg" alt="Sample framed posters, canvas prints, metal prints, and sticker sheets">
+	    <div class="port-overlay">
+	      <div class="port-tag">Art Prints</div>
+	      <div class="port-title">Prints, Posters & Stickers</div>
+	      <div class="port-sub">Canvas, framed posters, metal prints, decals, and sticker sheets</div>
+	    </div>
+	  </div>
 
 </div>
 
 <!-- TESTIMONIALS -->
 <section class="testimonials">
   <div class="sec-tag" style="color:var(--navy)">What They Said</div>
-  <h2 class="sec-title">Real <em>Results.</em> Real Reviews.</h2>
+	  <h2 class="sec-title">What Buyers <em>Notice.</em></h2>
   <div class="testi-grid">
     <div class="tc">
       <div class="tc-stars">★★★★★</div>
-      <p class="tc-text">Honestly the smartest decision we made for our company retreat was ordering through Smart Merch. Quality was incredible and everything came ahead of schedule.</p>
-      <div class="tc-author"><div class="tc-av">JR</div><div><div class="tc-name">Jessica R.</div><div class="tc-role">Marketing Director, TechCorp</div></div></div>
+	      <p class="tc-text">The best merch starts before production. Clear product recommendations, accurate mockups, and realistic timelines make the whole order easier to approve.</p>
+	      <div class="tc-author"><div class="tc-av">01</div><div><div class="tc-name">Clear Proofs</div><div class="tc-role">Logo placement, scale, and color direction</div></div></div>
     </div>
     <div class="tc">
       <div class="tc-stars">★★★★★</div>
-      <p class="tc-text">These guys actually get it. They didn't just print a logo — they thought about the design and made it look like it belonged there. Smart merch indeed.</p>
-      <div class="tc-author"><div class="tc-av">MK</div><div><div class="tc-name">Marcus K.</div><div class="tc-role">Founder, Elevate Athletics</div></div></div>
+	      <p class="tc-text">Your logo should feel intentional on the product. We help match the decoration method, blank, and placement to the way the item will actually be used.</p>
+	      <div class="tc-author"><div class="tc-av">02</div><div><div class="tc-name">Smart Product Picks</div><div class="tc-role">Apparel, drinkware, kits, and promo items</div></div></div>
     </div>
     <div class="tc">
       <div class="tc-stars">★★★★★</div>
-      <p class="tc-text">500 tote bags, 3 days early, zero issues. If you want merch done the smart way — with care, quality, and zero stress — this is your team.</p>
-      <div class="tc-author"><div class="tc-av">SL</div><div><div class="tc-name">Sarah L.</div><div class="tc-role">Events Manager, Spark Agency</div></div></div>
+	      <p class="tc-text">For event dates, launches, and group orders, planning matters. Quantity, sizes, artwork, shipping, and rush timing are all handled before the order moves forward.</p>
+	      <div class="tc-author"><div class="tc-av">03</div><div><div class="tc-name">Deadline Planning</div><div class="tc-role">Rush orders, bulk runs, and fulfillment</div></div></div>
     </div>
   </div>
 </section>
 
 <!-- BRANDS -->
 <section class="brands-strip">
-  <div class="brands-label">Trusted by brands across New Jersey & beyond</div>
-  <div class="brands-row">
-    <div class="brand-pill">TechCorp</div>
-    <div class="brand-pill">Elevate Athletics</div>
-    <div class="brand-pill">Spark Agency</div>
-    <div class="brand-pill">Jersey Shore FC</div>
-    <div class="brand-pill">Green Future NJ</div>
-    <div class="brand-pill">Red Brick Realty</div>
-    <div class="brand-pill">Morning Ritual Coffee</div>
-    <div class="brand-pill">DevCon</div>
-    <div class="brand-pill">Boardwalk Gallery</div>
-    <div class="brand-pill">+ 490 more</div>
+	  <div class="brands-label">Built for groups across New Jersey & beyond</div>
+	  <div class="brands-row">
+	    <div class="brand-pill">Local Businesses</div>
+	    <div class="brand-pill">Schools & Camps</div>
+	    <div class="brand-pill">Teams & Leagues</div>
+	    <div class="brand-pill">Events & Fundraisers</div>
+	    <div class="brand-pill">Creators & Shops</div>
+	    <div class="brand-pill">Synagogues & Clubs</div>
+	    <div class="brand-pill">Corporate Gifts</div>
+	    <div class="brand-pill">Rush Orders</div>
+	    <div class="brand-pill">Bulk Runs</div>
+	    <div class="brand-pill">Nationwide Shipping</div>
   </div>
 </section>
 
