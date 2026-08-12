@@ -785,6 +785,26 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
 .what-actions { margin-top:36px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
 .what-actions .quote-btn { font-size:18px; padding:14px 28px; }
 .what-actions .hero-secondary { color:var(--navy); display:inline-flex; align-items:center; min-height:48px; line-height:1.1; }
+.featured-products { padding: 72px 56px; background: var(--offwhite); color: var(--navy); }
+.fp-sub { color:#6b7a99; font-size:15px; max-width:560px; margin-top:8px; }
+.fp-grid { display:grid; grid-template-columns: repeat(3, 1fr); gap:20px; margin-top:36px; }
+.fp-card {
+  background:#fff; border-radius:16px; overflow:hidden;
+  box-shadow:0 6px 28px rgba(13,42,94,.08); border:1px solid rgba(13,42,94,.06);
+  transition: transform .32s cubic-bezier(.22,1,.36,1), box-shadow .32s, border-color .32s;
+}
+.fp-card:hover { transform: translateY(-6px); box-shadow:0 20px 48px rgba(13,42,94,.13); border-color:rgba(245,137,26,.18); }
+.fp-img { aspect-ratio: 4/3; overflow:hidden; background:#eef1f6; }
+.fp-img img { width:100%; height:100%; object-fit:cover; display:block; transition: transform .5s cubic-bezier(.22,1,.36,1); }
+.fp-card:hover .fp-img img { transform: scale(1.06); }
+.fp-body { padding:20px 22px 24px; }
+.fp-body h3 { font-family:var(--display); font-size:22px; font-weight:900; color:var(--navy); margin-bottom:6px; }
+.fp-body p { color:#6b7a99; font-size:14px; line-height:1.7; }
+@media (max-width: 900px) {
+  .featured-products { padding:48px 24px; }
+  .fp-grid { grid-template-columns:1fr; }
+}
+
 .local-seo-section {
   background: linear-gradient(145deg, rgba(13,42,94,.98), rgba(8,15,36,.98));
   border-top: 1px solid rgba(245,137,26,.16);
@@ -1077,6 +1097,39 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   <div class="trust-pill">NJ Based</div>
   <div class="trust-pill">Nationwide Shipping</div>
   <div class="trust-pill">Rush Available</div>
+</section>
+
+<!-- FEATURED PRODUCTS -->
+<section class="featured-products" id="featured-products">
+  <div class="sec-tag" style="color:var(--orange)">Best Sellers</div>
+  <h2 class="sec-title" style="color:var(--navy)">Your Logo, <em>Their New Favorite</em></h2>
+  <p class="fp-sub">The three products every brand starts with — real garments, printed and embroidered in-house.</p>
+  <div class="fp-grid">
+    <div class="fp-card">
+      <div class="fp-img"><img src="assets/portfolio/tshirt-design-variety.jpg" alt="Custom printed t-shirts folded and stacked" loading="lazy"></div>
+      <div class="fp-body">
+        <h3>Custom T-Shirts</h3>
+        <p>Soft, retail-feel tees printed with your logo or design — the everyday essential for staff, events, and merch drops.</p>
+      </div>
+    </div>
+    <div class="fp-card">
+      <div class="fp-img"><img src="https://images.unsplash.com/photo-1499971856191-1a420a42b498?fm=jpg&q=80&w=1200&auto=format&fit=crop" alt="Custom crewneck sweatshirts" loading="lazy"></div>
+      <div class="fp-body">
+        <h3>Crewneck Sweatshirts</h3>
+        <p>Heavyweight crewnecks with clean embroidery or print — a step up in warmth without losing the simple look.</p>
+      </div>
+    </div>
+    <div class="fp-card">
+      <div class="fp-img"><img src="assets/portfolio/apparel-stack.jpg" alt="Custom embroidered hoodies folded on a table" loading="lazy"></div>
+      <div class="fp-body">
+        <h3>Custom Hoodies</h3>
+        <p>Pullover or zip-up hoodies, embroidered or printed — the go-to for brands that want their merch to actually get worn.</p>
+      </div>
+    </div>
+  </div>
+  <div class="what-actions">
+    <a class="hero-secondary" href="bulk-order-form.html">Get A Free Quote →</a>
+  </div>
 </section>
 
 <!-- WHAT WE DO -->
