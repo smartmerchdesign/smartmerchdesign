@@ -250,6 +250,36 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
   transition: all .25s; animation: up .7s .24s ease both;
 }
 .hero-etsy:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 44px rgba(241,101,33,.55); }
+.hero-price-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(245,137,26,.1); border: 1px solid rgba(245,137,26,.35);
+  border-radius: 100px; padding: 10px 18px; margin-bottom: 28px;
+  font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .4px;
+  color: var(--white); animation: up .7s .1s ease both;
+}
+.hero-price-badge .icon { font-size: 18px; }
+.hero-price-badge em { color: var(--orange); font-style: normal; }
+
+/* ── Price Guarantee band ── */
+.guarantee { background:linear-gradient(135deg,#152348,#0d1e3e); margin:0 56px 0; border-radius:20px; padding:48px 40px; border:1px solid rgba(245,137,26,.2); display:flex; align-items:center; gap:40px; }
+.guarantee-icon { font-size:64px; flex-shrink:0; filter:drop-shadow(0 0 20px rgba(245,137,26,.4)); }
+.guarantee h3 { font-family:var(--display); font-size:32px; font-weight:900; color:var(--white); margin-bottom:10px; }
+.guarantee h3 em { color:var(--orange); font-style:normal; }
+.guarantee p { font-size:14px; color:var(--muted); line-height:1.8; }
+.guarantee-band-wrap { padding:64px 0; }
+.guarantee .form-submit {
+  display:inline-flex; align-items:center; justify-content:center; gap:10px;
+  background:var(--orange); color:var(--white);
+  font-family:var(--display); font-weight:700; font-size:16px; letter-spacing:1px;
+  padding:12px 24px; border-radius:8px; border:0; text-decoration:none;
+  box-shadow:0 10px 30px rgba(245,137,26,.28); transition:all .2s;
+}
+.guarantee .form-submit:visited { color:var(--white); }
+.guarantee .form-submit:hover { background:var(--orlo); transform:translateY(-2px); }
+@media (max-width:900px) {
+  .guarantee { margin:0 20px; flex-direction:column; padding:32px 24px; text-align:center; }
+  .guarantee-band-wrap { padding:48px 0; }
+}
 
 /* ── Typed cursor ── */
 .typed-cursor {
@@ -868,7 +898,8 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
 }
 #scroll-top.visible { opacity:1; visibility:visible; transform:translateY(0) scale(1); pointer-events:all; }
 #scroll-top:hover { background:var(--orlo); transform:translateY(-3px) scale(1.08); }
-.trust-strip { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); gap:12px; padding:18px 56px; background:rgba(245,137,26,.08); border-top:1px solid rgba(245,137,26,.18); border-bottom:1px solid rgba(245,137,26,.18); }
+.trust-strip { display:grid; grid-template-columns:repeat(6,minmax(0,1fr)); gap:12px; padding:18px 56px; background:rgba(245,137,26,.08); border-top:1px solid rgba(245,137,26,.18); border-bottom:1px solid rgba(245,137,26,.18); }
+.trust-pill.trust-price { background:rgba(245,137,26,.16); border-color:rgba(245,137,26,.4); }
 .trust-pill {
   background:rgba(255,255,255,.05); border:1px solid rgba(255,255,255,.1);
   border-radius:8px; padding:12px 14px; color:var(--white);
@@ -991,6 +1022,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   <div class="hero-left">
     <div class="hero-tag">💡 <span class="hero-tag-typed">Custom Merch</span><span class="typed-cursor">|</span></div>
     <h1 aria-label="Merch as smart as your brand">MERCH AS<br><span class="org">SMART</span> AS<br><span class="out">YOUR BRAND</span></h1>
+    <div class="hero-price-badge"><span class="icon">💰</span> <em>Lowest Price Guarantee</em> — find it cheaper, we'll beat it</div>
     <p class="hero-sub">Not just merch — <strong>smart merch.</strong> We design custom branded products that make people stop, stare, and remember your name. Your brand deserves more than a logo slapped on a shirt.</p>
     <div class="hero-actions"><a class="hero-secondary" href="bulk-order-form.html">Get A Free Quote →</a></div>
   </div>
@@ -1039,6 +1071,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
 
 
 <section class="trust-strip" aria-label="Smart Merch Design order benefits">
+  <div class="trust-pill trust-price">Best Price Guarantee</div>
   <div class="trust-pill">Free Mockup</div>
   <div class="trust-pill">Bulk Pricing</div>
   <div class="trust-pill">NJ Based</div>
@@ -1075,7 +1108,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
       <div class="why-num" style="color:rgba(245,137,26,.12)">02</div>
       <span class="why-icon">💰</span>
       <div class="why-title" style="color:var(--white)"><em>Smart</em> Pricing</div>
-      <p class="why-desc" style="color:rgba(255,255,255,.6)">Premium quality doesn't have to mean premium prices. Our smart sourcing and production workflow keeps costs low and quality high — no compromise.</p>
+      <p class="why-desc" style="color:rgba(255,255,255,.6)">We work hard to be the cheapest, best-value option you'll find for the same quality — premium results without the premium price tag. Found a lower quote elsewhere? We'll beat it.</p>
     </div>
     <div class="why-card">
       <div class="why-num">03</div>
@@ -1085,6 +1118,18 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
     </div>
   </div>
 </section>
+
+<!-- PRICE GUARANTEE -->
+<div class="guarantee-band-wrap">
+  <div class="guarantee">
+    <div class="guarantee-icon">💰</div>
+    <div>
+      <h3>The Best <em>Price</em>, Guaranteed</h3>
+      <p>We're committed to giving you the cheapest, best-value pricing on custom merch you'll find anywhere — without cutting corners on quality. Get a quote from another shop? Send it our way and we'll do everything we can to beat it.</p>
+      <a class="form-submit" href="bulk-order-form.html" style="margin-top:20px;display:inline-flex;">Get Your Best Price →</a>
+    </div>
+  </div>
+</div>
 
 <!-- SMART SERVICES -->
 <section class="services" id="services">
