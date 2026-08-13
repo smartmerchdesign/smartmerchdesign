@@ -194,10 +194,10 @@ nav {
 }
 /* ─── HERO ─── */
 .hero {
-  min-height: calc(100vh - 68px);
-  display: grid; grid-template-columns: 1fr 440px;
-  align-items: center; gap: 60px;
-  padding: 80px 56px;
+  min-height: 620px;
+  display: grid; grid-template-columns: minmax(0, 1fr) 400px;
+  align-items: center; gap: 48px;
+  padding: 56px 56px;
   position: relative; overflow: hidden;
   background: var(--dark);
 }
@@ -224,20 +224,20 @@ nav {
   display: inline-flex; align-items: center; gap: 8px;
   font-size: 11px; font-weight: 600; letter-spacing: 3px; text-transform: uppercase;
   color: var(--orange); border: 1px solid rgba(245,137,26,0.35);
-  padding: 6px 16px; border-radius: 100px; margin-bottom: 28px;
+  padding: 5px 14px; border-radius: 100px; margin-bottom: 20px;
   animation: up .7s ease both;
 }
 h1 {
   font-family: var(--display); font-weight: 900;
-  font-size: clamp(60px, 7.5vw, 108px);
-  line-height: .88; letter-spacing: -1px; margin-bottom: 28px;
+  font-size: clamp(52px, 6.2vw, 88px);
+  line-height: .9; letter-spacing: -1px; margin-bottom: 22px;
   animation: up .7s .08s ease both;
 }
 h1 .org { color: var(--orange); }
 h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
 .hero-sub {
   font-size: 17px; line-height: 1.8; color: var(--muted);
-  max-width: 500px; margin-bottom: 40px;
+  max-width: 500px; margin-bottom: 28px;
   animation: up .7s .16s ease both;
 }
 .hero-sub strong { color: var(--white); font-weight: 600; }
@@ -253,7 +253,7 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
 .hero-price-badge {
   display: inline-flex; align-items: center; gap: 10px;
   background: rgba(245,137,26,.1); border: 1px solid rgba(245,137,26,.35);
-  border-radius: 100px; padding: 10px 18px; margin-bottom: 28px;
+  border-radius: 100px; padding: 9px 16px; margin-bottom: 20px;
   font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: .4px;
   color: var(--white); animation: up .7s .1s ease both;
 }
@@ -302,7 +302,7 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
 .hero-right { position: relative; z-index: 1; animation: up .7s .32s ease both; }
 .card {
   background: linear-gradient(145deg, #152348, #0d1e3e);
-  border: 1px solid rgba(245,137,26,.22); border-radius: 20px; padding: 36px 32px;
+  border: 1px solid rgba(245,137,26,.22); border-radius: 20px; padding: 28px 26px;
   box-shadow: 0 32px 72px rgba(0,0,0,.5); position: relative; overflow: hidden;
   animation: homeCardFloat 6s ease-in-out infinite;
 }
@@ -315,7 +315,7 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
   letter-spacing: 3px; text-transform: uppercase;
   color: var(--orange); margin-bottom: 18px; text-align: center;
 }
-.bulb-big { font-size: 80px; text-align: center; margin-bottom: 20px; display: block;
+.bulb-big { font-size: 64px; text-align: center; margin-bottom: 20px; display: block;
   filter: drop-shadow(0 0 24px rgba(245,137,26,.5));
   animation: pulse 3s ease-in-out infinite;
 }
