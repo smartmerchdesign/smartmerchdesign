@@ -1,0 +1,7 @@
+Smart Merch Design website update
+
+- Removed all Etsy references from site content, navigation, styles, scripts, forms, legal pages, and product messaging.
+- Reworked homepage hero for stronger conversion messaging and a compact layout.
+- Added Featured Work portfolio preview with direct portfolio CTA.
+- Simplified main navigation by removing duplicate Size Guide and FAQ links from the top-level bar.
+- Kept brand logo showcase and responsive layout.

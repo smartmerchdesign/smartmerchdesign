@@ -8,7 +8,7 @@
   --mid:     #152348;
   --orange:  #f5891a;
   --orlo:    #ffa840;
-  --etsy:    #f16521;
+  --accent:    #f16521;
   --white:   #ffffff;
   --offwhite:#f4f6fb;
   --muted:   rgba(255,255,255,0.52);
@@ -55,20 +55,20 @@ nav {
   color: var(--muted); text-decoration: none; transition: all .2s; white-space: nowrap;
 }
 .dropdown-menu a:hover { color: var(--orange); background: rgba(245,137,26,.08); }
-.etsy-btn {
+.marketplace-btn {
   display: inline-flex; align-items: center; gap: 8px;
   flex: 0 0 auto;
   width: auto;
   max-width: max-content;
-  background: var(--etsy); color: var(--white);
+  background: var(--orange); color: var(--white);
   font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 1px;
   padding: 9px 20px; border-radius: 6px; text-decoration: none;
   transition: background .2s, transform .2s;
   box-shadow: 0 4px 18px rgba(241,101,33,.35);
   white-space: nowrap; line-height: 1.05; min-height: 40px; justify-content: center;
 }
-.etsy-btn:hover { background: #ff7535; transform: translateY(-1px); }
-.etsy-btn:focus-visible {
+.marketplace-btn:hover { background: #ff7535; transform: translateY(-1px); }
+.marketplace-btn:focus-visible {
   outline: 2px solid rgba(255,168,64,.85);
   outline-offset: 3px;
 }
@@ -305,14 +305,14 @@ footer {
 }
 .footer-logo em { color: var(--orange); font-style: normal; }
 .footer-copy { font-size: 12px; color: var(--muted); text-align: center; }
-.footer-etsy {
+.footer-cta {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--etsy); color: var(--white);
+  background: var(--orange); color: var(--white);
   font-family: var(--display); font-weight: 700; font-size: 14px; letter-spacing: 1px;
   padding: 10px 22px; border-radius: 8px; text-decoration: none;
   transition: background .2s; justify-self: end;
 }
-.footer-etsy:hover { background: #ff7535; }
+.footer-cta:hover { background: #ff7535; }
 .footer-actions {
   display: inline-flex;
   align-items: center;
@@ -397,10 +397,10 @@ footer {
   nav { gap: 12px; }
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 12px; letter-spacing: .55px; }
-  .quote-btn, .rush-nav, .etsy-btn { font-size: 14px; padding: 8px 13px; }
+  .quote-btn, .rush-nav, .marketplace-btn { font-size: 14px; padding: 8px 13px; }
 }
 @media (max-width: 1140px) {
-  .marketplace-nav-btn, .secondary-etsy { display:none; }
+  .marketplace-nav-btn, .secondary-cta { display:none; }
 }
 @media (max-width: 1020px) {
   nav { padding: 0 20px; }
@@ -408,11 +408,11 @@ footer {
   .nav-links.open { display: flex; }
   .nav-links a { padding: 10px 12px; border-radius: 8px; }
   .hamburger { display: flex; }
-  .etsy-btn, .marketplace-nav-btn, .secondary-etsy { display: none; }
+  .marketplace-btn, .marketplace-nav-btn, .secondary-cta { display: none; }
   .page-hero { padding: 48px 20px 40px; }
   footer { grid-template-columns: 1fr; text-align: center; padding: 32px 20px; gap: 16px; }
   .footer-actions { justify-self: center; justify-content: center; flex-wrap: wrap; }
-  .footer-etsy { justify-self: center; }
+  .footer-cta { justify-self: center; }
   .form-row { grid-template-columns: 1fr; }
 }
 
@@ -459,17 +459,17 @@ nav.nav-scrolled {
 .page-hero::after { transform:translateY(var(--px,0)); will-change:transform; }
 
 /* ── Button shimmer sweep ── */
-.form-submit, .etsy-btn, .price-cta, .hero-etsy {
+.form-submit, .marketplace-btn, .price-cta, .primary-cta {
   position:relative; overflow:hidden;
 }
-.form-submit::after, .etsy-btn::after, .price-cta::after, .hero-etsy::after {
+.form-submit::after, .marketplace-btn::after, .price-cta::after, .primary-cta::after {
   content:''; position:absolute; top:0; left:-110%;
   width:60%; height:100%;
   background:linear-gradient(90deg,transparent,rgba(255,255,255,.18),transparent);
   transform:skewX(-20deg); transition:left .55s ease; pointer-events:none;
 }
-.form-submit:hover::after, .etsy-btn:hover::after,
-.price-cta:hover::after, .hero-etsy:hover::after { left:150%; }
+.form-submit:hover::after, .marketplace-btn:hover::after,
+.price-cta:hover::after, .primary-cta:hover::after { left:150%; }
 
 /* ── Logo float (single definition) ── */
 .logo-img { animation:float 5.5s ease-in-out infinite; }
@@ -581,8 +581,8 @@ nav.nav-scrolled {
   white-space: nowrap; line-height: 1.05; min-height: 40px; justify-content: center;
 }
 .quote-btn:hover { background: var(--orlo); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,137,26,.45); }
-.secondary-etsy { background: transparent; border: 1px solid rgba(241,101,33,.45); box-shadow: none; padding-inline: 16px; width:auto !important; max-width:max-content; }
-.secondary-etsy:hover { background: rgba(241,101,33,.14); }
+.secondary-cta { background: transparent; border: 1px solid rgba(241,101,33,.45); box-shadow: none; padding-inline: 16px; width:auto !important; max-width:max-content; }
+.secondary-cta:hover { background: rgba(241,101,33,.14); }
 .local-seo-section {
   padding: 64px 56px;
   background: linear-gradient(145deg, rgba(13,42,94,.98), rgba(8,15,36,.98));
@@ -597,7 +597,7 @@ nav.nav-scrolled {
 .local-keywords span { border: 1px solid rgba(245,137,26,.28); background: rgba(245,137,26,.08); color: rgba(255,255,255,.78); padding: 8px 13px; border-radius: 999px; font-size: 13px; }
 @media (max-width: 900px) {
   .quote-btn { display: inline-flex; }
-  .secondary-etsy { display: none; }
+  .secondary-cta { display: none; }
   .local-seo-section { padding: 48px 24px; }
 }
 

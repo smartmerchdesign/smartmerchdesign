@@ -74,7 +74,7 @@
   if (!reduced) {
     document.addEventListener('click', function (e) {
       var btn = e.target.closest(
-        '.form-submit,.etsy-btn,.btn-next,.hero-etsy,.price-cta,.tier-cta,.hero-cta'
+        '.form-submit,.marketplace-btn,.btn-next,.primary-cta,.price-cta,.tier-cta,.hero-cta'
       );
       if (!btn) return;
       var r      = btn.getBoundingClientRect();
@@ -103,7 +103,7 @@
     '.sec-title','.sec-tag','.tl-day',
     '.why-card','.what-card','.trust-pill','.svc','.step','.cat',
     '.audience-card','.proof-card',
-    '.ccard','.contact-card','.rbar','.etsy-cta'
+    '.ccard','.contact-card','.rbar','.quote-cta'
   ];
 
   var revealObserver = new IntersectionObserver(function (entries) {
@@ -206,7 +206,7 @@
 
   /* ── 10. MAGNETIC BUTTONS ── */
   if (!reduced && window.matchMedia('(pointer: fine)').matches) {
-    document.querySelectorAll('.form-submit,.etsy-btn,.hero-etsy').forEach(function (btn) {
+    document.querySelectorAll('.form-submit,.marketplace-btn,.primary-cta').forEach(function (btn) {
       btn.addEventListener('mousemove', function (e) {
         var r = btn.getBoundingClientRect();
         var x = (e.clientX - r.left - r.width  / 2) * 0.14;

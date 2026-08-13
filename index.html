@@ -108,7 +108,7 @@
   --mid:     #152348;
   --orange:  #f5891a;
   --orlo:    #ffa840;
-  --etsy:    #f16521;
+  --accent:    #f16521;
   --white:   #ffffff;
   --offwhite:#f4f6fb;
   --muted:   rgba(255,255,255,0.52);
@@ -142,20 +142,20 @@ nav {
   color: var(--muted); text-decoration: none; transition: color .2s; white-space: nowrap;
 }
 .nav-links a:hover { color: var(--orange); }
-.etsy-btn {
+.marketplace-btn {
   display: inline-flex; align-items: center; gap: 8px;
   flex: 0 0 auto;
   width: auto;
   max-width: max-content;
-  background: var(--etsy); color: var(--white);
+  background: var(--orange); color: var(--white);
   font-family: var(--display); font-weight: 700; font-size: 15px; letter-spacing: 1px;
   padding: 9px 20px; border-radius: 6px; text-decoration: none;
   transition: background .2s, transform .2s;
   box-shadow: 0 4px 18px rgba(241,101,33,.35);
   white-space: nowrap; line-height: 1.05; min-height: 40px; justify-content: center;
 }
-.etsy-btn:hover { background: #ff7535; transform: translateY(-1px); }
-.etsy-btn:focus-visible {
+.marketplace-btn:hover { background: #ff7535; transform: translateY(-1px); }
+.marketplace-btn:focus-visible {
   outline: 2px solid rgba(255,168,64,.85);
   outline-offset: 3px;
 }
@@ -241,15 +241,15 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
   animation: up .7s .16s ease both;
 }
 .hero-sub strong { color: var(--white); font-weight: 600; }
-.hero-etsy {
+.primary-cta {
   display: inline-flex; align-items: center; gap: 12px;
-  background: var(--etsy); color: var(--white);
+  background: var(--orange); color: var(--white);
   font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: 1px;
   padding: 16px 38px; border-radius: 10px; text-decoration: none;
   box-shadow: 0 10px 36px rgba(241,101,33,.4);
   transition: all .25s; animation: up .7s .24s ease both;
 }
-.hero-etsy:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 44px rgba(241,101,33,.55); }
+.primary-cta:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 44px rgba(241,101,33,.55); }
 .hero-price-badge {
   display: inline-flex; align-items: center; gap: 10px;
   background: rgba(245,137,26,.1); border: 1px solid rgba(245,137,26,.35);
@@ -289,14 +289,14 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
 @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0} }
 
 /* ── Homepage button shimmer ── */
-.hero-etsy { position: relative; overflow: hidden; }
-.hero-etsy::after {
+.primary-cta { position: relative; overflow: hidden; }
+.primary-cta::after {
   content: ''; position: absolute; top: 0; left: -110%;
   width: 60%; height: 100%;
   background: linear-gradient(90deg, transparent, rgba(255,255,255,.18), transparent);
   transform: skewX(-20deg); transition: left .55s ease; pointer-events: none;
 }
-.hero-etsy:hover::after { left: 150%; }
+.primary-cta:hover::after { left: 150%; }
 
 /* hero card */
 .hero-right { position: relative; z-index: 1; animation: up .7s .32s ease both; }
@@ -485,34 +485,34 @@ h1 .out { -webkit-text-stroke: 2px rgba(255,255,255,0.65); color: transparent; }
 .chip:hover { background: rgba(245,137,26,.15); border-color: rgba(245,137,26,.45); color: var(--white); transform: translateY(-1px); }
 .chip-i { font-size: 13px; }
 
-/* ─── ETSY BANNER ─── */
-.etsy-banner {
+/* ─── QUOTE BANNER ─── */
+.quote-banner {
   background: linear-gradient(135deg, #2a1000, #5c2500);
   border-top: 1px solid rgba(241,101,33,.3);
   border-bottom: 1px solid rgba(241,101,33,.3);
   padding: 64px 56px;
   display: flex; align-items: center; justify-content: space-between; gap: 40px;
 }
-.etsy-banner-tag {
+.quote-banner-tag {
   font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
-  color: var(--etsy); margin-bottom: 12px;
+  color: var(--orange); margin-bottom: 12px;
   display: flex; align-items: center; gap: 8px;
 }
-.etsy-banner-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--etsy); }
-.etsy-banner-title {
+.quote-banner-tag::before { content: ''; display: block; width: 24px; height: 2px; background: var(--orange); }
+.quote-banner-title {
   font-family: var(--display); font-size: clamp(32px, 4vw, 52px);
   font-weight: 900; line-height: 1; color: var(--white); margin-bottom: 12px;
 }
-.etsy-banner-title em { color: var(--etsy); font-style: normal; }
-.etsy-banner-sub { font-size: 15px; color: rgba(255,255,255,.6); max-width: 480px; line-height: 1.7; }
-.etsy-banner-btn {
+.quote-banner-title em { color: var(--orange); font-style: normal; }
+.quote-banner-sub { font-size: 15px; color: rgba(255,255,255,.6); max-width: 480px; line-height: 1.7; }
+.quote-banner-btn {
   display: inline-flex; align-items: center; gap: 12px; flex-shrink: 0;
-  background: var(--etsy); color: var(--white);
+  background: var(--orange); color: var(--white);
   font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: 1px;
   padding: 18px 44px; border-radius: 10px; text-decoration: none;
   box-shadow: 0 10px 40px rgba(241,101,33,.45); transition: all .25s;
 }
-.etsy-banner-btn:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 50px rgba(241,101,33,.6); }
+.quote-banner-btn:hover { background: #ff7535; transform: translateY(-3px); box-shadow: 0 18px 50px rgba(241,101,33,.6); }
 
 /* ─── RATINGS ─── */
 .ratings { padding: 96px 56px; background: var(--navy); }
@@ -595,13 +595,13 @@ footer {
 .footer-logo { font-family: var(--display); font-size: 18px; font-weight: 700; letter-spacing: 2px; display: flex; align-items: center; gap: 8px; }
 .footer-logo em { color: var(--orange); font-style: normal; }
 .footer-copy { font-size: 12px; color: var(--muted); text-align: center; }
-.footer-etsy {
+.footer-cta {
   display: inline-flex; align-items: center; gap: 8px; justify-self: end;
   background: rgba(241,101,33,.15); border: 1px solid rgba(241,101,33,.3);
-  color: var(--etsy); font-size: 13px; font-weight: 600;
+  color: var(--orange); font-size: 13px; font-weight: 600;
   padding: 8px 16px; border-radius: 6px; text-decoration: none; transition: all .2s;
 }
-.footer-etsy:hover { background: var(--etsy); color: var(--white); }
+.footer-cta:hover { background: var(--orange); color: var(--white); }
 .footer-actions {
   display: inline-flex;
   align-items: center;
@@ -710,10 +710,10 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   nav { gap: 12px; }
   .nav-links { gap: 14px; }
   .nav-links a { font-size: 12px; letter-spacing: .55px; }
-  .quote-btn, .rush-nav, .etsy-btn { font-size: 14px; padding: 8px 13px; }
+  .quote-btn, .rush-nav, .marketplace-btn { font-size: 14px; padding: 8px 13px; }
 }
 @media (max-width: 1140px) {
-  .marketplace-nav-btn, .secondary-etsy { display:none; }
+  .marketplace-nav-btn, .secondary-cta { display:none; }
 }
 @media (max-width: 1020px) {
   nav { padding: 0 24px; }
@@ -727,7 +727,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   .nav-links li { width: 100%; }
   .nav-links a { display: block; padding: 10px 12px; border-radius: 8px; }
   .hamburger { display: flex; }
-  .etsy-btn, .marketplace-nav-btn, .secondary-etsy { display: none; }
+  .marketplace-btn, .marketplace-nav-btn, .secondary-cta { display: none; }
   .hero { grid-template-columns: 1fr; padding: 60px 24px; gap: 40px; min-height: auto; }
   .hero-right { display: none; }
   .why, .services, .process, .products, .ratings, .contact { padding: 72px 24px; }
@@ -739,9 +739,9 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   .steps::before { display: none; }
   .cat-grid { grid-template-columns: 1fr; }
   .contact-cards { grid-template-columns: 1fr; }
-  .etsy-banner { flex-direction: column; padding: 56px 24px; text-align: center; }
-  .etsy-banner-sub { margin: 0 auto; }
-  .etsy-banner-tag { justify-content: center; }
+  .quote-banner { flex-direction: column; padding: 56px 24px; text-align: center; }
+  .quote-banner-sub { margin: 0 auto; }
+  .quote-banner-tag { justify-content: center; }
   footer { flex-direction: column; text-align: center; padding: 28px 24px; }
   .rating-big { flex-direction: column; align-items: center; gap: 28px; }
   .rating-divider { display: none; }
@@ -762,10 +762,10 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   white-space: nowrap; line-height: 1.05; min-height: 40px; justify-content: center;
 }
 .quote-btn:hover { background: var(--orlo); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(245,137,26,.45); }
-.secondary-etsy { background: transparent; border: 1px solid rgba(241,101,33,.45); box-shadow: none; padding-inline: 16px; width:auto !important; max-width:max-content; }
-.secondary-etsy:hover { background: rgba(241,101,33,.14); }
+.secondary-cta { background: transparent; border: 1px solid rgba(241,101,33,.45); box-shadow: none; padding-inline: 16px; width:auto !important; max-width:max-content; }
+.secondary-cta:hover { background: rgba(241,101,33,.14); }
 .hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:16px; animation: up .7s .24s ease both; }
-.hero-actions .hero-etsy { animation:none; flex:0 0 auto; width:auto; max-width:100%; min-height:0; line-height:1.2; white-space:normal; align-self:flex-start; }
+.hero-actions .primary-cta { animation:none; flex:0 0 auto; width:auto; max-width:100%; min-height:0; line-height:1.2; white-space:normal; align-self:flex-start; }
 .hero-secondary, .banner-secondary { color: var(--white); text-decoration:none; font-weight:700; font-size:14px; opacity:.78; transition:opacity .2s,color .2s; }
 .hero-secondary:hover, .banner-secondary:hover { color: var(--orange); opacity:1; }
 .banner-actions { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
@@ -935,7 +935,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
 .local-keywords { display:flex; flex-wrap:wrap; gap:10px; margin-top:24px; }
 .local-keywords span { border:1px solid rgba(245,137,26,.28); background:rgba(245,137,26,.08); color:rgba(255,255,255,.78); padding:8px 13px; border-radius:999px; font-size:13px; }
 @media (max-width: 900px) {
-  .secondary-etsy { display:none; }
+  .secondary-cta { display:none; }
   .what-grid { grid-template-columns:1fr; }
   .what-we-do, .local-seo-section { padding:48px 24px; }
 }
@@ -1084,7 +1084,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   nav > div:last-child .quote-btn { display:none; }
   .hero { padding:48px 20px; }
   .hero-actions { align-items:flex-start; }
-  .hero-actions .hero-etsy { width:100%; justify-content:center; padding:15px 18px; font-size:18px; }
+  .hero-actions .primary-cta { width:100%; justify-content:center; padding:15px 18px; font-size:18px; }
   .hero-secondary { display:inline-flex; padding:4px 0; }
   .contact-cards { gap:14px; }
   .ccard { width:100%; min-width:0; }
@@ -1117,6 +1117,25 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   }
 }
 
+
+/* ─── FINAL CONVERSION POLISH ─── */
+.hero-primary-cta { display:inline-flex !important; align-items:center; justify-content:center; min-height:48px; padding:14px 24px !important; font-size:16px !important; }
+.hero-actions { display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+.featured-work { padding:80px 56px 88px; background:#fff; color:var(--navy); }
+.fw-sub { max-width:760px; margin-top:14px; color:#667799; font-size:16px; line-height:1.7; }
+.fw-grid { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:18px; margin-top:34px; }
+.fw-card { position:relative; display:block; min-height:270px; overflow:hidden; border-radius:18px; text-decoration:none; background:#e9edf5; box-shadow:0 8px 30px rgba(13,42,94,.1); }
+.fw-card img { width:100%; height:100%; min-height:270px; object-fit:cover; display:block; transition:transform .5s cubic-bezier(.22,1,.36,1); }
+.fw-card::after { content:''; position:absolute; inset:0; background:linear-gradient(180deg,transparent 42%,rgba(8,15,36,.82)); }
+.fw-card:hover img { transform:scale(1.045); }
+.fw-overlay { position:absolute; left:18px; right:18px; bottom:16px; z-index:2; color:#fff; }
+.fw-overlay strong { display:block; font-family:var(--display); font-size:24px; line-height:1; margin-bottom:4px; }
+.fw-overlay span { font-size:13px; color:rgba(255,255,255,.82); }
+.featured-work .section-actions { margin-top:32px; display:flex; align-items:center; gap:18px; flex-wrap:wrap; }
+.featured-work .section-actions .banner-secondary { color:var(--navy); }
+@media (max-width:1100px) { .fw-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media (max-width:640px) { .hero-actions { align-items:stretch; } .hero-primary-cta { width:100%; } .hero-secondary { width:100%; justify-content:center; } .featured-work { padding:64px 20px 72px; } .fw-grid { grid-template-columns:1fr; } .fw-card,.fw-card img { min-height:230px; } }
+
 </style>
 </head>
 <body>
@@ -1141,8 +1160,6 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
     <li><a href="products.html">Products</a></li>
     <li><a href="portfolio.html">Portfolio</a></li>
     <li><a href="pricing.html">Pricing</a></li>
-    <li><a href="size-guide.html">Size Guide</a></li>
-    <li><a href="faq.html">FAQ</a></li>
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div style="display:flex;gap:12px;align-items:center;">
@@ -1159,23 +1176,23 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   <div class="hero-glow"></div>
   <div class="hero-left">
     <div class="hero-tag">💡 <span class="hero-tag-typed">Custom Merch</span><span class="typed-cursor">|</span></div>
-    <h1 aria-label="Merch as smart as your brand">MERCH AS<br><span class="org">SMART</span> AS<br><span class="out">YOUR BRAND</span></h1>
-    <div class="hero-price-badge"><span class="icon">💰</span> <em>Lowest Price Guarantee</em> — find it cheaper, we'll beat it</div>
-    <p class="hero-sub">Not just merch — <strong>smart merch.</strong> We design custom branded products that make people stop, stare, and remember your name. Your brand deserves more than a logo slapped on a shirt.</p>
-    <div class="hero-actions"><a class="hero-secondary" href="bulk-order-form.html">Get A Free Quote →</a></div>
+    <h1 aria-label="Custom apparel and merch that gets noticed">CUSTOM APPAREL<br><span class="org">THAT GETS</span><br><span class="out">NOTICED.</span></h1>
+    <div class="hero-price-badge"><span class="icon">✓</span> <em>Free Quote</em> • Free Mockup • Fast Turnaround</div>
+    <p class="hero-sub">We design and produce custom apparel, embroidery, and branded merch for businesses, teams, events, and growing brands — all with clear communication from idea to finished product.</p>
+    <div class="hero-actions"><a class="quote-btn hero-primary-cta" href="bulk-order-form.html">Get A Free Quote →</a><a class="hero-secondary" href="portfolio.html">View Our Work →</a></div>
   </div>
   <div class="hero-right">
     <div class="card">
       <div class="card-headline">💡 The Smart Choice for Merch</div>
       <span class="bulb-big">💡</span>
       <div class="card-stats">
-        <div class="cs"><div class="cs-n">100s</div><div class="cs-l">Brands Helped</div></div>
+        <div class="cs"><div class="cs-n">100s</div><div class="cs-l">Brand Options</div></div>
         <div class="cs"><div class="cs-n">Rush</div><div class="cs-l">Options</div></div>
-        <div class="cs"><div class="cs-n">1K+</div><div class="cs-l">Items Produced</div></div>
+        <div class="cs"><div class="cs-n">1K+</div><div class="cs-l">Products Available</div></div>
       </div>
       <div class="card-stars">
         <div class="big-stars">★★★★★</div>
-        <div class="star-label">5-Star Rated on Etsy</div>
+        <div class="star-label">5-Star Customer Feedback</div>
       </div>
     </div>
   </div>
@@ -1271,6 +1288,20 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
       <div class="brand-logo-card"><img src="assets/brands/yp-classics.png" alt="YP Classics logo" loading="lazy"></div>
     </div>
   </div>
+</section>
+
+<!-- FEATURED WORK -->
+<section class="featured-work" id="featured-work">
+  <div class="sec-tag" style="color:var(--orange)">Featured Work</div>
+  <h2 class="sec-title" style="color:var(--navy)">Real Projects. <em>Real Merch.</em></h2>
+  <p class="fw-sub">A look at recent apparel, embroidery, promo, and event pieces — all produced with the same attention to detail we bring to your order.</p>
+  <div class="fw-grid">
+    <a class="fw-card" href="portfolio.html"><img src="assets/portfolio/apparel-stack.jpg" alt="Custom apparel production" loading="lazy"><div class="fw-overlay"><strong>Custom Apparel</strong><span>T-Shirts & Hoodies</span></div></a>
+    <a class="fw-card" href="portfolio.html"><img src="assets/portfolio/embroidered-hats.jpg" alt="Custom embroidered hats" loading="lazy"><div class="fw-overlay"><strong>Embroidery</strong><span>Hats & Headwear</span></div></a>
+    <a class="fw-card" href="portfolio.html"><img src="assets/portfolio/team-jerseys.jpg" alt="Custom team jerseys" loading="lazy"><div class="fw-overlay"><strong>Teams & Events</strong><span>Uniforms & Group Orders</span></div></a>
+    <a class="fw-card" href="portfolio.html"><img src="assets/portfolio/welcome-kits.jpg" alt="Custom branded welcome kits" loading="lazy"><div class="fw-overlay"><strong>Branded Kits</strong><span>Gifts & Company Swag</span></div></a>
+  </div>
+  <div class="section-actions"><a class="form-submit" href="portfolio.html">View Full Portfolio →</a><a class="banner-secondary" href="bulk-order-form.html">Start Your Project →</a></div>
 </section>
 
 <!-- WHAT WE DO -->
@@ -1475,11 +1506,11 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
 </section>
 
 <!-- QUOTE BANNER -->
-<div class="etsy-banner">
+<div class="quote-banner">
   <div>
-    <div class="etsy-banner-tag">Shop Smart</div>
-    <div class="etsy-banner-title">Need Custom Merch?<br><em>Start With A Quote.</em></div>
-    <p class="etsy-banner-sub">Tell us the product, quantity, design, deadline, and shipping needs. We'll send a personalized quote built around your project.</p>
+    <div class="quote-banner-tag">Start Your Project</div>
+    <div class="quote-banner-title">Need Custom Merch?<br><em>Start With A Quote.</em></div>
+    <p class="quote-banner-sub">Tell us the product, quantity, design, deadline, and shipping needs. We'll send a personalized quote built around your project.</p>
   </div>
   <div class="banner-actions"><a class="banner-secondary" href="bulk-order-form.html">Get A Free Quote →</a></div>
 </div>
@@ -1494,7 +1525,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
     <div class="rating-score">
       <div class="score-num">5.0</div>
       <div class="score-stars">★★★★★</div>
-      <div class="score-label">Customer Feedback · Etsy & Direct Orders</div>
+      <div class="score-label">Customer Feedback</div>
     </div>
     <div class="rating-divider"></div>
     <div class="rating-counts">
