@@ -951,6 +951,16 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   padding:9px 15px; text-decoration:none; transition:all .2s; white-space:nowrap; line-height:1.05; min-height:40px;
 }
 .rush-nav:hover { background:var(--orange); color:var(--white); transform:translateY(-1px); }
+.hero-pack-btn { display:none; }
+@media (max-width:900px) {
+  .hero-pack-btn {
+    display:flex; align-items:center; justify-content:center; width:100%; box-sizing:border-box;
+    color:var(--orange); background:rgba(245,137,26,.1); border:1px solid rgba(245,137,26,.35); border-radius:6px;
+    font-family:var(--display); font-weight:700; font-size:18px; letter-spacing:1px;
+    padding:15px 18px; text-decoration:none; line-height:1.05; min-height:48px;
+  }
+  .hero-pack-btn:active { background:var(--orange); color:var(--white); }
+}
 .newsletter-band { padding:52px 56px; background:rgba(255,255,255,.035); border-top:1px solid rgba(255,255,255,.06); border-bottom:1px solid rgba(255,255,255,.06); display:flex; justify-content:space-between; align-items:center; gap:32px; }
 .newsletter-band h2 { font-family:var(--display); font-size:clamp(28px,4vw,44px); line-height:1; color:var(--white); }
 .newsletter-band h2 em { color:var(--orange); font-style:normal; }
@@ -1148,7 +1158,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div style="display:flex;gap:12px;align-items:center;">
-    <a class="rush-nav" href="50-shirt-bundle.html">👕 50 Shirts · $250</a>
+    <a class="rush-nav" href="50-shirt-bundle.html">👕 50 Shirts</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
@@ -1164,7 +1174,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
     <h1 aria-label="Merch as smart as your brand">MERCH AS<br><span class="org">SMART</span> AS<br><span class="out">YOUR BRAND</span></h1>
     <div class="price-match-badge"><span class="icon">💰</span> <em>PRICE MATCH PROMISE</em> — Find a better comparable price? We’ll match it or beat it.</div>
     <p class="hero-sub">Not just merch — <strong>smart merch.</strong> We design custom branded products that make people stop, stare, and remember your name. Your brand deserves more than a logo slapped on a shirt.</p>
-    <div class="hero-actions"><a class="hero-secondary" href="bulk-order-form.html">Get A Free Quote →</a></div>
+    <div class="hero-actions"><a class="hero-pack-btn" href="50-shirt-bundle.html">👕 50 Shirts · $250</a><a class="hero-secondary" href="bulk-order-form.html">Get A Free Quote →</a></div>
   </div>
   <div class="hero-right">
     <div class="card">

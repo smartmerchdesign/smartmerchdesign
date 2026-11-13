@@ -62,7 +62,7 @@
 .b-cta-row{display:flex;gap:12px;flex-wrap:wrap}
 .b-fine{margin-top:16px;font-size:13px;color:var(--muted)}
 .b-visual{border-radius:26px;overflow:hidden;box-shadow:0 0 0 6px rgba(255,255,255,.8),0 30px 70px rgba(15,42,90,.25);max-width:540px;margin-left:auto;width:100%}
-.b-visual svg{display:block;width:100%;height:auto}
+.b-visual img{display:block;width:100%;height:auto}
 
 /* quote section */
 .b-quote{display:grid;grid-template-columns:1fr 1.15fr;gap:clamp(28px,5vw,72px);align-items:start;scroll-margin-top:84px}
@@ -206,7 +206,7 @@
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div style="display:flex;gap:12px;align-items:center;">
-    <a class="rush-nav" href="50-shirt-bundle.html">👕 50 Shirts · $250</a>
+    <a class="rush-nav" href="50-shirt-bundle.html">👕 50 Shirts</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')"><span></span><span></span><span></span></div>
   </div>
@@ -236,38 +236,7 @@
     </div>
     <p class="b-fine">No payment required for a quote. Approve your mockup before payment.</p>
   </div>
-  <div class="b-visual" role="img" aria-label="Illustration of the 50-shirt pack: black Gildan 64000 Softstyle shirts with a logo on the front and a design on the back">
-<svg viewBox="0 0 520 560" xmlns="http://www.w3.org/2000/svg">
-  <defs>
-    <linearGradient id="bg" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#173a78"/><stop offset="1" stop-color="#0a1c43"/></linearGradient>
-    <linearGradient id="sh" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#23262d"/><stop offset="1" stop-color="#0b0c0f"/></linearGradient>
-    <path id="shirt" d="M60 20 L20 48 L36 84 L55 72 L55 186 L145 186 L145 72 L164 84 L180 48 L140 20 Q100 46 60 20 Z"/>
-  </defs>
-  <rect width="520" height="560" fill="url(#bg)"/>
-  <g transform="translate(262,118) scale(1.3)">
-    <use href="#shirt" fill="url(#sh)"/>
-    <path d="M78 22 Q100 36 122 22" fill="none" stroke="#000" stroke-width="3" opacity=".5"/>
-    <rect x="60" y="62" width="80" height="72" fill="none" stroke="#fff" stroke-width="1.6" stroke-dasharray="5 4"/>
-    <g fill="#fff" font-weight="900" font-size="14.5" text-anchor="middle"><text x="100" y="84">YOUR</text><text x="100" y="104">DESIGN</text><text x="100" y="124">HERE</text></g>
-  </g>
-  <g transform="translate(26,150) scale(1.55)">
-    <use href="#shirt" fill="url(#sh)"/>
-    <path d="M78 22 Q100 40 122 22" fill="none" stroke="#000" stroke-width="3" opacity=".6"/>
-    <g fill="#fff" font-weight="900" font-size="11" text-anchor="middle"><text x="124" y="68">YOUR</text><text x="124" y="80">LOGO</text></g>
-  </g>
-  <rect x="18" y="18" width="156" height="150" rx="18" fill="#fff"/>
-  <text x="36" y="80" font-size="64" font-weight="800" fill="#151a22" letter-spacing="-2">50</text>
-  <text x="38" y="102" font-size="14" font-weight="800" fill="#151a22" letter-spacing="1.8">SHIRT PACK</text>
-  <text x="36" y="148" font-size="44" font-weight="800" fill="#2f6a9d" letter-spacing="-1">$250</text>
-  <text x="28" y="492" font-size="21" font-weight="800" fill="#fff" letter-spacing="2.2">GILDAN 64000 SOFTSTYLE</text>
-  <text x="28" y="514" font-size="15" fill="#cfd8e6">1-color front print included</text>
-  <g stroke="#fff" stroke-width="2">
-    <circle cx="42" cy="538" r="12" fill="#111"/><circle cx="76" cy="538" r="12" fill="#fff"/><circle cx="110" cy="538" r="12" fill="#c9c9c9"/>
-    <circle cx="144" cy="538" r="12" fill="#c8262c"/><circle cx="178" cy="538" r="12" fill="#14264d"/><circle cx="212" cy="538" r="12" fill="#f07a2a"/><circle cx="246" cy="538" r="12" fill="#e6f23c"/>
-  </g>
-  <line x1="286" y1="524" x2="286" y2="552" stroke="#fff" stroke-opacity=".5"/>
-  <text x="496" y="546" font-size="22" font-weight="800" fill="#fff" text-anchor="end">20+ colors</text>
-</svg></div>
+  <div class="b-visual"><img src="assets/50-shirt-pack-hero.jpg" width="1254" height="1254" alt="50-shirt pack for $250: Gildan 64000 Softstyle black shirts with your logo on the front and your design on the back, available in 20+ colors" fetchpriority="high"></div>
 </section>
 </div>
 
