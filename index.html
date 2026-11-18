@@ -1128,6 +1128,15 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
   }
 }
 
+
+/* Compact header on laptop widths so the "50 Shirts · $250" button fits without crowding the menu */
+@media (min-width:1021px) and (max-width:1360px) {
+  nav { gap:10px; padding-left:20px; padding-right:20px; }
+  nav .nav-links { gap:11px; }
+  nav .nav-links a { font-size:11.5px; letter-spacing:.35px; }
+  nav .rush-nav, nav .quote-btn { font-size:13px; letter-spacing:.4px; padding:8px 10px; gap:6px; }
+  nav > div:last-child { gap:8px !important; }
+}
 </style>
 </head>
 <body>
@@ -1158,7 +1167,7 @@ nav > div:last-child { flex: 0 0 auto; min-width: max-content; }
     <li><a href="contact.html">Contact</a></li>
   </ul>
   <div style="display:flex;gap:12px;align-items:center;">
-    <a class="rush-nav" href="50-shirt-bundle.html">👕 50 Shirts</a>
+    <a class="rush-nav" href="50-shirt-bundle.html">👕 50 Shirts · $250</a>
     <a class="quote-btn" href="bulk-order-form.html">💡 Free Quote</a>
     <div class="hamburger" onclick="this.parentElement.parentElement.querySelector('.nav-links').classList.toggle('open')">
       <span></span><span></span><span></span>
