@@ -140,6 +140,18 @@
 .b-note.big strong{display:block;font-size:18px;margin-bottom:4px}
 .b-formfine{text-align:center;font-size:13px;color:var(--muted);margin-top:18px}
 
+
+.b-upload-box{display:flex;align-items:center;gap:14px;padding:12px;border:1.5px dashed #b9c6d6;border-radius:12px;background:#f8fafc;position:relative;transition:border-color .15s,background .15s}
+.b-upload-box:hover,.b-upload-box:focus-within{border-color:var(--blue);background:#fff}
+.b-upload-box.has-file{border-style:solid;border-color:var(--blue);background:#f0f6fb}
+.b-file{position:absolute;opacity:0;width:1px;height:1px;pointer-events:none}
+.b-upload-btn{flex:0 0 auto;display:inline-flex;align-items:center;gap:6px;padding:11px 16px;background:var(--blue);color:#fff;font-weight:700;font-size:14px;border-radius:10px;cursor:pointer;transition:background .15s}
+.b-upload-btn:hover{background:var(--blue-d)}
+.b-upload-box:focus-within .b-upload-btn{outline:2px solid var(--ink);outline-offset:2px}
+.b-file-name{font-size:13px;color:var(--muted);line-height:1.4;min-width:0;overflow-wrap:anywhere}
+.b-upload-box.has-file .b-file-name{color:var(--ink);font-weight:600}
+.b-file-err{display:block;color:#b42318;font-size:13px;margin-top:6px;min-height:0}
+
 /* stats strip */
 .b-strip{display:grid;grid-template-columns:repeat(5,1fr);background:#111827}
 .b-strip div{padding:34px 14px;text-align:center}
@@ -204,7 +216,7 @@
   .b-sticky small{color:#5d6675;margin-left:4px}
   .b-sticky .b-btn{padding:11px 20px}
 }
-@media(max-width:560px){.b-sizes{grid-template-columns:repeat(2,1fr)}.b-points,.b-row2{grid-template-columns:1fr}.b-pill{position:static;display:inline-block;margin-bottom:12px}.b-pack h3{padding-right:0}}
+@media(max-width:560px){.b-upload-box{flex-direction:column;align-items:stretch;text-align:center}.b-upload-btn{justify-content:center}.b-sizes{grid-template-columns:repeat(2,1fr)}.b-points,.b-row2{grid-template-columns:1fr}.b-pill{position:static;display:inline-block;margin-bottom:12px}.b-pack h3{padding-right:0}}
 </style>
 </head>
 <body>
@@ -283,7 +295,7 @@
       <div class="b-card-tag">50-shirt pack</div>
       <h3>Request My Quote</h3>
       <div class="b-card-sub">Only 3 fields required</div>
-      <form id="bundle-form" action="https://formspree.io/f/xykolgjb" method="POST">
+      <form id="bundle-form" action="https://formspree.io/f/xykolgjb" method="POST" enctype="multipart/form-data">
       <input type="hidden" name="request_type" value="50-Shirt Bundle quote">
       <input type="hidden" name="_subject" value="New 50-Shirt Bundle quote request">
       <input type="hidden" name="_next" value="https://smartmerchdesign.com/thank-you.html">
@@ -293,6 +305,16 @@
       <div class="b-row2">
         <label class="b-field"><span>Email *</span><input type="email" name="email" autocomplete="email" placeholder="you@company.com" required></label>
         <label class="b-field"><span>Telephone *</span><input type="tel" name="phone" autocomplete="tel" placeholder="(555) 555-0123" required></label>
+      </div>
+
+      <div class="b-field b-upload">
+        <span>Upload your design <small>(optional)</small></span>
+        <div class="b-upload-box">
+          <input id="bundle-artwork" class="b-file" type="file" name="artwork" accept="image/*,.pdf,.ai,.eps,.svg,.psd,.zip" multiple>
+          <label class="b-upload-btn" for="bundle-artwork">⬆ Choose file</label>
+          <span class="b-file-name" id="file-name">Logo or artwork · PNG, JPG, PDF, AI, EPS, SVG · up to 10 MB total</span>
+        </div>
+        <small class="b-file-err" id="file-err" role="alert"></small>
       </div>
 
       <details class="b-more">
@@ -335,7 +357,7 @@
           </div>
         </div>
 
-        <label class="b-field"><span>Artwork link <small>(Drive, Dropbox, etc.), or email files after submitting</small></span><input type="url" name="artwork_link" placeholder="https://"></label>
+        <label class="b-field"><span>Artwork link <small>(Drive, Dropbox, etc.), if your file is too large to upload</small></span><input type="url" name="artwork_link" placeholder="https://"></label>
         <label class="b-field"><span>Ship-to city &amp; state / ZIP</span><input type="text" name="ship_to"></label>
         <label class="b-field"><span>Date needed by</span><input type="date" name="needed_by"></label>
         <label class="b-field"><span>Notes</span><textarea name="notes" rows="3" placeholder="Ink color for your 1-color print, event details, anything else."></textarea></label>
@@ -473,6 +495,25 @@
     totalEl.textContent=t; field.value=t;
     noteEl.textContent='Base pack, 50 shirts'+(notes.length?' + '+notes.join(', '):'')+'. Final price confirmed in your quote.';
   }
+
+  var fileIn=document.getElementById('bundle-artwork'), fileBox=fileIn&&fileIn.closest('.b-upload-box');
+  var fileName=document.getElementById('file-name'), fileErr=document.getElementById('file-err');
+  var defaultName=fileName?fileName.textContent:'', MAX=10*1024*1024;
+  function resetFiles(){fileIn.value='';fileBox.classList.remove('has-file');fileName.textContent=defaultName;}
+  function checkFiles(){
+    var files=[].slice.call(fileIn.files||[]), total=0;
+    files.forEach(function(f){total+=f.size;});
+    fileErr.textContent='';
+    if(!files.length){resetFiles();return true;}
+    if(total>MAX){
+      fileErr.textContent='Those files total '+(total/1048576).toFixed(1)+' MB. Please keep uploads under 10 MB, or paste a Drive/Dropbox link below.';
+      resetFiles();return false;
+    }
+    fileBox.classList.add('has-file');
+    fileName.textContent=files.length===1?files[0].name:files.length+' files selected: '+files.map(function(f){return f.name;}).join(', ');
+    return true;
+  }
+  if(fileIn){fileIn.addEventListener('change',checkFiles);}
   form.addEventListener('input',update); form.addEventListener('change',update); update();
 })();
 </script>
