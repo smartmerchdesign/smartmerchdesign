@@ -35,12 +35,19 @@
     <div class="page-tag">Message Received</div>
     <h1>THANK YOU. <em>WE GOT IT.</em></h1>
     <p>Your request has been sent to Smart Merch Design. We usually reply same business day with next steps, questions, pricing, or sample recommendations.</p>
+    <p id="file-note" style="display:none;margin-top:14px;padding:14px 16px;border-radius:10px;background:rgba(245,137,26,.12);border:1px solid rgba(245,137,26,.4);color:#fff"></p>
+
     <div class="section-actions" style="margin-top:30px;">
       <a class="form-submit" href="index.html">Back To Home</a>
       <a class="text-link-cta" href="tel:+13476085682">Call or text (347) 608-5682</a>
     </div>
   </div>
 </main>
+<script>
+(function(){try{var f=sessionStorage.getItem('smd_file_not_sent');if(!f)return;sessionStorage.removeItem('smd_file_not_sent');
+var n=document.getElementById('file-note');n.style.display='block';
+n.textContent='Your request was received, but your file ('+f+') could not be uploaded. Please email it to smartmerchdesign@gmail.com and we will attach it to your order.';}catch(e){}})();
+</script>
 
 <script src="shared.js?v=form-redirect" defer></script>
 </body>

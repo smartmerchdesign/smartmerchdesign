@@ -325,16 +325,47 @@
       submitButton.textContent = 'Sending...';
     }
 
-    fetch(form.action, {
-      method: form.method || 'POST',
-      body: new FormData(form),
-      headers: { 'Accept': 'application/json' }
-    }).then(function (response) {
-      if (response.ok) {
-        window.location.href = 'thank-you.html';
-        return;
-      }
-      throw new Error('Formspree returned an error');
+    /* Build the request. Plain forms go as normal form data; only forms with a real
+       attached file go as multipart. (An empty file input still sends an empty file part,
+       which some Formspree plans reject, so those are stripped out.) */
+    var fd = new FormData(form);
+    var files = [];
+    fd.forEach(function (v, k) {
+      if (typeof File !== 'undefined' && v instanceof File && (v.size > 0 || v.name)) files.push(v.name);
+    });
+    function plainBody(extra) {
+      var p = new URLSearchParams();
+      fd.forEach(function (v, k) { if (!(typeof File !== 'undefined' && v instanceof File)) p.append(k, v); });
+      if (extra) Object.keys(extra).forEach(function (k) { p.append(k, extra[k]); });
+      return p;
+    }
+    function send(body) {
+      return fetch(form.action, { method: form.method || 'POST', body: body, headers: { 'Accept': 'application/json' } })
+        .then(function (response) {
+          if (!response.ok) {
+            return response.text().then(function (t) { console.error('Form submit failed', response.status, t); throw new Error('Formspree returned an error'); });
+          }
+        });
+    }
+
+    var attempt;
+    if (files.length) {
+      var withFiles = new FormData();
+      fd.forEach(function (v, k) {
+        if (typeof File !== 'undefined' && v instanceof File && !(v.size > 0 || v.name)) return;
+        withFiles.append(k, v);
+      });
+      attempt = send(withFiles).then(function () { return true; }).catch(function () {
+        /* Upload rejected: still capture the lead, and tell the customer to email the file. */
+        return send(plainBody({ upload_note: 'Customer tried to attach: ' + files.join(', ') + ' (upload failed - ask them to email the file)' }))
+          .then(function () { try { sessionStorage.setItem('smd_file_not_sent', files.join(', ')); } catch (e) {} return true; });
+      });
+    } else {
+      attempt = send(plainBody()).then(function () { return true; });
+    }
+
+    attempt.then(function () {
+      window.location.href = 'thank-you.html';
     }).catch(function () {
       form.dataset.ajaxHandled = 'false';
       if (submitButton) {
